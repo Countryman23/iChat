@@ -1,6 +1,6 @@
 import React from 'react';
 import MyPostsItem from './MyPostsItem';
-import "./MyPosts.css";
+import "./MyPosts.module.css";
 
 const MyPosts = () => {
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import ProfileItem from './ProfileItem';
-import "./Profile.css";
+import "./Profile.module.css";
 
 const Profile = () => {
     return (

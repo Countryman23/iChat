@@ -1,6 +1,6 @@
 import React from 'react';
 import GroupsItem from './GroupsItem';
-import "./Groups.css";
+import "./Groups.module.css";
 
 const Groups = () => {
     return (

@@ -1,13 +1,13 @@
 import React from 'react';
-import "./UserInfo.css";
+import ModCSS from "./UserInfo.module.css"; //Модифицируем наши стили с помощью .module
 
 const UserInfoItem = () => {
     return (
         <div>
-            <div className="item">
+            <div className={ModCSS.item}>
                 ava
             </div>
-            <div className="item">
+            <div className={ModCSS.item}>
                 Description
             </div>
         </div>

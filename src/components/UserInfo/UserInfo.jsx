@@ -1,6 +1,6 @@
 import React from 'react';
 import UserInfoItem from './UserInfoItem';
-import "./UserInfo.css";
+import "./UserInfo.module.css";
 
 const UserInfo = () => {
     return (
