@@ -4,39 +4,39 @@ import Groups from "./components/Groups/Groups";
 import UserInfo from "./components/UserInfo/UserInfo";
 import MyPosts from "./components/MyPosts/MyPosts";
 import Authorization from "./components/Authorization/Authorization";
-import "./App.css";
-import "./main.css";
-import "./content.css";
+import ModCSSapp from "./App.module.css"; //Модифицируем наши стили с помощью .module
+import ModCSSmain from "./main.module.css"; //Модифицируем наши стили с помощью .module
+import ModCSSc from "./content.module.css"; //Модифицируем наши стили с помощью .module
+import Logo from "./logo.png"
 
 //создали основную компоненту (это переменная, которая по факту функция)
 const App = () => {
     return (
-        <div className="app-wrapper">
-            <div className="main">
-                <div className="logo">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuRqOE5EJnSqYT_juSSqytRMOY5JIst6MVxA&usqp=CAU"/>
-                    {/* <img src="./../public/logo.png" alt="Logo" /> */}
+        <div className={ModCSSapp.appWrapper}>
+            <div className={ModCSSmain.main}>
+                <div className={ModCSSmain.logo}>
+                    <img src={Logo} alt="Logo" />
                     <h1> Сообщество умных людей</h1>
                 </div>
-                <div className="authorization">
+                <div className={ModCSSmain.authorization}>
                     {/* передаём сюда подкомпоненту */}
-                    <Authorization />
+                    <a>Authorization</a>
                 </div>
-                <div className="profile">
-                    <Profile />
+                <div className={ModCSSmain.profile}>
+                    <a>Profile</a>
                 </div>
-                <div className="groups">
-                    <Groups />
+                <div className={ModCSSmain.groups}>
+                    <a>Groups</a>
                 </div>
                 <div>
                     <a>Settings</a>
                 </div>
             </div>
-            <div className="content">
-                <div className="UserInfo">
+            <div className={ModCSSc.content}>
+                <div className={ModCSSc.item}>
                     <UserInfo />
                 </div>
-                <div className="MyPosts">
+                <div className={ModCSSc.item}>
                     <MyPosts />
                 </div>
             </div>

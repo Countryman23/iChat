@@ -1,3 +1,7 @@
 .item {
     color: #fff;
 }
+
+.active {
+    color: rgb(35, 217, 230);
+}

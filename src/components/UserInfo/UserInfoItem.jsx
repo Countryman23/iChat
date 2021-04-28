@@ -10,6 +10,9 @@ const UserInfoItem = () => {
             <div className={ModCSS.item}>
                 Description
             </div>
+            <div className={ModCSS.item}>
+                Statistics
+            </div>
         </div>
     );
 };

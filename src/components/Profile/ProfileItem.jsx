@@ -5,10 +5,13 @@ const ProfileItem = () => {
     return (
         <div>
             <div className={ModCSS.item}>
-                User
+                888
             </div>
             <div className={ModCSS.item}>
-                Statistics
+                888
+            </div>
+            <div className={ModCSS.item}>
+                888
             </div>
         </div>
     );

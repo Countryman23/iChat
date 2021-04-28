@@ -1,4 +1,4 @@
-.app-wrapper {
+.appWrapper {
     margin: 0 auto;
     width: 1400px;
     display: grid;
@@ -8,8 +8,6 @@
     grid-template-columns: 3fr 7fr;
 }
 
-.logo img {
-    height: 150px;
-}
+
 
 

@@ -5,8 +5,9 @@ import ModCSS from "./Authorization.module.css"; //Модифицируем на
 const AuthorizationItem = () => {
     //добавляем к HTML разметке JS код. Было className="item", стало {ModCSS.item}
     return (
+        // применяем шаблонные строки для конкатенации выражения {`${} ${}`}
         <div>
-            <div className={ModCSS.item}> 
+            <div className={`${ModCSS.item} ${ModCSS.active}`}>
                 <a>Login</a>
             </div>
             <div className={ModCSS.item}>
