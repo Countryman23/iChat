@@ -1,12 +1,13 @@
 import React from 'react';
+import "./UserInfo.css";
 
 const UserInfoItem = () => {
     return (
         <div>
-            <div>
+            <div className="item">
                 ava
             </div>
-            <div>
+            <div className="item">
                 Description
             </div>
         </div>
