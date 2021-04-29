@@ -1,21 +1,22 @@
 import React from 'react';
 import ModCSS from "./MyPosts.module.css"; //Модифицируем наши стили с помощью .module
+import Post from './Post/Post';
 
 const MyPostsItem = () => {
     return (
         <div>
             <div className={ModCSS.item}>
-                myPost
+                <p>My posts</p>
+                <div>
+                <textarea />
+                </div>
+                <div>
+                <button>Add post</button>
+                </div>
             </div>
-            <div className={ModCSS.item}>
-                newPost
-            </div>
-            <div className={ModCSS.item}>
-                Post1
-            </div>
-            <div className={ModCSS.item}>
-                Post2
-            </div>
+            {/* создаём атрибыты для пропсов */}
+            <Post message="Hello" /> 
+            <Post message="You cool"/>
         </div>
     );
 };
