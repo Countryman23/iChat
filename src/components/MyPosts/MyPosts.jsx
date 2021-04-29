@@ -8,15 +8,16 @@ const MyPosts = () => {
             <div className={ModCSS.item}>
                 <p>My posts</p>
                 <div>
-                <textarea />
+                    <textarea />
                 </div>
                 <div>
-                <button>Add post</button>
+                    <button>Add post</button>
                 </div>
             </div>
+            {/* экспортируем компоненту Post */}
             {/* создаём атрибыты для пропсов */}
-            <Post message="Hello" /> 
-            <Post message="You cool"/>
+            <Post message="Hello" />
+            <Post message="You cool" />
         </div>
     );
 };

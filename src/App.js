@@ -4,6 +4,7 @@ import Authorization from "./components/Authorization/Authorization";
 import Profile from "./components/Profile/Profile";
 import MyPosts from "./components/MyPosts/MyPosts";
 import Messages from "./components/Messages/Messages";
+import Settings from "./components/Settings/Settings";
 import ModCSS from "./App.module.css"; //Модифицируем наши стили с помощью .module
 import { BrowserRouter, Route } from "react-router-dom"; // импорт с фигурными скобками из-за экспорта не по дефолту
 
@@ -24,6 +25,7 @@ const App = () => {
                     <Route path="/Profile" component={Profile} />
                     <Route path="/MyPosts" component={MyPosts} />
                     <Route path="/Messages" component={Messages} />
+                    <Route path="/Settings" component={Settings} />
                 </div>
             </div>
         </BrowserRouter>

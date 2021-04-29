@@ -1,7 +1,4 @@
-.item {
-    color: #fff;
-}
-
-.active {
-    color: rgb(35, 217, 230);
+/* добавили activeLink вручную */
+.item a.activeLink {
+    color: rgb(202, 223, 222)
 }

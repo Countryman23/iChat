@@ -2,14 +2,14 @@
     margin: 0 auto;
     width: 1400px;
     display: grid;
-    /* распределяем по столбцам */
+    /* распределяем по столбцам на главном экране*/
     grid-template-areas: "n c";
     /* разбиваем на столбцы */
     grid-template-columns: 3fr 7fr;
 }
 .nav {
     grid-area: n;
-    background-color: #fff;
+    background-color: rgb(74, 189, 135);
 }
 
 .content {

@@ -6,7 +6,7 @@ const Post = (props) => {
       <div>
           <div className={ModCSS.item}>
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW-Jw-ZMy8KVpsK728K3CAEogswHduRgqog&usqp=CAU" />
-          {/* принимаем атрибуты через пропсы из MyPostsItem */}
+          {/* принимаем атрибуты через пропсы из MyPosts */}
           {props.message}
       </div>
         <div>
