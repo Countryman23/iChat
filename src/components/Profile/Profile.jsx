@@ -1,11 +1,18 @@
 import React from 'react';
-import ProfileItem from './ProfileItem';
-import "./Profile.module.css";
+import ModCSS from "./Profile.module.css"; //Модифицируем наши стили с помощью .module
 
 const Profile = () => {
     return (
         <div>
-            <ProfileItem />
+            <div className={ModCSS.item}>
+                ava
+            </div>
+            <div className={ModCSS.item}>
+                Description
+            </div>
+            <div className={ModCSS.item}>
+                Statistics
+            </div>
         </div>
     );
 };

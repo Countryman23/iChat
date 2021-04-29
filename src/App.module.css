@@ -3,11 +3,19 @@
     width: 1400px;
     display: grid;
     /* распределяем по столбцам */
-    grid-template-areas: "m c";
+    grid-template-areas: "n c";
     /* разбиваем на столбцы */
     grid-template-columns: 3fr 7fr;
 }
+.nav {
+    grid-area: n;
+    background-color: #fff;
+}
 
+.content {
+    grid-area: c;
+    background-color: rgb(175, 104, 104);
+}
 
 
 

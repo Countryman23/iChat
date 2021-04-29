@@ -1,46 +1,32 @@
 import React from "react";
-import Profile from "./components/Profile/Profile";
-import Groups from "./components/Groups/Groups";
-import UserInfo from "./components/UserInfo/UserInfo";
-import MyPosts from "./components/MyPosts/MyPosts";
+import Navigation from "./components/Navigation/Navigation";
 import Authorization from "./components/Authorization/Authorization";
-import ModCSSapp from "./App.module.css"; //Модифицируем наши стили с помощью .module
-import ModCSSmain from "./main.module.css"; //Модифицируем наши стили с помощью .module
-import ModCSSc from "./content.module.css"; //Модифицируем наши стили с помощью .module
-import Logo from "./logo.png"
+import Profile from "./components/Profile/Profile";
+import MyPosts from "./components/MyPosts/MyPosts";
+import Messages from "./components/Messages/Messages";
+import ModCSS from "./App.module.css"; //Модифицируем наши стили с помощью .module
+import { BrowserRouter, Route } from "react-router-dom"; // импорт с фигурными скобками из-за экспорта не по дефолту
 
 //создали основную компоненту (это переменная, которая по факту функция)
 const App = () => {
     return (
-        <div className={ModCSSapp.appWrapper}>
-            <div className={ModCSSmain.main}>
-                <div className={ModCSSmain.logo}>
-                    <img src={Logo} alt="Logo" />
-                    <h1> Сообщество умных людей</h1>
+        // BrowserRouter, вложенность для маршрутизации
+        <BrowserRouter>
+            <div className={ModCSS.appWrapper}>
+                <div className={ModCSS.nav}>
+                {/* передаём сюда подкомпоненту */}
+                {/* в Navigation.jsx лежат ссылки для Route */}
+                    <Navigation />
                 </div>
-                <div className={ModCSSmain.authorization}>
-                    {/* передаём сюда подкомпоненту */}
-                    <a>Authorization</a>
-                </div>
-                <div className={ModCSSmain.profile}>
-                    <a>Profile</a>
-                </div>
-                <div className={ModCSSmain.groups}>
-                    <a>Groups</a>
-                </div>
-                <div>
-                    <a>Settings</a>
+                <div className={ModCSS.content}>
+                    {/* создаём маршрутизатор для управлеения ссылками */}
+                    <Route path="/Authorization" component={Authorization} />
+                    <Route path="/Profile" component={Profile} />
+                    <Route path="/MyPosts" component={MyPosts} />
+                    <Route path="/Messages" component={Messages} />
                 </div>
             </div>
-            <div className={ModCSSc.content}>
-                <div className={ModCSSc.item}>
-                    <UserInfo />
-                </div>
-                <div className={ModCSSc.item}>
-                    <MyPosts />
-                </div>
-            </div>
-        </div>
+        </BrowserRouter>
     );
 };
 
