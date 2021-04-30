@@ -14,6 +14,7 @@ const Navigation = () => {
                 {/* для Route тут должны быть ссылки*/}
                 <div className={ModCSS.item}>
                     {/* принудительно создали класс activeClassName(activeLink)*/}
+                    {/* создали NavLink для обработки ссылок без перезагрузки всей страницы  */}
                     <NavLink to="/Authorization" activeClassName={ModCSS.activeLink}>Authorization</NavLink>
                 </div>
                 <div className={ModCSS.item}>

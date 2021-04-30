@@ -1,1 +1,22 @@
+.messages {
+    display: grid;
+    grid-template-areas: "n i";
+    grid-template-columns: 3fr 7fr;
+}
 
+.name {
+    grid-area: n;
+}
+
+.item {
+    grid-area: i;
+}
+
+.name a.activeLink {
+    color: rgb(202, 223, 222);
+    text-decoration: none;
+}
+
+.name a {
+    text-decoration: none;
+}

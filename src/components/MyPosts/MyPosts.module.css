@@ -1,3 +1,7 @@
 .item img {
     width: 30px;
 }
+
+.item {
+    padding-bottom: 10px;
+}

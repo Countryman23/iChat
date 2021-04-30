@@ -1,4 +1,15 @@
+.main {
+    padding: 10px;
+}
+
 /* добавили activeLink вручную */
 .item a.activeLink {
-    color: rgb(202, 223, 222)
+    color: rgb(202, 223, 222);
+    text-decoration: none;
+    
+}
+
+.item a {
+    text-decoration: none;
+    
 }
