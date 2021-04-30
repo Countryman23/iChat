@@ -2,14 +2,18 @@ import React from 'react';
 import ModCSS from "./MyPosts.module.css"; //Модифицируем наши стили с помощью .module
 import Post from './Post/Post';
 
-const MyPosts = () => {
+const MyPosts = (props) => {
 
-    let postData = [
-        { id: 1, text: "text1", like: "10" },
-        { id: 2, text: "text2", like: "20" },
-        { id: 3, text: "Bi", like: "30" },
-        { id: 4, text: "Mi", like: "40" }
-    ];
+    // переносим масив в app.js
+    // let postData = [
+    //     { id: 1, text: "text1", like: "10" },
+    //     { id: 2, text: "text2", like: "20" },
+    //     { id: 3, text: "Bi", like: "30" },
+    //     { id: 4, text: "Mi", like: "40" }
+    // ];
+
+    // добавляем props. к postData.map чтобы передать пропсы из index.js
+    let postDataEl = props.postData.map(post => (<Post text={post.text} like={post.like} />))
 
     return (
         <div>
@@ -22,13 +26,14 @@ const MyPosts = () => {
                     <button>Add post</button>
                 </div>
             </div>
+            { postDataEl }
             {/* экспортируем компоненту Post */}
             {/* передаём атрибуты компоненте, через пропсы */}
-            <Post text="Hello" like="10" />
-            <Post text="You cool" like="20" />
+            {/* <Post text="Hello" like="10" />
+            <Post text="You cool" like="20" /> */}
             {/* в этом способе данные берем из масива с объектами */}
-            <Post text={postData[2].text} like={postData[2].like} />
-            <Post text={postData[3].text} like={postData[3].like} />
+            {/* <Post text={postData[2].text} like={postData[2].like} />
+            <Post text={postData[3].text} like={postData[3].like} /> */}
         </div>
     );
 };
