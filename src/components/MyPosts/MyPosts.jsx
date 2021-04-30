@@ -13,7 +13,7 @@ const MyPosts = (props) => {
     // ];
 
     // добавляем props. к postData.map чтобы передать пропсы из index.js
-    let postDataEl = props.postData.map(post => (<Post text={post.text} like={post.like} />))
+    let postDataEl = props.state.postData.map(post => (<Post text={post.text} like={post.like} />))
 
     return (
         <div>

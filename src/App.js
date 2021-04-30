@@ -39,8 +39,12 @@ const App = (props) => {
                     <Route path="/Profile" render={ () => <Profile />} />
                     {/* передаём пропсы из масива postData */}
                     {/* затем берём postData уже из пропса который приходит в app.js из index.js. прописываем props.postData */}
-                    <Route path="/MyPosts" render={ () => <MyPosts postData={props.postData}/>} />
-                    <Route path="/Messages" render={ () => <Messages MesDataName={props.MesDataName} MesDataItem={props.MesDataItem}/>} />
+                    {/* теперь массив с объектами находится в state.js, для этого добавляем appState (props.appState.postData)*/}
+                    {/* <Route path="/MyPosts" render={ () => <MyPosts postData={props.appState.postData}/>} />
+                    <Route path="/Messages" render={ () => <Messages MesDataName={props.appState.MesDataName} MesDataItem={props.appState.MesDataItem}/>} /> */}
+                    {/* сгруппировали state и атрибуты имеют другой вид */}
+                    <Route path="/MyPosts" render={ () => <MyPosts state={props.appState.postData}/>} />
+                    <Route path="/Messages" render={ () => <Messages state={props.appState.MesDataName} state={props.appState.MesDataItem}/>} />
                     <Route path="/Settings" render={Settings} />
                 </div>
             </div>
