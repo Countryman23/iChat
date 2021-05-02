@@ -30,7 +30,7 @@ import state from './redux/state';
 
 // передаём основную компоненту App тегу body
 ReactDOM.render(<React.StrictMode>
-    <App appState={state} />
+    <App addState={state} />
     {/* так было до state.js */}
     {/* <App postData={postData} MesDataName={MesDataName} MesDataItem={MesDataItem}/> */}
     </React.StrictMode>,

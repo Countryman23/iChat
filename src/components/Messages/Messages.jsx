@@ -23,8 +23,8 @@ const Messages = (props) => {
     // создали метод для перебора масива. 
     // если функция принимает один параметр, можем писать его без скобок.
     // если return возвращает одну строку, то можно его не прописывать.
-    let MesDataNameEl = props.state.MesDataName.map(name => (<MessageName name={name.name} id={name.id} />));
-    let MesDataItemEl = props.state.MesDataItem.map(item => (<MessageItem item={item.item} id={item.id} />))
+    let MesDataNameEl = props.state.messagesPage.MesDataName.map(name => (<MessageName name={name.name} id={name.id} />));
+    let MesDataItemEl = props.state.messagesPage.MesDataItem.map(item => (<MessageItem item={item.item} id={item.id} />))
 
     return (
         <div className={ModCSS.messages}>

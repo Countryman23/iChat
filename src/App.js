@@ -18,6 +18,7 @@ import { BrowserRouter, Route } from "react-router-dom"; // импорт с фи
 
 //создали основную компоненту (это переменная, которая по факту функция)
 const App = (props) => {
+    
     return (
         // BrowserRouter, вложенность для маршрутизации
         <BrowserRouter>
@@ -43,9 +44,10 @@ const App = (props) => {
                     {/* <Route path="/MyPosts" render={ () => <MyPosts postData={props.appState.postData}/>} />
                     <Route path="/Messages" render={ () => <Messages MesDataName={props.appState.MesDataName} MesDataItem={props.appState.MesDataItem}/>} /> */}
                     {/* сгруппировали state и атрибуты имеют другой вид */}
-                    <Route path="/MyPosts" render={ () => <MyPosts state={props.appState.postData}/>} />
-                    <Route path="/Messages" render={ () => <Messages state={props.appState.MesDataName} state={props.appState.MesDataItem}/>} />
+                    <Route path="/MyPosts" render={ () => <MyPosts state={props.addState}/>} />
+                    <Route path="/Messages" render={ () => <Messages state={props.addState} state={props.addState}/>} />
                     <Route path="/Settings" render={Settings} />
+                    
                 </div>
             </div>
         </BrowserRouter>

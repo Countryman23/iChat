@@ -3,7 +3,7 @@ import ModCSS from "./MyPosts.module.css"; //Модифицируем наши �
 import Post from './Post/Post';
 
 const MyPosts = (props) => {
-
+debugger
     // переносим масив в app.js
     // let postData = [
     //     { id: 1, text: "text1", like: "10" },
@@ -13,7 +13,7 @@ const MyPosts = (props) => {
     // ];
 
     // добавляем props. к postData.map чтобы передать пропсы из index.js
-    let postDataEl = props.state.postData.map(post => (<Post text={post.text} like={post.like} />))
+    let postDataEl = props.state.myPostsPage.postData.map(post => (<Post text={post.text} like={post.like} />))
 
     return (
         <div>
