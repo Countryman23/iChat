@@ -4,9 +4,10 @@ import './index.css';
 import App from './App'; // импортируем сюда компоненту
 import reportWebVitals from './reportWebVitals';
 import state from './redux/state';
+import {addPostBLL} from './redux/state'; //импортируем не по дефолту, нужны {}
 
-// переносим масив из app.js
-// переносим все масивы state.js
+// переносим массив из app.js
+// переносим все массивы state.js
 // let postData = [
 //     { id: 1, text: "text1", like: "10" },
 //     { id: 2, text: "text2", like: "20" },
@@ -30,7 +31,7 @@ import state from './redux/state';
 
 // передаём основную компоненту App тегу body
 ReactDOM.render(<React.StrictMode>
-    <App addState={state} />
+    <App addState={state} addPostBLL={addPostBLL} />
     {/* так было до state.js */}
     {/* <App postData={postData} MesDataName={MesDataName} MesDataItem={MesDataItem}/> */}
     </React.StrictMode>,

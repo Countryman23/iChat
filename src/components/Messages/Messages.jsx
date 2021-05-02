@@ -20,7 +20,7 @@ const Messages = (props) => {
     //     {id: 4, item: "item4"},
     // ];
     
-    // создали метод для перебора масива. 
+    // создали метод для перебора массива. 
     // если функция принимает один параметр, можем писать его без скобок.
     // если return возвращает одну строку, то можно его не прописывать.
     let MesDataNameEl = props.state.messagesPage.MesDataName.map(name => (<MessageName name={name.name} id={name.id} />));
@@ -31,7 +31,7 @@ const Messages = (props) => {
             <div className={ModCSS.name}>
                 {/* так как это переменная ствим фигурные скобки {} */}
                 { MesDataNameEl } 
-                {/* в этом способе данные берем из масива с объектами */}
+                {/* в этом способе данные берем из массива с объектами */}
                 {/* <MessageName name={MesDataName[0].name} id={MesDataName[0].id} />
                 <MessageName name={MesDataName[1].name} id={MesDataName[1].id} /> */}
                 {/* передаём атрибуты компоненте, через пропсы */}
@@ -40,7 +40,7 @@ const Messages = (props) => {
             </div>
             <div className={ModCSS.item}>
                 { MesDataItemEl }
-                {/* в этом способе данные берем из масива с объектами */}
+                {/* в этом способе данные берем из массива с объектами */}
                 {/* <MessageItem item={MesDataItem[0].item} id={MesDataItem[0].id} />
                 <MessageItem item={MesDataItem[1].item} id={MesDataItem[1].id} /> */}
                 {/* передаём атрибуты компоненте, через пропсы */}

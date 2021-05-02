@@ -8,7 +8,7 @@ import Settings from "./components/Settings/Settings";
 import ModCSS from "./App.module.css"; //Модифицируем наши стили с помощью .module
 import { BrowserRouter, Route } from "react-router-dom"; // импорт с фигурными скобками из-за экспорта не по дефолту
 
-// переносим масив из MyPosts, и далее в index.js
+// переносим массив из MyPosts, и далее в index.js
 // let postData = [
 //         { id: 1, text: "text1", like: "10" },
 //         { id: 2, text: "text2", like: "20" },
@@ -38,13 +38,14 @@ const App = (props) => {
                     {/* через render можем вызвать анонимную функцию */}
                     <Route path="/Authorization" render={ () => <Authorization />} />
                     <Route path="/Profile" render={ () => <Profile />} />
-                    {/* передаём пропсы из масива postData */}
+                    {/* передаём пропсы из массива postData */}
                     {/* затем берём postData уже из пропса который приходит в app.js из index.js. прописываем props.postData */}
                     {/* теперь массив с объектами находится в state.js, для этого добавляем appState (props.appState.postData)*/}
                     {/* <Route path="/MyPosts" render={ () => <MyPosts postData={props.appState.postData}/>} />
                     <Route path="/Messages" render={ () => <Messages MesDataName={props.appState.MesDataName} MesDataItem={props.appState.MesDataItem}/>} /> */}
                     {/* сгруппировали state и атрибуты имеют другой вид */}
-                    <Route path="/MyPosts" render={ () => <MyPosts state={props.addState}/>} />
+                    <Route path="/MyPosts" render={ () => <MyPosts state={props.addState} 
+                                                                addPostBLL={props.addPostBLL} />} />
                     <Route path="/Messages" render={ () => <Messages state={props.addState} state={props.addState}/>} />
                     <Route path="/Settings" render={Settings} />
                     
