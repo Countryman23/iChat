@@ -7,7 +7,9 @@ const state = {
             { id: 2, text: "text2", like: 20 },
             { id: 3, text: "Bi", like: 30 },
             { id: 4, text: "Mi", like: 40 }
-        ]
+        ],
+        // создали newPostData для принятия новых значений поля textarea
+        newPostData: "hard code textarea",
     },
         
     messagesPage: {
@@ -35,6 +37,11 @@ export let addPostBLL = (postMessage) => {
     }
     state.myPostsPage.postData.push(newPost);
     // обновляем страницу с новыми данными
+    reRenderEntireTree(state);
+};
+
+export let updatePostChange = (newText) => {
+    state.myPostsPage.newPostData = newText;
     reRenderEntireTree(state);
 };
 

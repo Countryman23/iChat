@@ -22,19 +22,25 @@ const MyPosts = (props) => {
     // запускаем функцию addPostBLL из index.js
     let addPostUI = () => {
         let newText = newPostEl.current.value;
-        if (newText == ""){
+        if (newText === ""){
             addPostUI = null;
         } 
         else {props.addPostBLL(newText)};
         newPostEl.current.value = "";
     }
 
+    // создаём переменную которая будет отправлять новые значения в BLL
+    let postChange = () => {
+        let newText = newPostEl.current.value;
+        props.updatePostChange (newText);
+    }
+    
     return (
         <div>
             <div className={ModCSS.item}>
                 <div className={ModCSS.header}><h3>My posts</h3></div>
                 <div>
-                    <textarea ref={newPostEl} />
+                    <textarea onChange={postChange} ref={newPostEl} value={props.state.myPostsPage.newPostData} />
                 </div>
                 <div>
                     {/* добавили событие onClick, и передали ей функцию addPost */}

@@ -44,9 +44,16 @@ const App = (props) => {
                     {/* <Route path="/MyPosts" render={ () => <MyPosts postData={props.appState.postData}/>} />
                     <Route path="/Messages" render={ () => <Messages MesDataName={props.appState.MesDataName} MesDataItem={props.appState.MesDataItem}/>} /> */}
                     {/* сгруппировали state и атрибуты имеют другой вид */}
+                    {/* <Route path="/MyPosts" render={ () => <MyPosts state={props.addState} addPostBLL={props.addPostBLL} />} /> */}
+                    {/* добавили myPostsPage */}
+                    {/* добавили updatePostChange */}
                     <Route path="/MyPosts" render={ () => <MyPosts state={props.addState} 
-                                                                addPostBLL={props.addPostBLL} />} />
-                    <Route path="/Messages" render={ () => <Messages state={props.addState} state={props.addState}/>} />
+                                                            addPostBLL={props.addPostBLL}
+                                                            myPostsPage={props.myPostsPage}
+                                                            updatePostChange={props.updatePostChange} />} />
+                                                            
+                    <Route path="/Messages" render={ () => <Messages state={props.addState} 
+                                                            state={props.addState}/>} />
                     <Route path="/Settings" render={Settings} />
                     
                 </div>
