@@ -1,10 +1,11 @@
-import React from 'react'; //подключаем модуль реакт из папки модулей
-import ReactDOM from 'react-dom';
+// import React from 'react'; //подключаем модуль реакт из папки модулей
+// import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App'; // импортируем сюда компоненту
+// import App from './App'; // импортируем сюда компоненту
 import reportWebVitals from './reportWebVitals';
 import state from './redux/state';
-import {addPostBLL} from './redux/state'; //импортируем не по дефолту, нужны {}
+// import {addPostBLL} from './redux/state'; //импортируем не по дефолту, нужны {}
+import {reRenderEntireTree} from "./redux/render"
 
 // переносим массив из app.js
 // переносим все массивы state.js
@@ -29,13 +30,18 @@ import {addPostBLL} from './redux/state'; //импортируем не по д�
 //     {id: 4, item: "item4"},
 // ];
 
-// передаём основную компоненту App тегу body
-ReactDOM.render(<React.StrictMode>
-    <App addState={state} addPostBLL={addPostBLL} />
-    {/* так было до state.js */}
-    {/* <App postData={postData} MesDataName={MesDataName} MesDataItem={MesDataItem}/> */}
-    </React.StrictMode>,
-  document.getElementById('root')
-);
+// перенесли функцию reRenderEntireTree в render.js
+// let reRenderEntireTree = (state) => {
+//     // передаём основную компоненту App тегу body
+//     ReactDOM.render(<React.StrictMode>
+//         <App addState={state} addPostBLL={addPostBLL} />
+//         {/* так было до state.js */}
+//         {/* <App postData={postData} MesDataName={MesDataName} MesDataItem={MesDataItem}/> */}
+//     </React.StrictMode>,
+//         document.getElementById('root')
+//     );
+// }
+
+reRenderEntireTree(state);
 
 reportWebVitals();

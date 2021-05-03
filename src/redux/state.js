@@ -1,3 +1,5 @@
+import {reRenderEntireTree} from './render';
+
 const state = {
     myPostsPage: {
         postData: [
@@ -26,14 +28,14 @@ const state = {
 // создали функцию, которая будет добавлять новый пост в postData
 // экспортируем не по дефолту
 export let addPostBLL = (postMessage) => {
-    
-    let newPost = {
+        let newPost = {
         id: 5, 
         text: postMessage, 
         like: 50,
     }
-    
     state.myPostsPage.postData.push(newPost);
+    // обновляем страницу с новыми данными
+    reRenderEntireTree(state);
 };
 
 export default state

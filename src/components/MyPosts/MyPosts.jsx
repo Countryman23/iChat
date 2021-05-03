@@ -22,10 +22,12 @@ const MyPosts = (props) => {
     // запускаем функцию addPostBLL из index.js
     let addPostUI = () => {
         let newText = newPostEl.current.value;
-        props.addPostBLL(newText);
+        if (newText == ""){
+            addPostUI = null;
+        } 
+        else {props.addPostBLL(newText)};
+        newPostEl.current.value = "";
     }
-
-    
 
     return (
         <div>
