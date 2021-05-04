@@ -21,12 +21,11 @@ const MyPosts = (props) => {
     // считываем поле textarea с помощью addPostUI
     // запускаем функцию addPostBLL из index.js
     let addPostUI = () => {
-        let newText = newPostEl.current.value;
-        if (newText === ""){
-            addPostUI = null;
-        } 
-        else {props.addPostBLL(newText)};
-        newPostEl.current.value = "";
+        // нет смысла отправлять текст в addPostUI
+        // let newText = newPostEl.current.value;
+        // закеоментировали let newText
+        // props.addPostBLL(newText);
+        props.addPostBLL();
     }
 
     // создаём переменную которая будет отправлять новые значения в BLL

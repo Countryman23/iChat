@@ -1,4 +1,9 @@
-import {reRenderEntireTree} from './render';
+// import {reRenderEntireTree} from './render'; октлючили импорт, так как убрали render.js
+
+//создали локально reRenderEntireTree
+let reRenderEntireTree = () => {
+    console.log("State")
+}
 
 const state = {
     myPostsPage: {
@@ -27,22 +32,42 @@ const state = {
         ]
     }
 }
+
+window.state = state;
+
 // создали функцию, которая будет добавлять новый пост в postData
 // экспортируем не по дефолту
-export let addPostBLL = (postMessage) => {
+// удалили аргумент postMessage, будем брать его через state
+export let addPostBLL = () => {
         let newPost = {
         id: 5, 
-        text: postMessage, 
+        // удалили postMessage, будем брать его через state
+        // text: postMessage, 
+        text: state.myPostsPage.newPostData, 
         like: 50,
     }
     state.myPostsPage.postData.push(newPost);
+    // попробовать реализоть не добавлять пустой textarea
+    // if (newPost.text === ""){alert("hi")};
+    //очищаем поле textarea
+    state.myPostsPage.newPostData = "";
     // обновляем страницу с новыми данными
     reRenderEntireTree(state);
 };
-
+// получаем значение newText и перезаписываем в newPostData 
 export let updatePostChange = (newText) => {
     state.myPostsPage.newPostData = newText;
     reRenderEntireTree(state);
 };
+
+// функция для импорта reRenderEntireTree
+export const subscribe = (observer) => {
+    //observer наблюдает за запросом рендеринга
+    reRenderEntireTree = observer;
+}; // из index.js вызываем subscribe(reRenderEntireTree)
+    // затем она запускается тут (пока не могу понять почему reRenderEntireTree не подставляется в качестве аргумента observer)
+    // reRenderEntireTree = observer присваевается переменной let reRenderEntireTree
+    // вместо аргумента observer принимается reRenderEntireTree
+    // в итоге в index.js вызываем subscribe с переданной "настоящей функцией"(reRenderEntireTree) которая запускается в index.js
 
 export default state
