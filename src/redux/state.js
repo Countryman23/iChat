@@ -102,36 +102,93 @@ let store = {
             ]
         }
     },
-    getState() {
-        return this._state;
-    },
-    // заменили название
+    // заменили название reRenderEntireTree()
     _callSubscriber() {
         console.log("state change")
     },
-    addPostBLL() {
-        let newPost = {
-        id: 5, 
-        // удалили postMessage, будем брать его через state
-        // text: postMessage, 
-        text: this._state.myPostsPage.newPostData, 
-        like: 50,
-        }
-        this._state.myPostsPage.postData.push(newPost);
-    // попробовать реализоть не добавлять пустой textarea
-if (this._state.myPostsPage.newPostData === ""){this._state.myPostsPage.postData.pop(newPost)};
-    //очищаем поле textarea
-    this._state.myPostsPage.newPostData = "";
-    // обновляем страницу с новыми данными
-    this._callSubscriber(this._state);
-    },
-    updatePostChange(newText) {
-        this._state.myPostsPage.newPostData = newText;
-        this._callSubscriber(this._state);
+    getState() {
+        return this._state;
     },
     subscribe(observer) {
         //observer наблюдает за запросом рендеринга
         this._callSubscriber = observer;
+    },
+        // делаем эти методы приватными для dispatch
+    // _addPostBLL() {
+    //     let newPost = {
+    //     id: 5, 
+    //     // удалили postMessage, будем брать его через state
+    //     // text: postMessage, 
+    //     text: this._state.myPostsPage.newPostData, 
+    //     like: 50,
+    //     }
+    //     this._state.myPostsPage.postData.push(newPost);
+    // // // не добавлять пустой textarea
+    // if (this._state.myPostsPage.newPostData === ""){this._state.myPostsPage.postData.pop(newPost)};
+    // // //очищаем поле textarea
+    // this._state.myPostsPage.newPostData = "";
+    // // // обновляем страницу с новыми данными через reRenderEntireTree
+    // this._callSubscriber(this._state);
+    // },
+    // // передали этот метод в dispatch
+    // _updatePostChange(newText) {
+    //     // this._state.myPostsPage.newPostData = newText;
+    //     // this._callSubscriber(this._state); // вызываем reRenderEntireTree
+    // },
+
+    // убрали приватность, передали эти методы в метод dispatch
+    // addPostBLL() {
+    //     let newPost = {
+    //     id: 5, 
+    //     // удалили postMessage, будем брать его через state
+    //     // text: postMessage, 
+    //     text: this._state.myPostsPage.newPostData, 
+    //     like: 50,
+    //     }
+    //     this._state.myPostsPage.postData.push(newPost);
+    // // не добавлять пустой textarea
+    // if (this._state.myPostsPage.newPostData === ""){this._state.myPostsPage.postData.pop(newPost)};
+    // //очищаем поле textarea
+    // this._state.myPostsPage.newPostData = "";
+    // // обновляем страницу с новыми данными через reRenderEntireTree
+    // this._callSubscriber(this._state);
+    // },
+    // передали этот метод в dispatch
+    // updatePostChange(newText) {
+    //     // this._state.myPostsPage.newPostData = newText;
+    //     // this._callSubscriber(this._state); // вызываем reRenderEntireTree
+    // },
+
+    // теперь всё что нужно менять внутри store, меняем через этот метод dispatch
+    dispatch(action){
+        // пример когда методы приватные
+        // if (action.type === "ADD-POST-BLL") {
+        //     this.addPostBLL();
+        // } else if (action.type === "UPDATE-POST-CHANGE") {
+        //     this._updatePostChange(action.newText)
+        // }
+        
+        if (action.type === "ADD-POST-BLL") {
+            {let newPost = {
+                id: 5, 
+                // удалили postMessage, будем брать его через state
+                // text: postMessage, 
+                text: this._state.myPostsPage.newPostData, 
+                like: 50,
+                }
+                this._state.myPostsPage.postData.push(newPost);
+            // не добавлять пустой textarea
+            if (this._state.myPostsPage.newPostData === ""){this._state.myPostsPage.postData.pop(newPost)};
+            //очищаем поле textarea
+            this._state.myPostsPage.newPostData = "";
+            // обновляем страницу с новыми данными через reRenderEntireTree
+            this._callSubscriber(this._state);
+            }
+        } else if (action.type === "UPDATE-POST-CHANGE") {
+            //добавили action к newText, так как этот параметр больше не может прийти через updatePostChange(newText)
+            this._state.myPostsPage.newPostData = action.newText;
+            this._callSubscriber(this._state); // вызываем reRenderEntireTree
+        }
     }
 }
 window.store = store;

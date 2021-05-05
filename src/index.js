@@ -56,14 +56,31 @@ import store from './redux/state';
 //     );
 // }
 
+// переписываем с учётом dispatch
+// let reRenderEntireTree = (state) => {
+//     // новый вид после появления store
+//     ReactDOM.render(<React.StrictMode>
+//         {/* bind тут нужен чтобы this методa addPostBLL вызывался не от addPostBLL, а от объекта store */}
+//         <App addState={state} 
+//             addPostBLL={store.addPostBLL.bind(store)} 
+//             newPostData={state} 
+//             updatePostChange={store.updatePostChange.bind(store)}/>
+//         {/* так было до state.js */}
+//         {/* <App postData={postData} MesDataName={MesDataName} MesDataItem={MesDataItem}/> */}
+//     </React.StrictMode>,
+//         document.getElementById('root')
+//     );
+// }
+
 let reRenderEntireTree = (state) => {
     // новый вид после появления store
     ReactDOM.render(<React.StrictMode>
         {/* bind тут нужен чтобы this методa addPostBLL вызывался не от addPostBLL, а от объекта store */}
         <App addState={state} 
-            addPostBLL={store.addPostBLL.bind(store)} 
-            newPostData={state} 
-            updatePostChange={store.updatePostChange.bind(store)}/>
+            dispatch={store.dispatch.bind(store)} 
+            newPostData={state} />
+            {/* updatePostChange тут уже не нужен */}
+            {/* updatePostChange={store.updatePostChange.bind(store)} */}
         {/* так было до state.js */}
         {/* <App postData={postData} MesDataName={MesDataName} MesDataItem={MesDataItem}/> */}
     </React.StrictMode>,
@@ -71,9 +88,9 @@ let reRenderEntireTree = (state) => {
     );
 }
 
-// reRenderEntireTree(store._state);
+// reRenderEntireTree(store._state); было так
 reRenderEntireTree(store.getState());
 
-store.subscribe(reRenderEntireTree);
+store.subscribe(reRenderEntireTree); // тут reRenderEntireTree не означает что мы его запускем. запускается он как переданный аргумент для subscribe после вызова
 
 reportWebVitals();

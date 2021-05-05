@@ -47,10 +47,16 @@ const App = (props) => {
                     {/* <Route path="/MyPosts" render={ () => <MyPosts state={props.addState} addPostBLL={props.addPostBLL} />} /> */}
                     {/* добавили myPostsPage */}
                     {/* добавили updatePostChange */}
-                    <Route path="/MyPosts" render={ () => <MyPosts state={props.addState} 
+                    {/* переписываем с учётом dispatch */}
+                    {/* <Route path="/MyPosts" render={ () => <MyPosts state={props.addState} 
                                                             addPostBLL={props.addPostBLL}
                                                             myPostsPage={props.myPostsPage}
-                                                            updatePostChange={props.updatePostChange} />} />
+                                                            updatePostChange={props.updatePostChange} />} /> */}
+                    <Route path="/MyPosts" render={ () => <MyPosts state={props.addState} 
+                                                            dispatch={props.dispatch}
+                                                            myPostsPage={props.myPostsPage} />} />
+                                                            {/* updatePostChange тут уже не нужен */}
+                                                            {/* updatePostChange={props.updatePostChange}  */}
                                                             
                     <Route path="/Messages" render={ () => <Messages state={props.addState} 
                                                             state={props.addState}/>} />

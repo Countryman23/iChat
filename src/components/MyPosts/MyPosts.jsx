@@ -12,8 +12,18 @@ const MyPosts = (props) => {
     //     { id: 4, text: "Mi", like: "40" }
     // ];
 
+            {/* экспортируем компоненту Post */}
+            {/* передаём атрибуты компоненте, через пропсы */}
+            {/* <Post text="Hello" like="10" />
+            <Post text="You cool" like="20" /> */}
+            {/* в этом способе данные берем из массива с объектами */}
+            {/* <Post text={postData[2].text} like={postData[2].like} />
+            <Post text={postData[3].text} like={postData[3].like} /> */}
+
     // добавляем props. к postData.map чтобы передать пропсы из index.js
-    let postDataEl = props.state.myPostsPage.postData.map(post => (<Post text={post.text} like={post.like} />))
+    let postDataEl = props.state.myPostsPage.postData.map(post => (<Post 
+                                                                    text={post.text} 
+                                                                    like={post.like} />))
 
     // просим React создать ссылку
     let newPostEl = React.createRef();
@@ -22,17 +32,18 @@ const MyPosts = (props) => {
     // запускаем функцию addPostBLL из index.js
     let addPostUI = () => {
         // нет смысла отправлять текст в addPostUI
-        // let newText = newPostEl.current.value;
-        // закеоментировали let newText
-        // props.addPostBLL(newText);
-        props.addPostBLL();
-        // if (newPostDataRemove.value === ""){alert("hi")};
+        // let text = newPostEl.current.value;
+        // закеоментировали let text
+        // props.addPostBLL(text);
+        // props.addPostBLL(); // меняем на dispatch
+        props.dispatch ({ type: "ADD-POST-BLL"})
     }
 
     // создаём переменную которая будет отправлять новые значения в BLL
     let postChange = () => {
-        let newText = newPostEl.current.value;
-        props.updatePostChange (newText);
+        let text = newPostEl.current.value;
+        // props.updatePostChange (text); // меняем на dispatch
+        props.dispatch ({ type: "UPDATE-POST-CHANGE", newText: text})
     }
     // вынес пропс в переменную
     let newPostDataRemove = props.state.myPostsPage.newPostData;
@@ -50,13 +61,6 @@ const MyPosts = (props) => {
                 </div>
             </div>
             { postDataEl }
-            {/* экспортируем компоненту Post */}
-            {/* передаём атрибуты компоненте, через пропсы */}
-            {/* <Post text="Hello" like="10" />
-            <Post text="You cool" like="20" /> */}
-            {/* в этом способе данные берем из массива с объектами */}
-            {/* <Post text={postData[2].text} like={postData[2].like} />
-            <Post text={postData[3].text} like={postData[3].like} /> */}
         </div>
     );
 };
