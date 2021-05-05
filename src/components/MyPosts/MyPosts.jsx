@@ -26,6 +26,7 @@ const MyPosts = (props) => {
         // закеоментировали let newText
         // props.addPostBLL(newText);
         props.addPostBLL();
+        // if (newPostDataRemove.value === ""){alert("hi")};
     }
 
     // создаём переменную которая будет отправлять новые значения в BLL
@@ -33,13 +34,15 @@ const MyPosts = (props) => {
         let newText = newPostEl.current.value;
         props.updatePostChange (newText);
     }
-    
+    // вынес пропс в переменную
+    let newPostDataRemove = props.state.myPostsPage.newPostData;
+
     return (
         <div>
             <div className={ModCSS.item}>
                 <div className={ModCSS.header}><h3>My posts</h3></div>
                 <div>
-                    <textarea onChange={postChange} ref={newPostEl} value={props.state.myPostsPage.newPostData} />
+                    <textarea onChange={postChange} ref={newPostEl} value={newPostDataRemove} />
                 </div>
                 <div>
                     {/* добавили событие onClick, и передали ей функцию addPost */}

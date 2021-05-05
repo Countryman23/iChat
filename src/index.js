@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App'; // импортируем сюда компоненту
 import reportWebVitals from './reportWebVitals';
-import state from './redux/state';
-import {addPostBLL, updatePostChange, subscribe} from './redux/state'; //импортируем не по дефолту, нужны {}
-// import {reRenderEntireTree} from "./redux/render"
+import store from './redux/state';
+// import {addPostBLL, updatePostChange, subscribe} from './redux/state'; //импортируем не по дефолту, нужны {} // это уже не нужно, та как теперь экспортируем store
+// import {reRenderEntireTree} from "./redux/render" // render.js уже не нужен
 
 // переносим массив из app.js
 // переносим все массивы state.js
@@ -42,10 +42,28 @@ import {addPostBLL, updatePostChange, subscribe} from './redux/state'; //имп�
 //     );
 // }
 // вернули обратно для рефакторинга
+// let reRenderEntireTree = (state) => {
+//     // передаём основную компоненту App тегу body
+//     ReactDOM.render(<React.StrictMode>
+//         <App addState={state} 
+//             addPostBLL={addPostBLL} 
+//             newPostData={state} 
+//             updatePostChange={updatePostChange}/>
+//         {/* так было до state.js */}
+//         {/* <App postData={postData} MesDataName={MesDataName} MesDataItem={MesDataItem}/> */}
+//     </React.StrictMode>,
+//         document.getElementById('root')
+//     );
+// }
+
 let reRenderEntireTree = (state) => {
-    // передаём основную компоненту App тегу body
+    // новый вид после появления store
     ReactDOM.render(<React.StrictMode>
-        <App addState={state} addPostBLL={addPostBLL} newPostData={state} updatePostChange={updatePostChange}/>
+        {/* bind тут нужен чтобы this методa addPostBLL вызывался не от addPostBLL, а от объекта store */}
+        <App addState={state} 
+            addPostBLL={store.addPostBLL.bind(store)} 
+            newPostData={state} 
+            updatePostChange={store.updatePostChange.bind(store)}/>
         {/* так было до state.js */}
         {/* <App postData={postData} MesDataName={MesDataName} MesDataItem={MesDataItem}/> */}
     </React.StrictMode>,
@@ -53,8 +71,9 @@ let reRenderEntireTree = (state) => {
     );
 }
 
-reRenderEntireTree(state);
+// reRenderEntireTree(store._state);
+reRenderEntireTree(store.getState());
 
-subscribe(reRenderEntireTree);
+store.subscribe(reRenderEntireTree);
 
 reportWebVitals();
