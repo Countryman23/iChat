@@ -1,6 +1,7 @@
 import React from 'react';
 import ModCSS from "./MyPosts.module.css"; //Модифицируем наши стили с помощью .module
 import Post from './Post/Post';
+import {addPostUIActionCreator, postChangeActionCreator} from './../../redux/state';
 
 const MyPosts = (props) => {
 
@@ -36,16 +37,21 @@ const MyPosts = (props) => {
         // закеоментировали let text
         // props.addPostBLL(text);
         // props.addPostBLL(); // меняем на dispatch
-        props.dispatch ({ type: "ADD-POST-BLL"})
+        // props.dispatch ({ type: "ADD-POST-BLL"})
+        //создали функцию addPostUIActionCreator которая будет передоваться в BLL
+        props.dispatch(addPostUIActionCreator());
     }
 
     // создаём переменную которая будет отправлять новые значения в BLL
     let postChange = () => {
         let text = newPostEl.current.value;
         // props.updatePostChange (text); // меняем на dispatch
-        props.dispatch ({ type: "UPDATE-POST-CHANGE", newText: text})
+        // props.dispatch ({ type: "UPDATE-POST-CHANGE", newText: text})
+        //создали функцию addPostUIActionCreator которая будет передоваться в BLL
+        props.dispatch(postChangeActionCreator(text))
     }
-    // вынес пропс в переменную
+
+     // вынес пропс в переменную
     let newPostDataRemove = props.state.myPostsPage.newPostData;
 
     return (

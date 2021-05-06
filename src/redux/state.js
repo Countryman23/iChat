@@ -1,3 +1,5 @@
+const ADD_POST_BLL = "ADD-POST-BLL";
+const UPDATE_POST_CHANGE = "UPDATE-POST-CHANGE";
 // import {reRenderEntireTree} from './render'; октлючили импорт, так как убрали render.js
 
 //создали локально reRenderEntireTree
@@ -168,7 +170,7 @@ let store = {
         //     this._updatePostChange(action.newText)
         // }
         
-        if (action.type === "ADD-POST-BLL") {
+        if (action.type === ADD_POST_BLL) {
             {let newPost = {
                 id: 5, 
                 // удалили postMessage, будем брать его через state
@@ -184,13 +186,31 @@ let store = {
             // обновляем страницу с новыми данными через reRenderEntireTree
             this._callSubscriber(this._state);
             }
-        } else if (action.type === "UPDATE-POST-CHANGE") {
+        } else if (action.type === UPDATE_POST_CHANGE) {
             //добавили action к newText, так как этот параметр больше не может прийти через updatePostChange(newText)
             this._state.myPostsPage.newPostData = action.newText;
             this._callSubscriber(this._state); // вызываем reRenderEntireTree
         }
     }
 }
+
+// // вспомогательная функция
+// export const addPostUIActionCreator = () => {
+//     return {
+//         type: ADD_POST_BLL
+//     }
+// }
+// // вспомогательная функция
+// export const postChangeActionCreator = (text) => {
+//     return {
+//         type: UPDATE_POST_CHANGE, newText: text
+//     }
+// }
+// вспомогательная функция
+//переписываем в одну строку
+export const addPostUIActionCreator = () => ({type: ADD_POST_BLL})
+export const postChangeActionCreator = (text) => ({type: UPDATE_POST_CHANGE, newText: text})
+
 window.store = store;
 
 export default store
