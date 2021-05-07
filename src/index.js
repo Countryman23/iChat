@@ -73,12 +73,12 @@ import store from './redux/state';
 // }
 
 let reRenderEntireTree = (state) => {
+    // debugger
     // новый вид после появления store
     ReactDOM.render(<React.StrictMode>
         {/* bind тут нужен чтобы this методa addPostBLL вызывался не от addPostBLL, а от объекта store */}
         <App addState={state} 
-            dispatch={store.dispatch.bind(store)} 
-            newPostData={state} />
+            dispatch={store.dispatch.bind(store)} />
             {/* updatePostChange тут уже не нужен */}
             {/* updatePostChange={store.updatePostChange.bind(store)} */}
         {/* так было до state.js */}

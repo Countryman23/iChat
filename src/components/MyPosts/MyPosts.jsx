@@ -4,7 +4,7 @@ import Post from './Post/Post';
 import {addPostUIActionCreator, postChangeActionCreator} from './../../redux/state';
 
 const MyPosts = (props) => {
-
+// debugger
     // переносим массив в app.js
     // let postData = [
     //     { id: 1, text: "text1", like: "10" },
@@ -53,7 +53,7 @@ const MyPosts = (props) => {
 
      // вынес пропс в переменную
     let newPostDataRemove = props.state.myPostsPage.newPostData;
-
+// debugger
     return (
         <div>
             <div className={ModCSS.item}>

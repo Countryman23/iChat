@@ -18,7 +18,7 @@ import { BrowserRouter, Route } from "react-router-dom"; // импорт с фи
 
 //создали основную компоненту (это переменная, которая по факту функция)
 const App = (props) => {
-    
+    // debugger
     return (
         // BrowserRouter, вложенность для маршрутизации
         <BrowserRouter>
@@ -53,13 +53,13 @@ const App = (props) => {
                                                             myPostsPage={props.myPostsPage}
                                                             updatePostChange={props.updatePostChange} />} /> */}
                     <Route path="/MyPosts" render={ () => <MyPosts state={props.addState} 
-                                                            dispatch={props.dispatch}
-                                                            myPostsPage={props.myPostsPage} />} />
+                                                            dispatch={props.dispatch} />} />
                                                             {/* updatePostChange тут уже не нужен */}
                                                             {/* updatePostChange={props.updatePostChange}  */}
                                                             
                     <Route path="/Messages" render={ () => <Messages state={props.addState} 
-                                                            state={props.addState}/>} />
+                                                            dispatch={props.dispatch}
+                                                            messagesPage={props.messagesPage}/>} />
                     <Route path="/Settings" render={Settings} />
                     
                 </div>

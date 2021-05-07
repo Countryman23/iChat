@@ -1,5 +1,8 @@
 const ADD_POST_BLL = "ADD-POST-BLL";
 const UPDATE_POST_CHANGE = "UPDATE-POST-CHANGE";
+const ADD_MESSAGE_BUTTON_BLL = "ADD-MESSAGE-BUTTON-BLL";
+const UPDATE_TEXT_MESSAGE_CHANGE = "UPDATE-TEXT-MESSAGE-CHANGE";
+
 // import {reRenderEntireTree} from './render'; октлючили импорт, так как убрали render.js
 
 //создали локально reRenderEntireTree
@@ -88,7 +91,7 @@ let store = {
             // создали newPostData для принятия новых значений поля textarea
             newPostData: "hard code textarea",
         },
-            
+        
         messagesPage: {
             MesDataName: [
                 {id: 1, name: "name1"},
@@ -101,7 +104,8 @@ let store = {
                 {id: 2, item: "item2"},
                 {id: 3, item: "item3"},
                 {id: 4, item: "item4"}
-            ]
+            ],
+            newMessageData: "hard code message",
         }
     },
     // заменили название reRenderEntireTree()
@@ -190,6 +194,19 @@ let store = {
             //добавили action к newText, так как этот параметр больше не может прийти через updatePostChange(newText)
             this._state.myPostsPage.newPostData = action.newText;
             this._callSubscriber(this._state); // вызываем reRenderEntireTree
+        } else if (action.type === ADD_MESSAGE_BUTTON_BLL){
+            {let newMessage = {
+                id: 5, 
+                item: this._state.messagesPage.newMessageData
+                }
+                this._state.messagesPage.MesDataItem.push(newMessage);
+            if (this._state.messagesPage.newMessageData === ""){this._state.messagesPage.MesDataItem.pop(newMessage)};
+            this._state.messagesPage.newMessageData = "";
+            this._callSubscriber(this._state);
+            }
+        } else if (action.type === UPDATE_TEXT_MESSAGE_CHANGE) {
+            this._state.messagesPage.newMessageData = action.newMessage;
+            this._callSubscriber(this._state);
         }
     }
 }
@@ -210,6 +227,8 @@ let store = {
 //переписываем в одну строку
 export const addPostUIActionCreator = () => ({type: ADD_POST_BLL})
 export const postChangeActionCreator = (text) => ({type: UPDATE_POST_CHANGE, newText: text})
+export const addMessageButtonUIAC = () => ({type: ADD_MESSAGE_BUTTON_BLL})
+export const textChangeAC = (text) => ({type: UPDATE_TEXT_MESSAGE_CHANGE, newMessage: text})
 
 window.store = store;
 

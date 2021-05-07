@@ -2,6 +2,7 @@ import React from 'react';
 import ModCSS from "./Messages.module.css"; //Модифицируем наши стили с помощью .module
 import MessageName from "./MessageName"
 import MessageItem from "./MessageItem"
+import {addMessageButtonUIAC, textChangeAC} from "./../../redux/state"
 // import MessageData from "./MessageData"
 
 const Messages = (props) => {
@@ -23,9 +24,24 @@ const Messages = (props) => {
     // создали метод для перебора массива. 
     // если функция принимает один параметр, можем писать его без скобок.
     // если return возвращает одну строку, то можно его не прописывать.
-    let MesDataNameEl = props.state.messagesPage.MesDataName.map(name => (<MessageName name={name.name} id={name.id} />));
-    let MesDataItemEl = props.state.messagesPage.MesDataItem.map(item => (<MessageItem item={item.item} id={item.id} />))
+    let MesDataNameEl = props.state.messagesPage.MesDataName
+    .map(name => (<MessageName name={name.name} id={name.id} />));
+    let MesDataItemEl = props.state.messagesPage.MesDataItem
+    .map(item => (<MessageItem item={item.item} id={item.id} />))
 
+    let addMessageButtonUI = () => {
+        props.dispatch(addMessageButtonUIAC());
+    }
+
+    let newTextEl = React.createRef();
+
+    let textChange = () => {
+        let text = newTextEl.current.value;
+        props.dispatch(textChangeAC(text))
+    }
+
+    let newTextDataRemove = props.state.messagesPage.newMessageData;
+// debugger
     return (
         <div className={ModCSS.messages}>
             <div className={ModCSS.name}>
@@ -46,6 +62,10 @@ const Messages = (props) => {
                 {/* передаём атрибуты компоненте, через пропсы */}
                 {/* <MessageItem item="item3" />
                <MessageItem item="item4" /> */}
+                <textarea onChange={textChange} ref={newTextEl} value={newTextDataRemove} />
+                <div>
+                    <button onClick={addMessageButtonUI}>Add message</button>
+                </div>
             </div>
         </div>
     );
