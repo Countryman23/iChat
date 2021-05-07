@@ -24,9 +24,9 @@ const Messages = (props) => {
     // создали метод для перебора массива. 
     // если функция принимает один параметр, можем писать его без скобок.
     // если return возвращает одну строку, то можно его не прописывать.
-    let MesDataNameEl = props.state.messagesPage.MesDataName
+    let MesDataNameEl = props.APPstate.messagesPage.MesDataName
     .map(name => (<MessageName name={name.name} id={name.id} />));
-    let MesDataItemEl = props.state.messagesPage.MesDataItem
+    let MesDataItemEl = props.APPstate.messagesPage.MesDataItem
     .map(item => (<MessageItem item={item.item} id={item.id} />))
 
     let addMessageButtonUI = () => {
@@ -40,7 +40,7 @@ const Messages = (props) => {
         props.dispatch(textChangeAC(text))
     }
 
-    let newTextDataRemove = props.state.messagesPage.newMessageData;
+    let newTextDataRemove = props.APPstate.messagesPage.newMessageData;
 // debugger
     return (
         <div className={ModCSS.messages}>

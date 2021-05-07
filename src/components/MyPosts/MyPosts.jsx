@@ -22,7 +22,7 @@ const MyPosts = (props) => {
             <Post text={postData[3].text} like={postData[3].like} /> */}
 
     // добавляем props. к postData.map чтобы передать пропсы из index.js
-    let postDataEl = props.state.myPostsPage.postData.map(post => (<Post 
+    let postDataEl = props.APPstate.myPostsPage.postData.map(post => (<Post 
                                                                     text={post.text} 
                                                                     like={post.like} />))
 
@@ -51,8 +51,8 @@ const MyPosts = (props) => {
         props.dispatch(postChangeActionCreator(text))
     }
 
-     // вынес пропс в переменную
-    let newPostDataRemove = props.state.myPostsPage.newPostData;
+    // вынес пропс в переменную
+    let newPostDataRemove = props.APPstate.myPostsPage.newPostData;
 // debugger
     return (
         <div>

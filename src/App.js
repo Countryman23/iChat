@@ -52,16 +52,14 @@ const App = (props) => {
                                                             addPostBLL={props.addPostBLL}
                                                             myPostsPage={props.myPostsPage}
                                                             updatePostChange={props.updatePostChange} />} /> */}
-                    <Route path="/MyPosts" render={ () => <MyPosts state={props.addState} 
+                    <Route path="/MyPosts" render={ () => <MyPosts APPstate={props.addState} 
                                                             dispatch={props.dispatch} />} />
                                                             {/* updatePostChange тут уже не нужен */}
                                                             {/* updatePostChange={props.updatePostChange}  */}
                                                             
-                    <Route path="/Messages" render={ () => <Messages state={props.addState} 
-                                                            dispatch={props.dispatch}
-                                                            messagesPage={props.messagesPage}/>} />
+                    <Route path="/Messages" render={ () => <Messages APPstate={props.addState} 
+                                                            dispatch={props.dispatch} />} />
                     <Route path="/Settings" render={Settings} />
-                    
                 </div>
             </div>
         </BrowserRouter>
