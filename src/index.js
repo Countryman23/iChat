@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App'; // импортируем сюда компоненту
 import reportWebVitals from './reportWebVitals';
-import store from './redux/state';
+//отключаем так как подключили redux
+// import store from './redux/store';
+import store from './redux/redux-store';
 // import {addPostBLL, updatePostChange, subscribe} from './redux/state'; //импортируем не по дефолту, нужны {} // это уже не нужно, та как теперь экспортируем store
 // import {reRenderEntireTree} from "./redux/render" // render.js уже не нужен
 
@@ -91,6 +93,13 @@ let reRenderEntireTree = (state) => {
 // reRenderEntireTree(store._state); было так
 reRenderEntireTree(store.getState());
 
-store.subscribe(reRenderEntireTree); // тут reRenderEntireTree не означает что мы его запускем. запускается он как переданный аргумент для subscribe после вызова
+// тут reRenderEntireTree не означает что мы его запускем. запускается он как переданный аргумент для subscribe после вызова
+// store.subscribe(reRenderEntireTree); 
+
+//так как redux не уведомляет об изменённом state, запрашиваем принудительно изменённый state
+store.subscribe(() => {
+    let state = store.getState()
+    reRenderEntireTree(state);
+});
 
 reportWebVitals();

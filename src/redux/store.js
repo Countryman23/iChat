@@ -1,5 +1,6 @@
 import myPostReducer from "./myPost-reducer";
 import messagesReducer from "./messages-reducer";
+
 //убираем const так как перенесли их в Reducer
 // const ADD_POST_BLL = "ADD-POST-BLL";
 // const UPDATE_POST_CHANGE = "UPDATE-POST-CHANGE";
@@ -83,34 +84,39 @@ import messagesReducer from "./messages-reducer";
 // упаковываем всё в один объект
 let store = {
     // _ это означает что эта ссылка приватная
-    _state: {
-        myPostsPage: {
-            postData: [
-                { id: 1, text: "text1", like: 10 },
-                { id: 2, text: "text2", like: 20 },
-                { id: 3, text: "Bi", like: 30 },
-                { id: 4, text: "Mi", like: 40 }
-            ],
-            // создали newPostData для принятия новых значений поля textarea
-            newPostData: "hard code textarea",
-        },
-        
-        messagesPage: {
-            MesDataName: [
-                {id: 1, name: "name1"},
-                {id: 2, name: "name2"},
-                {id: 3, name: "name3"},
-                {id: 4, name: "name4"}
-            ],
-            MesDataItem: [
-                {id: 1, item: "item1"},
-                {id: 2, item: "item2"},
-                {id: 3, item: "item3"},
-                {id: 4, item: "item4"}
-            ],
-            newMessageData: "hard code message",
-        }
-    },
+    // _state: {
+    //     //вынесли в initialState - myPostReducer
+    //     // myPostsPage: {
+    //     //     postData: [
+    //     //         { id: 1, text: "text1", like: 10 },
+    //     //         { id: 2, text: "text2", like: 20 },
+    //     //         { id: 3, text: "Bi", like: 30 },
+    //     //         { id: 4, text: "Mi", like: 40 }
+    //     //     ],
+    //     //     // создали newPostData для принятия новых значений поля textarea
+    //     //     newPostData: "hard code textarea",
+    //     // },
+
+    //     //вынесли в initialState - messagesReducer
+    //     // messagesPage: {
+    //     //     MesDataName: [
+    //     //         {id: 1, name: "name1"},
+    //     //         {id: 2, name: "name2"},
+    //     //         {id: 3, name: "name3"},
+    //     //         {id: 4, name: "name4"}
+    //     //     ],
+    //     //     MesDataItem: [
+    //     //         {id: 1, item: "item1"},
+    //     //         {id: 2, item: "item2"},
+    //     //         {id: 3, item: "item3"},
+    //     //         {id: 4, item: "item4"}
+    //     //     ],
+    //     //     newMessageData: "hard code message",
+    //     // }
+    // },
+    // _reRenderEntireTree() {
+    //     console.log("state change")
+    // },
     // заменили название reRenderEntireTree()
     _callSubscriber() {
         console.log("state change")

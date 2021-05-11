@@ -2,7 +2,19 @@
 const ADD_POST_BLL = "ADD-POST-BLL";
 const UPDATE_POST_CHANGE = "UPDATE-POST-CHANGE";
 
-const myPostReducer = (state, action) => {
+//так как redux запускается до нашего state, мы не успеваем отобразить state и сы получаем ошибку
+let initialState = {
+    postData: [
+        { id: 1, text: "text1", like: 10 },
+        { id: 2, text: "text2", like: 20 },
+        { id: 3, text: "Bi", like: 30 },
+        { id: 4, text: "Mi", like: 40 }
+    ],
+    // создали newPostData для принятия новых значений поля textarea
+    newPostData: "hard code textarea",
+};
+
+const myPostReducer = (state = initialState, action) => {
 //     if (action.type === ADD_POST_BLL) {
 //         {let newPost = {
 //             id: 5, 

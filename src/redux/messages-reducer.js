@@ -2,7 +2,23 @@
 const ADD_MESSAGE_BUTTON_BLL = "ADD-MESSAGE-BUTTON-BLL";
 const UPDATE_TEXT_MESSAGE_CHANGE = "UPDATE-TEXT-MESSAGE-CHANGE";
 
-export const messagesReducer = (state, action) => {
+let initialState = {
+    MesDataName: [
+        {id: 1, name: "name1"},
+        {id: 2, name: "name2"},
+        {id: 3, name: "name3"},
+        {id: 4, name: "name4"}
+    ],
+    MesDataItem: [
+        {id: 1, item: "item1"},
+        {id: 2, item: "item2"},
+        {id: 3, item: "item3"},
+        {id: 4, item: "item4"}
+    ],
+    newMessageData: "hard code message",
+};
+
+export const messagesReducer = (state = initialState, action) => {
     // if (action.type === ADD_MESSAGE_BUTTON_BLL) {
     //     {
     //         let newMessage = {
