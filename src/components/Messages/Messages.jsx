@@ -21,7 +21,7 @@ const Messages = (props) => {
     //     {id: 4, item: "item4"},
     // ];
     
-    // создали метод для перебора массива. 
+    // создали метод для перебора массива.. 
     // если функция принимает один параметр, можем писать его без скобок.
     // если return возвращает одну строку, то можно его не прописывать.
     let MesDataNameEl = props.APPstate.messagesPage.MesDataName
@@ -41,7 +41,7 @@ const Messages = (props) => {
     }
 
     let newTextDataRemove = props.APPstate.messagesPage.newMessageData;
-// debugger
+
     return (
         <div className={ModCSS.messages}>
             <div className={ModCSS.name}>
