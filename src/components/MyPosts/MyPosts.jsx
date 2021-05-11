@@ -1,7 +1,7 @@
 import React from 'react';
 import ModCSS from "./MyPosts.module.css"; //Модифицируем наши стили с помощью .module
 import Post from './Post/Post';
-import {addPostUIActionCreator, postChangeActionCreator} from './../../redux/state';
+import {addPostUIActionCreator, postChangeActionCreator} from './../../redux/myPost-reducer';
 
 const MyPosts = (props) => {
 // debugger

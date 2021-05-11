@@ -2,7 +2,7 @@ import React from 'react';
 import ModCSS from "./Messages.module.css"; //Модифицируем наши стили с помощью .module
 import MessageName from "./MessageName"
 import MessageItem from "./MessageItem"
-import {addMessageButtonUIAC, textChangeAC} from "./../../redux/state"
+import {addMessageButtonUIAC, textChangeAC} from "./../../redux/messages-reducer"
 // import MessageData from "./MessageData"
 
 const Messages = (props) => {

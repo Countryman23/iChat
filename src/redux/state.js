@@ -1,7 +1,10 @@
-const ADD_POST_BLL = "ADD-POST-BLL";
-const UPDATE_POST_CHANGE = "UPDATE-POST-CHANGE";
-const ADD_MESSAGE_BUTTON_BLL = "ADD-MESSAGE-BUTTON-BLL";
-const UPDATE_TEXT_MESSAGE_CHANGE = "UPDATE-TEXT-MESSAGE-CHANGE";
+import myPostReducer from "./myPost-reducer";
+import messagesReducer from "./messages-reducer";
+//убираем const так как перенесли их в Reducer
+// const ADD_POST_BLL = "ADD-POST-BLL";
+// const UPDATE_POST_CHANGE = "UPDATE-POST-CHANGE";
+// const ADD_MESSAGE_BUTTON_BLL = "ADD-MESSAGE-BUTTON-BLL";
+// const UPDATE_TEXT_MESSAGE_CHANGE = "UPDATE-TEXT-MESSAGE-CHANGE";
 
 // import {reRenderEntireTree} from './render'; октлючили импорт, так как убрали render.js
 
@@ -173,41 +176,48 @@ let store = {
         // } else if (action.type === "UPDATE-POST-CHANGE") {
         //     this._updatePostChange(action.newText)
         // }
-        
-        if (action.type === ADD_POST_BLL) {
-            {let newPost = {
-                id: 5, 
-                // удалили postMessage, будем брать его через state
-                // text: postMessage, 
-                text: this._state.myPostsPage.newPostData, 
-                like: 50,
-                }
-                this._state.myPostsPage.postData.push(newPost);
-            // не добавлять пустой textarea
-            if (this._state.myPostsPage.newPostData === ""){this._state.myPostsPage.postData.pop(newPost)};
-            //очищаем поле textarea
-            this._state.myPostsPage.newPostData = "";
-            // обновляем страницу с новыми данными через reRenderEntireTree
-            this._callSubscriber(this._state);
-            }
-        } else if (action.type === UPDATE_POST_CHANGE) {
-            //добавили action к newText, так как этот параметр больше не может прийти через updatePostChange(newText)
-            this._state.myPostsPage.newPostData = action.newText;
-            this._callSubscriber(this._state); // вызываем reRenderEntireTree
-        } else if (action.type === ADD_MESSAGE_BUTTON_BLL){
-            {let newMessage = {
-                id: 5, 
-                item: this._state.messagesPage.newMessageData
-                }
-                this._state.messagesPage.MesDataItem.push(newMessage);
-            if (this._state.messagesPage.newMessageData === ""){this._state.messagesPage.MesDataItem.pop(newMessage)};
-            this._state.messagesPage.newMessageData = "";
-            this._callSubscriber(this._state);
-            }
-        } else if (action.type === UPDATE_TEXT_MESSAGE_CHANGE) {
-            this._state.messagesPage.newMessageData = action.newMessage;
-            this._callSubscriber(this._state);
-        }
+        //переносим логику в reduser
+        // if (action.type === ADD_POST_BLL) {
+        //     {let newPost = {
+        //         id: 5, 
+        //         // удалили postMessage, будем брать его через state
+        //         // text: postMessage, 
+        //         text: this._state.myPostsPage.newPostData, 
+        //         like: 50,
+        //         }
+        //         this._state.myPostsPage.postData.push(newPost);
+        //     // не добавлять пустой textarea
+        //     if (this._state.myPostsPage.newPostData === ""){this._state.myPostsPage.postData.pop(newPost)};
+        //     //очищаем поле textarea
+        //     this._state.myPostsPage.newPostData = "";
+        //     // обновляем страницу с новыми данными через reRenderEntireTree
+        //     this._callSubscriber(this._state);
+        //     }
+        // } else if (action.type === UPDATE_POST_CHANGE) {
+        //     //добавили action к newText, так как этот параметр больше не может прийти через updatePostChange(newText)
+        //     this._state.myPostsPage.newPostData = action.newText;
+        //     this._callSubscriber(this._state); // вызываем reRenderEntireTree
+        // } else if (action.type === ADD_MESSAGE_BUTTON_BLL){
+        //     {let newMessage = {
+        //         id: 5, 
+        //         item: this._state.messagesPage.newMessageData
+        //         }
+        //         this._state.messagesPage.MesDataItem.push(newMessage);
+        //     if (this._state.messagesPage.newMessageData === ""){this._state.messagesPage.MesDataItem.pop(newMessage)};
+        //     this._state.messagesPage.newMessageData = "";
+        //     this._callSubscriber(this._state);
+        //     }
+        // } else if (action.type === UPDATE_TEXT_MESSAGE_CHANGE) {
+        //     this._state.messagesPage.newMessageData = action.newMessage;
+        //     this._callSubscriber(this._state);
+        // }
+    // }
+    //преобразовываем и вызываем новый myPostsPage после того как перенесли всё в Reducer 
+    this._state.myPostsPage = myPostReducer(this._state.myPostsPage, action);
+    //преобразовываем и вызываем новый messagesPage после того как перенесли всё в Reducer
+    this._state.messagesPage = messagesReducer(this._state.messagesPage, action);
+    //уведомляем об изменениях
+    this._callSubscriber(this._state);
     }
 }
 
@@ -223,12 +233,12 @@ let store = {
 //         type: UPDATE_POST_CHANGE, newText: text
 //     }
 // }
-// вспомогательная функция
-//переписываем в одну строку
-export const addPostUIActionCreator = () => ({type: ADD_POST_BLL})
-export const postChangeActionCreator = (text) => ({type: UPDATE_POST_CHANGE, newText: text})
-export const addMessageButtonUIAC = () => ({type: ADD_MESSAGE_BUTTON_BLL})
-export const textChangeAC = (text) => ({type: UPDATE_TEXT_MESSAGE_CHANGE, newMessage: text})
+//переписываем в одexport по ну строку
+//переносим export в Reducer
+// export const addPostUIActionCreator = () => ({type: ADD_POST_BLL})
+// export const postChangeActionCreator = (text) => ({type: UPDATE_POST_CHANGE, newText: text})
+// export const addMessageButtonUIAC = () => ({type: ADD_MESSAGE_BUTTON_BLL})
+// export const textChangeAC = (text) => ({type: UPDATE_TEXT_MESSAGE_CHANGE, newMessage: text})
 
 window.store = store;
 
