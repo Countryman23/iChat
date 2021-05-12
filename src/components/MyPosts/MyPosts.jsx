@@ -1,7 +1,6 @@
 import React from 'react';
 import ModCSS from "./MyPosts.module.css"; //Модифицируем наши стили с помощью .module
 import Post from './Post/Post';
-import {addPostUIActionCreator, postChangeActionCreator} from './../../redux/myPost-reducer';
 
 const MyPosts = (props) => {
 // debugger
@@ -22,7 +21,7 @@ const MyPosts = (props) => {
             <Post text={postData[3].text} like={postData[3].like} /> */}
 
     // добавляем props. к postData.map чтобы передать пропсы из index.js
-    let postDataEl = props.APPstate.myPostsPage.postData.map(post => (<Post 
+    let postDataEl = props.postData.map(post => (<Post 
                                                                     text={post.text} 
                                                                     like={post.like} />))
 
@@ -39,27 +38,31 @@ const MyPosts = (props) => {
         // props.addPostBLL(); // меняем на dispatch
         // props.dispatch ({ type: "ADD-POST-BLL"})
         //создали функцию addPostUIActionCreator которая будет передоваться в BLL
-        props.dispatch(addPostUIActionCreator());
+        //убрали после создания MyPostsContainer
+        // props.dispatch(addPostUIActionCreator());
+        props.addPostBLL()
     }
 
     // создаём переменную которая будет отправлять новые значения в BLL
-    let postChange = () => {
+    let addPostChange = () => {
         let text = newPostEl.current.value;
         // props.updatePostChange (text); // меняем на dispatch
         // props.dispatch ({ type: "UPDATE-POST-CHANGE", newText: text})
         //создали функцию addPostUIActionCreator которая будет передоваться в BLL
-        props.dispatch(postChangeActionCreator(text))
+        //убрали после создания MyPostsContainer
+        // props.dispatch(postChangeActionCreator(text))
+        props.updatePostChange (text);
     }
 
     // вынес пропс в переменную
-    let newPostDataRemove = props.APPstate.myPostsPage.newPostData;
+    let newPostDataRemove = props.newPostData;
 // debugger
     return (
         <div>
             <div className={ModCSS.item}>
                 <div className={ModCSS.header}><h3>My posts</h3></div>
                 <div>
-                    <textarea onChange={postChange} ref={newPostEl} value={newPostDataRemove} />
+                    <textarea onChange={addPostChange} ref={newPostEl} value={newPostDataRemove} />
                 </div>
                 <div>
                     {/* добавили событие onClick, и передали ей функцию addPost */}

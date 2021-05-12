@@ -13,7 +13,7 @@ let initialState = {
     // создали newPostData для принятия новых значений поля textarea
     newPostData: "hard code textarea",
 };
-
+// debugger
 const myPostReducer = (state = initialState, action) => {
 //     if (action.type === ADD_POST_BLL) {
 //         {let newPost = {

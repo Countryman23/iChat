@@ -2,7 +2,7 @@ import React from "react";
 import Navigation from "./components/Navigation/Navigation";
 import Authorization from "./components/Authorization/Authorization";
 import Profile from "./components/Profile/Profile";
-import MyPosts from "./components/MyPosts/MyPosts";
+import MyPostsContainer from "./components/MyPosts/MyPostsContainer";
 import Messages from "./components/Messages/Messages";
 import Settings from "./components/Settings/Settings";
 import ModCSS from "./App.module.css"; //Модифицируем наши стили с помощью .module
@@ -52,12 +52,16 @@ const App = (props) => {
                                                             addPostBLL={props.addPostBLL}
                                                             myPostsPage={props.myPostsPage}
                                                             updatePostChange={props.updatePostChange} />} /> */}
-                    <Route path="/MyPosts" render={ () => <MyPosts APPstate={props.addState} 
+                                                            {/* заменяем компоненту */}
+                    {/* <Route path="/MyPosts" render={ () => <MyPosts APPstate={props.addState} 
                                                             dispatch={props.dispatch} />} />
                                                             {/* updatePostChange тут уже не нужен */}
                                                             {/* updatePostChange={props.updatePostChange}  */}
+                    <Route path="/MyPosts" render={ () => <MyPostsContainer store = {props.addState} />} />
+                                                            {/* updatePostChange тут уже не нужен */}
+                                                            {/* updatePostChange={props.updatePostChange}  */}
                                                             
-                    <Route path="/Messages" render={ () => <Messages APPstate={props.addState} 
+                    <Route path="/Messages" render={ () => <Messages store={props.addState} 
                                                             dispatch={props.dispatch} />} />
                     <Route path="/Settings" render={Settings} />
                 </div>

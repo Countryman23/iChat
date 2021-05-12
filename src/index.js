@@ -79,7 +79,7 @@ let reRenderEntireTree = (state) => {
     // новый вид после появления store
     ReactDOM.render(<React.StrictMode>
         {/* bind тут нужен чтобы this методa addPostBLL вызывался не от addPostBLL, а от объекта store */}
-        <App addState={state} 
+        <App addState={store} 
             dispatch={store.dispatch.bind(store)} />
             {/* updatePostChange тут уже не нужен */}
             {/* updatePostChange={store.updatePostChange.bind(store)} */}
