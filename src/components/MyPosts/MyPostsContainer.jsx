@@ -14,15 +14,15 @@ const MyPostsContainer = (props) => {
         // props.addPostBLL(); // меняем на dispatch
         // props.dispatch ({ type: "ADD-POST-BLL"})
         //создали функцию addPostUIActionCreator которая будет передоваться в BLL
-        props.store.dispatch(addPostUIActionCreator());
+        props.newState.dispatch(addPostUIActionCreator());
     }
 
     // создаём переменную которая будет отправлять новые значения в BLL
     let onPostChange = (text) => {
-        props.store.dispatch(postChangeActionCreator(text))
+        props.newState.dispatch(postChangeActionCreator(text))
     }
     //необходимая переменная для пропсов
-    let state = props.store.getState();
+    let state = props.newState.getState();
     
     return (
         <MyPosts updatePostChange = {onPostChange} 

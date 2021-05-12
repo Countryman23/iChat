@@ -74,7 +74,7 @@ import store from './redux/redux-store';
 //     );
 // }
 
-let reRenderEntireTree = (state) => {
+let reRenderEntireTree = () => {
     // debugger
     // новый вид после появления store
     ReactDOM.render(<React.StrictMode>

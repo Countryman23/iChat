@@ -2,8 +2,11 @@ import React from "react";
 import Navigation from "./components/Navigation/Navigation";
 import Authorization from "./components/Authorization/Authorization";
 import Profile from "./components/Profile/Profile";
+//изменили на Container
+// import MyPosts from "./components/MyPosts/MyPosts";
+// import Messages from "./components/Messages/Messages";
 import MyPostsContainer from "./components/MyPosts/MyPostsContainer";
-import Messages from "./components/Messages/Messages";
+import MessagesContainer from "./components/Messages/MessagesContainer";
 import Settings from "./components/Settings/Settings";
 import ModCSS from "./App.module.css"; //Модифицируем наши стили с помощью .module
 import { BrowserRouter, Route } from "react-router-dom"; // импорт с фигурными скобками из-за экспорта не по дефолту
@@ -57,11 +60,11 @@ const App = (props) => {
                                                             dispatch={props.dispatch} />} />
                                                             {/* updatePostChange тут уже не нужен */}
                                                             {/* updatePostChange={props.updatePostChange}  */}
-                    <Route path="/MyPosts" render={ () => <MyPostsContainer store = {props.addState} />} />
+                    <Route path="/MyPosts" render={ () => <MyPostsContainer newState = {props.addState} />} />
                                                             {/* updatePostChange тут уже не нужен */}
                                                             {/* updatePostChange={props.updatePostChange}  */}
                                                             
-                    <Route path="/Messages" render={ () => <Messages store={props.addState} 
+                    <Route path="/Messages" render={ () => <MessagesContainer newState={props.addState} 
                                                             dispatch={props.dispatch} />} />
                     <Route path="/Settings" render={Settings} />
                 </div>

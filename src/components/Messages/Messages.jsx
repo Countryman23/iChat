@@ -20,27 +20,29 @@ const Messages = (props) => {
     //     {id: 3, item: "item3"},
     //     {id: 4, item: "item4"},
     // ];
-    
+    // debugger
     // создали метод для перебора массива.. 
     // если функция принимает один параметр, можем писать его без скобок.
     // если return возвращает одну строку, то можно его не прописывать.
-    let MesDataNameEl = props.APPstate.messagesPage.MesDataName
+    let MesDataNameEl = props.MesDataName
     .map(name => (<MessageName name={name.name} id={name.id} />));
-    let MesDataItemEl = props.APPstate.messagesPage.MesDataItem
+    let MesDataItemEl = props.MesDataItem
     .map(item => (<MessageItem item={item.item} id={item.id} />))
-
-    let addMessageButtonUI = () => {
-        props.dispatch(addMessageButtonUIAC());
-    }
-
+    
     let newTextEl = React.createRef();
 
-    let textChange = () => {
-        let text = newTextEl.current.value;
-        props.dispatch(textChangeAC(text))
+    let addMessageButtonUI = () => {
+        // props.dispatch(addMessageButtonUIAC());
+        props.addMessageButtonBLL();
     }
 
-    let newTextDataRemove = props.APPstate.messagesPage.newMessageData;
+    let addTextChange = () => {
+        let text = newTextEl.current.value;
+        // props.dispatch(textChangeAC(text))
+        props.updateTextChange(text);
+    }
+
+    let newTextDataRemove = props.newMessageData;
 
     return (
         <div className={ModCSS.messages}>
@@ -62,7 +64,7 @@ const Messages = (props) => {
                 {/* передаём атрибуты компоненте, через пропсы */}
                 {/* <MessageItem item="item3" />
                <MessageItem item="item4" /> */}
-                <textarea onChange={textChange} ref={newTextEl} value={newTextDataRemove} />
+                <textarea onChange={addTextChange} ref={newTextEl} value={newTextDataRemove} />
                 <div>
                     <button onClick={addMessageButtonUI}>Add message</button>
                 </div>
