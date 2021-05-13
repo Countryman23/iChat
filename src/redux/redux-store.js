@@ -10,4 +10,6 @@ let reducers = combineReducers({
 //createStore создаёт внутри себя  state внутр которого есть reducers
 let store = createStore(reducers);
 
+window.store = store;
+
 export default store;

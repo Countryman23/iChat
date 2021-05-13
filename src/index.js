@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 //отключаем так как подключили redux
 // import store from './redux/store';
 import store from './redux/redux-store';
+import { Provider } from 'react-redux';
 // import {addPostBLL, updatePostChange, subscribe} from './redux/state'; //импортируем не по дефолту, нужны {} // это уже не нужно, та как теперь экспортируем store
 // import {reRenderEntireTree} from "./redux/render" // render.js уже не нужен
 
@@ -74,32 +75,58 @@ import store from './redux/redux-store';
 //     );
 // }
 
-let reRenderEntireTree = () => {
-    // debugger
-    // новый вид после появления store
-    ReactDOM.render(<React.StrictMode>
-        {/* bind тут нужен чтобы this методa addPostBLL вызывался не от addPostBLL, а от объекта store */}
-        <App addState={store} 
-            dispatch={store.dispatch.bind(store)} />
-            {/* updatePostChange тут уже не нужен */}
-            {/* updatePostChange={store.updatePostChange.bind(store)} */}
-        {/* так было до state.js */}
-        {/* <App postData={postData} MesDataName={MesDataName} MesDataItem={MesDataItem}/> */}
-    </React.StrictMode>,
-        document.getElementById('root')
-    );
-}
+// let reRenderEntireTree = () => {
+//     // debugger
+//     // новый вид после появления store
+//     ReactDOM.render(<React.StrictMode>
+//         {/* bind тут нужен чтобы this методa addPostBLL вызывался не от addPostBLL, а от объекта store */}
+//         <App addState={store} 
+//             dispatch={store.dispatch.bind(store)} />
+//             {/* updatePostChange тут уже не нужен */}
+//             {/* updatePostChange={store.updatePostChange.bind(store)} */}
+//         {/* так было до state.js */}
+//         {/* <App postData={postData} MesDataName={MesDataName} MesDataItem={MesDataItem}/> */}
+//     </React.StrictMode>,
+//         document.getElementById('root')
+//     );
+// }
+
+//перепичываем через Provider (context API)
+// let reRenderEntireTree = () => {
+//     // debugger
+//     // новый вид после появления store
+//     ReactDOM.render(<React.StrictMode>
+//         {/* bind тут нужен чтобы this методa addPostBLL вызывался не от addPostBLL, а от объекта store */}
+//         <Provider store={store}>
+//             <App />
+//         </Provider>
+//             {/* updatePostChange тут уже не нужен */}
+//             {/* updatePostChange={store.updatePostChange.bind(store)} */}
+//         {/* так было до state.js */}
+//         {/* <App postData={postData} MesDataName={MesDataName} MesDataItem={MesDataItem}/> */}
+//     </React.StrictMode>,
+//         document.getElementById('root')
+//     );
+// }//убрали функцию reRenderEntireTree, так как добавили react-redux
 
 // reRenderEntireTree(store._state); было так
-reRenderEntireTree(store.getState());
+// reRenderEntireTree(store.getState());//убрали, так как добавили react-redux
 
 // тут reRenderEntireTree не означает что мы его запускем. запускается он как переданный аргумент для subscribe после вызова
 // store.subscribe(reRenderEntireTree); 
 
-//так как redux не уведомляет об изменённом state, запрашиваем принудительно изменённый state
-store.subscribe(() => {
-    let state = store.getState()
-    reRenderEntireTree(state);
-});
+// //так как redux не уведомляет об изменённом state, запрашиваем принудительно изменённый state
+// store.subscribe(() => {
+//     let state = store.getState()
+//     reRenderEntireTree(state);
+// });//убрали, так как добавили react-redux
+
+ReactDOM.render(<React.StrictMode>
+                    <Provider store={store}>
+                        <App />
+                    </Provider>
+                </React.StrictMode>,
+                                    document.getElementById('root')
+);
 
 reportWebVitals();

@@ -60,11 +60,12 @@ const App = (props) => {
                                                             dispatch={props.dispatch} />} />
                                                             {/* updatePostChange тут уже не нужен */}
                                                             {/* updatePostChange={props.updatePostChange}  */}
-                    <Route path="/MyPosts" render={ () => <MyPostsContainer newState = {props.addState} />} />
-                                                            {/* updatePostChange тут уже не нужен */}
-                                                            {/* updatePostChange={props.updatePostChange}  */}
-                                                            
+                    {/* <Route path="/MyPosts" render={ () => <MyPostsContainer newState = {props.addState} />} />
                     <Route path="/Messages" render={ () => <MessagesContainer newState={props.addState} 
+                                                            dispatch={props.dispatch} />} /> */}
+                                                            {/* переписываю под react-redux */}
+                    <Route path="/MyPosts" render={ () => <MyPostsContainer newState = {props.store} />} />
+                    <Route path="/Messages" render={ () => <MessagesContainer newState = {props.store}
                                                             dispatch={props.dispatch} />} />
                     <Route path="/Settings" render={Settings} />
                 </div>

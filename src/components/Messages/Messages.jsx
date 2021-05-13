@@ -2,8 +2,6 @@ import React from 'react';
 import ModCSS from "./Messages.module.css"; //Модифицируем наши стили с помощью .module
 import MessageName from "./MessageName"
 import MessageItem from "./MessageItem"
-import {addMessageButtonUIAC, textChangeAC} from "./../../redux/messages-reducer"
-// import MessageData from "./MessageData"
 
 const Messages = (props) => {
     
@@ -25,21 +23,25 @@ const Messages = (props) => {
     // если функция принимает один параметр, можем писать его без скобок.
     // если return возвращает одну строку, то можно его не прописывать.
     let MesDataNameEl = props.MesDataName
-    .map(name => (<MessageName name={name.name} id={name.id} />));
+    .map(name => (<MessageName name={name.name} 
+                                id={name.id}
+                                key={name.id} />));
     let MesDataItemEl = props.MesDataItem
-    .map(item => (<MessageItem item={item.item} id={item.id} />))
+    .map(item => (<MessageItem item={item.item} 
+                                id={item.id}
+                                key={item.id} />))
     
     let newTextEl = React.createRef();
-
-    let addMessageButtonUI = () => {
-        // props.dispatch(addMessageButtonUIAC());
-        props.addMessageButtonBLL();
-    }
-
+    //3
     let addTextChange = () => {
         let text = newTextEl.current.value;
         // props.dispatch(textChangeAC(text))
         props.updateTextChange(text);
+    }
+    //4
+    let addMessageButtonUI = () => {
+        // props.dispatch(addMessageButtonUIAC());
+        props.addMessageButtonBLL();
     }
 
     let newTextDataRemove = props.newMessageData;
@@ -58,15 +60,18 @@ const Messages = (props) => {
             </div>
             <div className={ModCSS.item}>
                 { MesDataItemEl }
-                {/* в этом способе данные берем из массива с объектами */}
+                {/*  в этом способе данные берем из массива с объектами */}
                 {/* <MessageItem item={MesDataItem[0].item} id={MesDataItem[0].id} />
                 <MessageItem item={MesDataItem[1].item} id={MesDataItem[1].id} /> */}
                 {/* передаём атрибуты компоненте, через пропсы */}
                 {/* <MessageItem item="item3" />
                <MessageItem item="item4" /> */}
-                <textarea onChange={addTextChange} ref={newTextEl} value={newTextDataRemove} />
+                <textarea onChange={addTextChange} 
+                            ref={newTextEl} 
+                            value={newTextDataRemove} />
                 <div>
-                    <button onClick={addMessageButtonUI}>Add message</button>
+                    <button onClick={addMessageButtonUI}>
+                            Add message</button>
                 </div>
             </div>
         </div>

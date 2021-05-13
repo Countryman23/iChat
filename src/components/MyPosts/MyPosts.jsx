@@ -21,9 +21,9 @@ const MyPosts = (props) => {
             <Post text={postData[3].text} like={postData[3].like} /> */}
 
     // добавляем props. к postData.map чтобы передать пропсы из index.js
-    let postDataEl = props.postData.map(post => (<Post 
-                                                                    text={post.text} 
-                                                                    like={post.like} />))
+    let postDataEl = props.postData.map(post => (<Post text={post.text} 
+                                                       like={post.like}
+                                                       key={post.id} />))
 
     // просим React создать ссылку
     let newPostEl = React.createRef();

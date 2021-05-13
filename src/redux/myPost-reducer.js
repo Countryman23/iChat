@@ -45,20 +45,49 @@ const myPostReducer = (state = initialState, action) => {
 //         // this._callSubscriber(this._state); // вызываем reRenderEntireTree
 // }
     //когда у нас дискретный(не бесконечный) набор чисел, можно применять switch
+//     switch (action.type) {
+//         case ADD_POST_BLL:
+//             let newPost = {
+//                 id: 5, 
+//                 text: state.newPostData, 
+//                 like: 50,
+//             }
+//             state.postData.push(newPost);
+//             if (state.newPostData === ""){state.postData.pop(newPost)};
+//             state.newPostData = "";
+//             return state;
+//         case UPDATE_POST_CHANGE:
+//             state.newPostData = action.newText;
+//             return state;
+//         default:
+//             return state;
+//     }
+// }
+
+//применяем копирование объекта
     switch (action.type) {
-        case ADD_POST_BLL:
+        case ADD_POST_BLL:{
             let newPost = {
                 id: 5, 
                 text: state.newPostData, 
                 like: 50,
             }
-            state.postData.push(newPost);
-            if (state.newPostData === ""){state.postData.pop(newPost)};
-            state.newPostData = "";
-            return state;
-        case UPDATE_POST_CHANGE:
-            state.newPostData = action.newText;
-            return state;
+            //создаём копию объекта
+            let stateCopy = {...state};
+            //добираемся до вложенного массива
+            stateCopy.postData = [...state.postData];
+            //добавляем посты уже в новую копию
+            stateCopy.postData.push(newPost);
+            if (stateCopy.newPostData === ""){stateCopy.postData.pop(newPost)};
+            stateCopy.newPostData = "";
+            return stateCopy;
+        }
+        case UPDATE_POST_CHANGE:{
+            let stateCopy = {...state};
+            // stateCopy.postData = [...state.postData];
+            stateCopy.newPostData = action.newText;
+            return stateCopy;
+        }
         default:
             return state;
     }

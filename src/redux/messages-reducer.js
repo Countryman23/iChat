@@ -36,20 +36,27 @@ export const messagesReducer = (state = initialState, action) => {
     // }
     //когда у нас дискретный(не бесконечный) набор чисел, можно применять switch
     switch (action.type) {
-        case ADD_MESSAGE_BUTTON_BLL:
+        case ADD_MESSAGE_BUTTON_BLL:{
             let newMessage = {
                 id: 5,
                 item: state.newMessageData
             };
-            state.MesDataItem.push(newMessage);
-            if (state.newMessageData === "") { state.MesDataItem.pop(newMessage) };
-            state.newMessageData = "";
+            let stateCopy = {
+                ...state,
+                MesDataItem: [...state.MesDataItem]
+            };
+            stateCopy.MesDataItem.push(newMessage);
+            if (stateCopy.newMessageData === "") { stateCopy.MesDataItem.pop(newMessage) };
+            stateCopy.newMessageData = "";
             //возвращаем изменения
-            return state;
-        case UPDATE_TEXT_MESSAGE_CHANGE:
-            state.newMessageData = action.newMessage;
+            return stateCopy;
+        }
+        case UPDATE_TEXT_MESSAGE_CHANGE:{
+            let stateCopy = {...state};
+            stateCopy.newMessageData = action.newMessage;
             //возвращаем изменения
-            return state;
+            return stateCopy;
+        }
         //если ничего не изменилось то возвращаем старый state
         default:
             return state;
