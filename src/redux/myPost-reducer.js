@@ -65,29 +65,53 @@ const myPostReducer = (state = initialState, action) => {
 // }
 
 //применяем копирование объекта
+    // switch (action.type) {
+    //     case ADD_POST_BLL:{
+    //         let newPost = {
+    //             id: 5, 
+    //             text: state.newPostData, 
+    //             like: 50,
+    //         }
+    //         //создаём копию объекта
+    //         let stateCopy = {...state};
+    //         //добираемся до вложенного массива
+    //         stateCopy.postData = [...state.postData];
+    //         //добавляем посты уже в новую копию
+    //         stateCopy.postData.push(newPost);
+    //         if (stateCopy.newPostData === ""){stateCopy.postData.pop(newPost)};
+    //         stateCopy.newPostData = "";
+    //         return stateCopy;
+    //     }
+    //     case UPDATE_POST_CHANGE:{
+    //         let stateCopy = {...state};
+    //         // stateCopy.postData = [...state.postData];
+    //         stateCopy.newPostData = action.newText;
+    //         return stateCopy;
+    //     }
+    //     default:
+    //         return state;
+    // }
+   
+    //переписываем оптимизируя
     switch (action.type) {
-        case ADD_POST_BLL:{
+        case UPDATE_POST_CHANGE:
+            return {
+                ...state,
+                newPostData: action.newText
+            };
+        case ADD_POST_BLL:
             let newPost = {
                 id: 5, 
                 text: state.newPostData, 
                 like: 50,
-            }
-            //создаём копию объекта
-            let stateCopy = {...state};
-            //добираемся до вложенного массива
-            stateCopy.postData = [...state.postData];
-            //добавляем посты уже в новую копию
-            stateCopy.postData.push(newPost);
-            if (stateCopy.newPostData === ""){stateCopy.postData.pop(newPost)};
-            stateCopy.newPostData = "";
-            return stateCopy;
-        }
-        case UPDATE_POST_CHANGE:{
-            let stateCopy = {...state};
-            // stateCopy.postData = [...state.postData];
-            stateCopy.newPostData = action.newText;
-            return stateCopy;
-        }
+            };
+            return {
+                ...state,
+                newPostData: "",
+                postData: [...state.postData, newPost]
+                // реализовать не добавлять пустой textarea
+                // if (state.myPostsPage.newPostData === ""){state.myPostsPage.postData.pop(newPost)};
+            };
         default:
             return state;
     }

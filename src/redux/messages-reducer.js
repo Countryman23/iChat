@@ -35,34 +35,53 @@ export const messagesReducer = (state = initialState, action) => {
     //     // this._callSubscriber(this._state);
     // }
     //когда у нас дискретный(не бесконечный) набор чисел, можно применять switch
+    // switch (action.type) {
+    //     case ADD_MESSAGE_BUTTON_BLL:{
+    //         let newMessage = {
+    //             id: 5,
+    //             item: state.newMessageData
+    //         };
+    //         let stateCopy = {
+    //             ...state,
+    //             MesDataItem: [...state.MesDataItem]
+    //         };
+    //         stateCopy.MesDataItem.push(newMessage);
+    //         if (stateCopy.newMessageData === "") { stateCopy.MesDataItem.pop(newMessage) };
+    //         stateCopy.newMessageData = "";
+    //         //возвращаем изменения
+    //         return stateCopy;
+    //     }
+    //     case UPDATE_TEXT_MESSAGE_CHANGE:{
+    //         let stateCopy = {...state};
+    //         stateCopy.newMessageData = action.newMessage;
+    //         //возвращаем изменения
+    //         return stateCopy;
+    //     }
+    //     //если ничего не изменилось то возвращаем старый state
+    //     default:
+    //         return state;
+    // }
+    //переносим return в каждый case
+    // return state;
+
+    //переписываем оптимизируя
     switch (action.type) {
-        case ADD_MESSAGE_BUTTON_BLL:{
-            let newMessage = {
-                id: 5,
-                item: state.newMessageData
-            };
-            let stateCopy = {
+        case UPDATE_TEXT_MESSAGE_CHANGE:
+                return {
+                    ...state,
+                    newMessageData: action.newMessage, //модифицируем копию
+                };
+        case ADD_MESSAGE_BUTTON_BLL:
+            let newMessage = state.newMessageData; //достаём текст
+            return {
                 ...state,
-                MesDataItem: [...state.MesDataItem]
+                newMessageData: "", //затираем
+                MesDataItem: [...state.MesDataItem, {id:5, item: newMessage}] //такой синтаксис push ...., {id:5, item: newMessage} 
             };
-            stateCopy.MesDataItem.push(newMessage);
-            if (stateCopy.newMessageData === "") { stateCopy.MesDataItem.pop(newMessage) };
-            stateCopy.newMessageData = "";
-            //возвращаем изменения
-            return stateCopy;
-        }
-        case UPDATE_TEXT_MESSAGE_CHANGE:{
-            let stateCopy = {...state};
-            stateCopy.newMessageData = action.newMessage;
-            //возвращаем изменения
-            return stateCopy;
-        }
         //если ничего не изменилось то возвращаем старый state
         default:
             return state;
     }
-    //переносим return в каждый case
-    // return state;
 }
 
 export const addMessageButtonUIAC = () => ({type: ADD_MESSAGE_BUTTON_BLL})
