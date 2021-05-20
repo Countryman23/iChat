@@ -4,13 +4,17 @@ import * as axios from 'axios'; //* импортируем всё что ест�
 // import ProfileInfo from './ProfileInfo';
 
 const Profile = (props) => {
-    if (props.users.length === 0) {
 
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
-            .then(response => {
-                // debugger;
-                props.setUsers(response.data.items);
-            });
+    //создали функцию для кнопки отображения всех юзеров
+    let getUsers = () => {
+        if (props.users.length === 0) {
+
+            axios.get("https://social-network.samuraijs.com/api/1.0/users")
+                .then(response => {
+                    // debugger;
+                    props.setUsers(response.data.items);
+                });
+    }
 
         //убрали и подключили через сервер
         // props.setUsers([
@@ -36,6 +40,7 @@ const Profile = (props) => {
     // debugger
     return (
         <div>
+            <button onClick={getUsers}>Get users</button>
             {/*  {props.users.map(u => берём users полученныйе из props.setUsers, которые пришли туда из ответа сервера*/}
             {props.users.map(u => <div key={u.id} className={ModCSS.profile}>
                 <div className={ModCSS.subscribeWrapper}>
@@ -63,4 +68,4 @@ const Profile = (props) => {
 
 };
 
-export default Profile;
+export default Profile; //это функциональная компонента. Дальше используем классовую компоненту ProfileС

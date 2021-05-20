@@ -1,6 +1,6 @@
 // import React from 'react';
 import {followAC, unFollowAC, setUsersAC} from '../../redux/profile-reducer';
-import Profile from './Profile';
+import ProfileC from './ProfileС';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
@@ -23,4 +23,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileC);
