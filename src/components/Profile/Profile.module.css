@@ -1,3 +1,28 @@
-.item {
-    color: #fff;
+.profile {
+    display: grid;
+    grid-template-areas: "s c";
+    grid-template-columns: 2fr 8fr;
+
+
+}
+
+.subscribeWrapper {
+    grid-area: s;
+    background-color: rgb(74, 189, 135);
+    margin: 0 auto;
+}
+
+.subscribeImg img{
+    width: 70px;
+}
+
+/* .subscribe {
+    margin: 0 auto;
+} */
+
+.content {
+    grid-area: c;
+    background-color: rgb(55, 68, 141);
+    padding: 10px;
+    margin-left: 10px;
 }

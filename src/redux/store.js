@@ -1,5 +1,6 @@
 import myPostReducer from "./myPost-reducer";
 import messagesReducer from "./messages-reducer";
+import profileReducer from "./profile-reducer";
 
 //убираем const так как перенесли их в Reducer
 // const ADD_POST_BLL = "ADD-POST-BLL";

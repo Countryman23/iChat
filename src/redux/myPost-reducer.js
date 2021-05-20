@@ -1,6 +1,6 @@
 //добавляем так же как в state.js
-const ADD_POST_BLL = "ADD-POST-BLL";
-const UPDATE_POST_CHANGE = "UPDATE-POST-CHANGE";
+const ADD_POST_BLL = "ADD_POST_BLL";
+const UPDATE_POST_CHANGE = "UPDATE_POST_CHANGE";
 
 //так как redux запускается до нашего state, мы не успеваем отобразить state и сы получаем ошибку
 let initialState = {
@@ -91,7 +91,7 @@ const myPostReducer = (state = initialState, action) => {
     //     default:
     //         return state;
     // }
-   
+    
     //переписываем оптимизируя
     switch (action.type) {
         case UPDATE_POST_CHANGE:
@@ -105,12 +105,13 @@ const myPostReducer = (state = initialState, action) => {
                 text: state.newPostData, 
                 like: 50,
             };
+            // if (newPost === ""){state.myPostsPage.postData.slice(newPost)};
             return {
                 ...state,
                 newPostData: "",
                 postData: [...state.postData, newPost]
                 // реализовать не добавлять пустой textarea
-                // if (state.myPostsPage.newPostData === ""){state.myPostsPage.postData.pop(newPost)};
+                //if (state.myPostsPage.newPostData === ""){state.myPostsPage.postData.pop(newPost)};
             };
         default:
             return state;
