@@ -1,47 +1,42 @@
 import React from 'react';
 import ModCSS from "./Profile.module.css"; //Модифицируем наши стили с помощью .module
-import * as axios from 'axios'; //* импортируем всё что есть в библиотеке axios
-// import ProfileInfo from './ProfileInfo';
 
-const Profile = (props) => {
+let Profile = (props) => {
 
-    //создали функцию для кнопки отображения всех юзеров
-    let getUsers = () => {
-        if (props.users.length === 0) {
+    let pagesCount = Math.ceil (props.totalUsersCount / props.pageSize); //3. количество страниц c пользователями
+        
+        let pages = [];
+        //4 заполняем в pages // дописал / 100 что бы уменьшить количество отображаемых страниц
+        for (let i=1; i <= pagesCount / 100; i++) {
+            pages.push(i);
+        }
 
-            axios.get("https://social-network.samuraijs.com/api/1.0/users")
-                .then(response => {
-                    // debugger;
-                    props.setUsers(response.data.items);
-                });
-    }
-
-        //убрали и подключили через сервер
-        // props.setUsers([
-        //     {
-        //         id: 1, photoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW-Jw-ZMy8KVpsK728K3CAEogswHduRgqog&usqp=CAU",
-        //         followed: true, fullName: "Ivan", status: "I am in network Russia", location: { country: "Russia", city: "Moscow" }
-        //     },
-        //     {
-        //         id: 2, photoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW-Jw-ZMy8KVpsK728K3CAEogswHduRgqog&usqp=CAU",
-        //         followed: false, fullName: "Roma", status: "I am in network Europe", location: { country: "Europe", city: "Italy" }
-        //     },
-        //     {
-        //         id: 3, photoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW-Jw-ZMy8KVpsK728K3CAEogswHduRgqog&usqp=CAU",
-        //         followed: false, fullName: "Dima", status: "I am in network Asia", location: { country: "Asia", city: "Japan" }
-        //     },
-        //     {
-        //         id: 4, photoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW-Jw-ZMy8KVpsK728K3CAEogswHduRgqog&usqp=CAU",
-        //         followed: false, fullName: "Rita", status: "I am in network USA", location: { country: "USA", city: "Chicago" }
-        //     },
-
-        // ])
-    };
-    // debugger
     return (
         <div>
-            <button onClick={getUsers}>Get users</button>
+            {/* Убираем кнопку */}
+            {/* <button onClick={this.getUsers}>Get users</button> */}
             {/*  {props.users.map(u => берём users полученныйе из props.setUsers, которые пришли туда из ответа сервера*/}
+            {/* временная запись для проверки, далее выводим количество страниц из результатов сервера */}
+            {/* <div className={ModCSS.listNamberSelectedWrapper} >
+                <span className={ModCSS.listNamberSelected}>1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+                <span>6</span>
+                <span>7</span>
+                <span>8</span>
+                <span>9</span>
+                <span>10</span>
+            </div> */} 
+            {/* //6 создаём массив*/}
+            {/* //10. деллаем логику onClick */}
+            <div className={ModCSS.listNamberSelected}>
+            {pages.map(p => {
+                return <span className={props.carrentPage === p && ModCSS.Selected}
+                            onClick={(e) => {props.onUserListChanged(p)}}>{p}</span>
+            })}
+            </div>
             {props.users.map(u => <div key={u.id} className={ModCSS.profile}>
                 <div className={ModCSS.subscribeWrapper}>
                     <div className={ModCSS.subscribeImg}>
@@ -65,7 +60,6 @@ const Profile = (props) => {
             </div>)}
         </div>
     )
+}
 
-};
-
-export default Profile; //это функциональная компонента. Дальше используем классовую компоненту ProfileС
+export default Profile;

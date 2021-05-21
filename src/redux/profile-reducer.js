@@ -28,7 +28,7 @@ const SET_USER_COUNT = "SET_USER_COUNT";//15.
 
 let initialState = {
     users: [],
-    pageSize: 5, //1
+    pageSize: 6, //1
     totalUsersCount: 0,//общее количество пользобателей
     carrentPage: 1,
 
