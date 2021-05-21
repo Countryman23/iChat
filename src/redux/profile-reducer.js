@@ -88,12 +88,20 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-//2
-export const followAC = (userId) => ({type: FOLLOW, userId})
-export const unFollowAC = (userId) => ({type: UNFOLLOW, userId})
-export const setUsersAC = (users) => ({type: SET_USERS, users})
-export const setCarrentPageAC = (carrentPage) => ({type: SET_CARRENT_PAGE, carrentPage}) //11. возвращаем action setCarrentPage
-export const setTotalUsersCountAC = (totalUsersCount) => ({type: SET_USER_COUNT, count: totalUsersCount}) //17. расписали count чтобы понять что от куда берётся
-export const toggleIsLoadingAC = (isLoading) => ({type: TOGGLE_IS_LOADING, isLoading}) 
+// //2
+// export const followAC = (userId) => ({type: FOLLOW, userId})
+// export const unFollowAC = (userId) => ({type: UNFOLLOW, userId})
+// export const setUsersAC = (users) => ({type: SET_USERS, users})
+// export const setCarrentPageAC = (carrentPage) => ({type: SET_CARRENT_PAGE, carrentPage}) //11. возвращаем action setCarrentPage
+// export const setTotalUsersCountAC = (totalUsersCount) => ({type: SET_USER_COUNT, count: totalUsersCount}) //17. расписали count чтобы понять что от куда берётся
+// export const toggleIsLoadingAC = (isLoading) => ({type: TOGGLE_IS_LOADING, isLoading})
+
+//Убираем окончание АС чтобы исправить под новый синтаксис
+export const follow = (userId) => ({type: FOLLOW, userId})
+export const unFollow = (userId) => ({type: UNFOLLOW, userId})
+export const setUsers = (users) => ({type: SET_USERS, users})
+export const setCarrentPage = (carrentPage) => ({type: SET_CARRENT_PAGE, carrentPage}) //11. возвращаем action setCarrentPage
+export const setTotalUsersCount = (totalUsersCount) => ({type: SET_USER_COUNT, count: totalUsersCount}) //17. расписали count чтобы понять что от куда берётся
+export const toggleIsLoading = (isLoading) => ({type: TOGGLE_IS_LOADING, isLoading}) 
 
 export default profileReducer;

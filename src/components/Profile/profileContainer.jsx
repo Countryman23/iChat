@@ -1,5 +1,7 @@
 import React from 'react';
-import {toggleIsLoadingAC, followAC, unFollowAC, setUsersAC, setCarrentPageAC, setTotalUsersCountAC} from '../../redux/profile-reducer';
+// import {toggleIsLoadingAC, followAC, unFollowAC, setUsersAC, setCarrentPageAC, setTotalUsersCountAC} from '../../redux/profile-reducer';
+//Убираем окончание АС чтобы исправить под новый синтаксис
+import {toggleIsLoading, follow, unFollow, setUsers, setCarrentPage, setTotalUsersCount} from '../../redux/profile-reducer';
 import { connect } from 'react-redux';
 import * as axios from 'axios'; //* импортируем всё что есть в библиотеке axios
 import Profile from './Profile';
@@ -77,27 +79,50 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (userId) => {
-            dispatch(followAC (userId));  
-        },
-        unFollow: (userId) => {
-            dispatch(unFollowAC (userId)); 
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC (users)); // для отображения пользователей
-        },
-        setCarrentPage: (pageNumber) => {
-            dispatch(setCarrentPageAC (pageNumber)); //12. реакция на onClick, и диспатчим то что нам возвращает вызов AC. (pageNumber это просто логическое название)
-        },
-        setTotalUsersCount: (totalCount) => {
-            dispatch(setTotalUsersCountAC (totalCount)); //18
-        },
-        toggleIsLoading: (isLoading) => {
-            dispatch(toggleIsLoadingAC (isLoading));
-        },
-    }
-};
+//перенеслив в connect
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         follow: (userId) => {
+//             dispatch(followAC (userId));  
+//         },
+//         unFollow: (userId) => {
+//             dispatch(unFollowAC (userId)); 
+//         },
+//         setUsers: (users) => {
+//             dispatch(setUsersAC (users)); // для отображения пользователей
+//         },
+//         setCarrentPage: (pageNumber) => {
+//             dispatch(setCarrentPageAC (pageNumber)); //12. реакция на onClick, и диспатчим то что нам возвращает вызов AC. (pageNumber это просто логическое название)
+//         },
+//         setTotalUsersCount: (totalCount) => {
+//             dispatch(setTotalUsersCountAC (totalCount)); //18
+//         },
+//         toggleIsLoading: (isLoading) => {
+//             dispatch(toggleIsLoadingAC (isLoading));
+//         },
+//     }
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileAPIComponent);
+//рефакторинг
+// export default connect(mapStateToProps, mapDispatchToProps)(ProfileAPIComponent);
+
+// //делаем сокращение. так как mapDispatchToProps берёт всего лишь ссылки на AC
+// export default connect(mapStateToProps, 
+//                         {follow: followAC,  
+//                         unFollow: unFollowAC,
+//                         setUsers: setUsersAC,
+//                         setCarrentPage: setCarrentPageAC,
+//                         setTotalUsersCount: setTotalUsersCountAC,
+//                         toggleIsLoading: toggleIsLoadingAC})
+//                         (ProfileAPIComponent);
+
+//снова редактируем так как современный ситаксис нам это позволяет. Убираем окончание АС, и когда {ключ: значениe} равны их можно записать одним словом
+export default connect(mapStateToProps, 
+                            {follow,  
+                            unFollow,
+                            setUsers,
+                            setCarrentPage,
+                            setTotalUsersCount,
+                            toggleIsLoading})
+                            (ProfileAPIComponent);
+                                        
