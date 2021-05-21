@@ -4,6 +4,7 @@ const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
 const SET_CARRENT_PAGE = "SET_CARRENT_PAGE";//7. создаём константу для работы с сервером. Далее берём её и обрабатываем в state (const profileReducer)
 const SET_USER_COUNT = "SET_USER_COUNT";//15. 
+const TOGGLE_IS_LOADING = "TOGGLE_IS_LOADING"; 
 
 //1
 // let initialState = {
@@ -28,10 +29,10 @@ const SET_USER_COUNT = "SET_USER_COUNT";//15.
 
 let initialState = {
     users: [],
-    pageSize: 6, //1
+    pageSize: 6, //1 создаём для store
     totalUsersCount: 0,//общее количество пользобателей
     carrentPage: 1,
-
+    isLoading: false, //ожидание прогрузки данных с сервера
 };
 
 //4
@@ -79,6 +80,9 @@ const profileReducer = (state = initialState, action) => {
         case SET_USER_COUNT: {
             return {...state, totalUsersCount: action.count} //16. 
         }
+        case TOGGLE_IS_LOADING: {
+            return {...state, isLoading: action.isLoading}
+        }
         default:
             return state;
     }
@@ -90,5 +94,6 @@ export const unFollowAC = (userId) => ({type: UNFOLLOW, userId})
 export const setUsersAC = (users) => ({type: SET_USERS, users})
 export const setCarrentPageAC = (carrentPage) => ({type: SET_CARRENT_PAGE, carrentPage}) //11. возвращаем action setCarrentPage
 export const setTotalUsersCountAC = (totalUsersCount) => ({type: SET_USER_COUNT, count: totalUsersCount}) //17. расписали count чтобы понять что от куда берётся
+export const toggleIsLoadingAC = (isLoading) => ({type: TOGGLE_IS_LOADING, isLoading}) 
 
 export default profileReducer;

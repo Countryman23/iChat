@@ -1,5 +1,6 @@
 import React from 'react';
 import ModCSS from "./Profile.module.css"; //Модифицируем наши стили с помощью .module
+import Loading from "../../loading"
 
 let Profile = (props) => {
 
@@ -11,7 +12,8 @@ let Profile = (props) => {
             pages.push(i);
         }
 
-    return (
+    return (<>
+        {props.isLoading ? <Loading /> : null }
         <div>
             {/* Убираем кнопку */}
             {/* <button onClick={this.getUsers}>Get users</button> */}
@@ -59,6 +61,7 @@ let Profile = (props) => {
                 </div>
             </div>)}
         </div>
+    </>
     )
 }
 

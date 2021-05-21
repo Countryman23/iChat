@@ -1,5 +1,5 @@
 import React from 'react';
-import {followAC, unFollowAC, setUsersAC, setCarrentPageAC, setTotalUsersCountAC} from '../../redux/profile-reducer';
+import {toggleIsLoadingAC, followAC, unFollowAC, setUsersAC, setCarrentPageAC, setTotalUsersCountAC} from '../../redux/profile-reducer';
 import { connect } from 'react-redux';
 import * as axios from 'axios'; //* импортируем всё что есть в библиотеке axios
 import Profile from './Profile';
@@ -32,9 +32,11 @@ class ProfileAPIComponent extends React.Component {
 
     //создаём объект componentDidMount для отрисовки jsx полученного из render()
     componentDidMount() {
+        this.props.toggleIsLoading(true)
         //axios.get("https://social-network.samuraijs.com/api/1.0/users")
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.carrentPage}&count=${this.props.pageSize}`) //6. добавили props чтобы данные для (page и count) подтягивались с сервера 
             .then(response => {
+                this.props.toggleIsLoading(false)
                 this.props.setUsers(response.data.items); //этим мы говорим, добавь в наш store юзеров из items
                 this.props.setTotalUsersCount(response.data.totalCount); //19.
             });
@@ -42,9 +44,11 @@ class ProfileAPIComponent extends React.Component {
     
     //13. делаем метод для onClick (pageNumber это просто логическое название)
     onUserListChanged = (pageNumber) => {
+        this.props.toggleIsLoading(true)
         this.props.setCarrentPage(pageNumber);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`) //14. меняем page=$ 
             .then(response => {
+                this.props.toggleIsLoading(false)
                 this.props.setUsers(response.data.items); //этим мы говорим, добавь в наш store юзеров из items
             });
     }
@@ -58,7 +62,8 @@ class ProfileAPIComponent extends React.Component {
                         onUserListChanged={this.onUserListChanged}
                         users={this.props.users}
                         follow={this.props.follow}
-                        unFollow={this.props.unFollow} />
+                        unFollow={this.props.unFollow}
+                        isLoading={this.props.isLoading} />
     }
 }
 
@@ -68,6 +73,7 @@ const mapStateToProps = (state) => {
         pageSize: state.profilePage.pageSize, //2
         totalUsersCount: state.profilePage.totalUsersCount,
         carrentPage: state.profilePage.carrentPage,//5
+        isLoading: state.profilePage.isLoading,
     }
 };
 
@@ -87,6 +93,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         setTotalUsersCount: (totalCount) => {
             dispatch(setTotalUsersCountAC (totalCount)); //18
+        },
+        toggleIsLoading: (isLoading) => {
+            dispatch(toggleIsLoadingAC (isLoading));
         },
     }
 };
