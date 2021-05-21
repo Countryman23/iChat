@@ -2,7 +2,7 @@
     display: grid;
     grid-template-areas: "s c";
     grid-template-columns: 2fr 8fr;
-
+    padding-top: 10px;
 
 }
 
@@ -25,4 +25,14 @@
     background-color: rgb(55, 68, 141);
     padding: 10px;
     margin-left: 10px;
+}
+
+.Selected {
+    font-weight: bold;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+.listNamberSelected {
+    cursor: pointer
 }

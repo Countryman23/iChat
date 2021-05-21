@@ -2,26 +2,36 @@
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
+const SET_CARRENT_PAGE = "SET_CARRENT_PAGE";//7. создаём константу для работы с сервером. Далее берём её и обрабатываем в state (const profileReducer)
+const SET_USER_COUNT = "SET_USER_COUNT";//15. 
 
 //1
+// let initialState = {
+//     users: [    //         {
+//     //     //             id: 1, photoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW-Jw-ZMy8KVpsK728K3CAEogswHduRgqog&usqp=CAU",
+//     //     //             followed: true, fullName: "Ivan", status: "I am in network Russia", location: { country: "Russia", city: "Moscow" }
+//     //     //         },
+//     //     //         {
+//     //     //             id: 2, photoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW-Jw-ZMy8KVpsK728K3CAEogswHduRgqog&usqp=CAU",
+//     //     //             followed: false, fullName: "Roma", status: "I am in network Europe", location: { country: "Europe", city: "Italy" }
+//     //     //         },
+//     //     //         {
+//     //     //             id: 3, photoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW-Jw-ZMy8KVpsK728K3CAEogswHduRgqog&usqp=CAU",
+//     //     //             followed: false, fullName: "Dima", status: "I am in network Asia", location: { country: "Asia", city: "Japan" }
+//     //     //         },
+//     //     //         {
+//     //     //             id: 4, photoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW-Jw-ZMy8KVpsK728K3CAEogswHduRgqog&usqp=CAU",
+//     //     //             followed: false, fullName: "Rita", status: "I am in network USA", location: { country: "USA", city: "Chicago" }
+//     //     //         },
+//     ],
+// };
+
 let initialState = {
-    users: [    //         {
-    //     //             id: 1, photoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW-Jw-ZMy8KVpsK728K3CAEogswHduRgqog&usqp=CAU",
-    //     //             followed: true, fullName: "Ivan", status: "I am in network Russia", location: { country: "Russia", city: "Moscow" }
-    //     //         },
-    //     //         {
-    //     //             id: 2, photoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW-Jw-ZMy8KVpsK728K3CAEogswHduRgqog&usqp=CAU",
-    //     //             followed: false, fullName: "Roma", status: "I am in network Europe", location: { country: "Europe", city: "Italy" }
-    //     //         },
-    //     //         {
-    //     //             id: 3, photoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW-Jw-ZMy8KVpsK728K3CAEogswHduRgqog&usqp=CAU",
-    //     //             followed: false, fullName: "Dima", status: "I am in network Asia", location: { country: "Asia", city: "Japan" }
-    //     //         },
-    //     //         {
-    //     //             id: 4, photoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW-Jw-ZMy8KVpsK728K3CAEogswHduRgqog&usqp=CAU",
-    //     //             followed: false, fullName: "Rita", status: "I am in network USA", location: { country: "USA", city: "Chicago" }
-    //     //         },
-    ],
+    users: [],
+    pageSize: 5, //1
+    totalUsersCount: 0,//общее количество пользобателей
+    carrentPage: 1,
+
 };
 
 //4
@@ -63,6 +73,12 @@ const profileReducer = (state = initialState, action) => {
             // return {...state, users: [...state.users, ...action.users]} //таким способом происходит задваивание users
             return {...state, users: [...action.users]} //взять старый state, взять пользователей которые там были и перезатиреть теми пользователями которые пришли из экшна
         }
+        case SET_CARRENT_PAGE: {
+            return {...state, carrentPage: action.carrentPage} //8. взять старый carrentPage, и меняем на тот carrentPage который сидит в action. затем его нужно задиспатчить
+        }
+        case SET_USER_COUNT: {
+            return {...state, totalUsersCount: action.count} //16. 
+        }
         default:
             return state;
     }
@@ -72,5 +88,7 @@ const profileReducer = (state = initialState, action) => {
 export const followAC = (userId) => ({type: FOLLOW, userId})
 export const unFollowAC = (userId) => ({type: UNFOLLOW, userId})
 export const setUsersAC = (users) => ({type: SET_USERS, users})
+export const setCarrentPageAC = (carrentPage) => ({type: SET_CARRENT_PAGE, carrentPage}) //11. возвращаем action setCarrentPage
+export const setTotalUsersCountAC = (totalUsersCount) => ({type: SET_USER_COUNT, count: totalUsersCount}) //17. расписали count чтобы понять что от куда берётся
 
 export default profileReducer;

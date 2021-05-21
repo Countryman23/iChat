@@ -4,14 +4,17 @@ import * as axios from 'axios'; //* импортируем всё что ест�
 
 class Profile extends React.Component {
 
-    constructor(props) {
-        super(props);
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
-            .then(response => {
-                // debugger;
-                this.props.setUsers(response.data.items);
-            });
-    }
+    //если конструктор работает только с супер, то его можно не записывать, это происходит по умолчанию
+    // constructor(props) {
+    //     super(props);
+
+    //     // перенесли в componentDidMount
+    //     // axios.get("https://social-network.samuraijs.com/api/1.0/users")
+    //     // .then(response => {
+    //     //     // debugger;
+    //     //     this.props.setUsers(response.data.items);
+    //     // });
+    // }
 
     //убираем let, так как внутри класса мы можем одъявлять только методы
     // getUsers = () => {
@@ -25,12 +28,61 @@ class Profile extends React.Component {
     //     }
     // } // Убираем логику нажатия кнопки
 
+    //создаём объект componentDidMount для отрисовки jsx полученного из render()
+    componentDidMount() {
+        //axios.get("https://social-network.samuraijs.com/api/1.0/users")
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.carrentPage}&count=${this.props.pageSize}`) //6. добавили props чтобы данные для (page и count) подтягивались с сервера 
+            .then(response => {
+                this.props.setUsers(response.data.items); //этим мы говорим, добавь в наш store юзеров из items
+                this.props.setTotalUsersCount(response.data.totalCount); //19.
+            });
+    }
+    
+    //13. делаем метод для onClick (pageNumber это просто логическое название)
+    onUserListChanged = (pageNumber) => {
+        this.props.setCarrentPage(pageNumber);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`) //14. меняем page=$ 
+            .then(response => {
+                this.props.setUsers(response.data.items); //этим мы говорим, добавь в наш store юзеров из items
+            });
+    }
+
+    // render получает и отрисовывает данные, затем передаёт их для отрисовки в componentDidMount. и если они изменились они перерисовываются в componentDidUpdate
     render() {
+        let pagesCount = this.props.totalUsersCount / this.props.pageSize; //3. количество страниц пользователей 
+        
+        let pages = [];
+        //4 заполняем в pages // дописал / 100 что бы уменьшить количество отображаемых страниц
+        for (let i=1; i <= pagesCount / 100; i++) {
+            pages.push(i);
+        }
+
         return (
             <div>
                 {/* Убираем кнопку */}
                 {/* <button onClick={this.getUsers}>Get users</button> */}
                 {/*  {props.users.map(u => берём users полученныйе из props.setUsers, которые пришли туда из ответа сервера*/}
+                {/* временная запись для проверки, далее выводим количество страниц из результатов сервера */}
+                {/* <div className={ModCSS.listNamberSelectedWrapper} >
+                    <span className={ModCSS.listNamberSelected}>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                    <span>6</span>
+                    <span>7</span>
+                    <span>8</span>
+                    <span>9</span>
+                    <span>10</span>
+                </div> */} 
+                {/* //6 создаём массив*/}
+                {/* //10. деллаем логику onClick */}
+                <div className={ModCSS.listNamberSelected}>
+                {pages.map(p => {
+                    return <span className={this.props.carrentPage === p && ModCSS.Selected}
+                                onClick={(e) => {this.onUserListChanged(p)}}>{p}</span>
+                })}
+                </div>
                 {this.props.users.map(u => <div key={u.id} className={ModCSS.profile}>
                     <div className={ModCSS.subscribeWrapper}>
                         <div className={ModCSS.subscribeImg}>
