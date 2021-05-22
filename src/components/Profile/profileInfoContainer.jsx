@@ -5,13 +5,17 @@ import * as axios from 'axios'; //* импортируем всё что ест�
 import { connect } from 'react-redux';
 import {setProfileInfo} from '../../redux/profile-reducer';
 import Loading from "../../loading";
+import { withRouter } from "react-router";
 
 //это контейнерная классовая компонента она обязана всё перенаправить в дочернюю компоненту
 class ProfileInfoContainer extends React.Component {
     
     componentDidMount () {
-        // debugger
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`) 
+        let userId = this.props.match.params.userId; // получаем id пользователя
+        if (!userId) {
+            userId = 2;
+        }
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId) 
             .then(response => {
                 this.props.setProfileInfo(response.data); //этим мы говорим, добавь в наш store всё из data
             });
@@ -39,4 +43,9 @@ const mapStateToProps = (state) => ({
         profileInfo: state.profilePage.profileInfo
 });
 
-export default connect(mapStateToProps, {setProfileInfo})(ProfileInfoContainer);
+//возвращает новую компоненту ProfileInfoContainer и в неё ещё закинет данные из URL
+let WithUrlDataContainerComponent = withRouter(ProfileInfoContainer);
+
+//рефакторинг
+// export default connect(mapStateToProps, {setProfileInfo})(ProfileInfoContainer);
+export default connect(mapStateToProps, {setProfileInfo})(WithUrlDataContainerComponent);

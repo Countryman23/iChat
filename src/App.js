@@ -43,7 +43,8 @@ const App = (props) => {
                     {/* через render можем вызвать анонимную функцию */}
                     <Route path="/Authorization" render={ () => <Authorization />} />
                     <Route path="/Profile" render={ () => <ProfileContainer />} />
-                    <Route path="/ProfileInfoContainer" render={ () => <ProfileInfoContainer />} />
+                    {/* ? - означает что это параметр (:userId) не обязательный */}
+                    <Route path="/ProfileInfoContainer/:userId?" render={ () => <ProfileInfoContainer />} />
                     {/* передаём пропсы из массива postData */}
                     {/* затем берём postData уже из пропса который приходит в app.js из index.js. прописываем props.postData */}
                     {/* теперь массив с объектами находится в state.js, для этого добавляем appState (props.appState.postData)*/}
