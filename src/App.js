@@ -8,6 +8,7 @@ import Authorization from "./components/Authorization/Authorization";
 import MyPostsContainer from "./components/MyPosts/MyPostsContainer";
 import MessagesContainer from "./components/Messages/MessagesContainer";
 import ProfileContainer from "./components/Profile/profileContainer";
+import ProfileInfoContainer from "./components/Profile/profileInfoContainer";
 import Settings from "./components/Settings/Settings";
 import ModCSS from "./App.module.css"; //Модифицируем наши стили с помощью .module
 import { BrowserRouter, Route } from "react-router-dom"; // импорт с фигурными скобками из-за экспорта не по дефолту
@@ -42,6 +43,7 @@ const App = (props) => {
                     {/* через render можем вызвать анонимную функцию */}
                     <Route path="/Authorization" render={ () => <Authorization />} />
                     <Route path="/Profile" render={ () => <ProfileContainer />} />
+                    <Route path="/ProfileInfoContainer" render={ () => <ProfileInfoContainer />} />
                     {/* передаём пропсы из массива postData */}
                     {/* затем берём postData уже из пропса который приходит в app.js из index.js. прописываем props.postData */}
                     {/* теперь массив с объектами находится в state.js, для этого добавляем appState (props.appState.postData)*/}

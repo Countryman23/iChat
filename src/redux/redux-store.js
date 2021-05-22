@@ -9,7 +9,7 @@ let reducers = combineReducers({
     messagesPage: messagesReducer,
     profilePage: profileReducer
 });
-//createStore создаёт внутри себя  state внутр которого есть reducers
+//createStore создаёт внутри себя  state внутр которого есть reducers (создаём store с помощью redux)
 let store = createStore(reducers);
 
 window.store = store;

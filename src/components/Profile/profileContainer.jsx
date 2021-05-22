@@ -34,6 +34,7 @@ class ProfileAPIComponent extends React.Component {
 
     //создаём объект componentDidMount для отрисовки jsx полученного из render()
     componentDidMount() {
+        // debugger
         this.props.toggleIsLoading(true)
         //axios.get("https://social-network.samuraijs.com/api/1.0/users")
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.carrentPage}&count=${this.props.pageSize}`) //6. добавили props чтобы данные для (page и count) подтягивались с сервера 

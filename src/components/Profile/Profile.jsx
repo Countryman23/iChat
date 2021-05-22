@@ -1,6 +1,7 @@
 import React from 'react';
 import ModCSS from "./Profile.module.css"; //Модифицируем наши стили с помощью .module
-import Loading from "../../loading"
+import Loading from "../../loading";
+import { NavLink } from "react-router-dom"; // импорт с фигурными скобками из-за экспорта не по дефолту
 
 let Profile = (props) => {
 
@@ -43,7 +44,10 @@ let Profile = (props) => {
                 <div className={ModCSS.subscribeWrapper}>
                     <div className={ModCSS.subscribeImg}>
                         {/* <img src={u.photoUrl} /> // временно скрыли потомучто этих данных нет в api  */}
+                        {/* //реализуем переход по юзеру */}
+                        <NavLink to={"/ProfileInfoContainer/" + u.id}>
                         <img src={u.photos.small != null ? u.photos.small : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW-Jw-ZMy8KVpsK728K3CAEogswHduRgqog&usqp=CAU"} />
+                        </NavLink>
                     </div>
                     <div className={ModCSS.subscribe}>
                         {u.followed
