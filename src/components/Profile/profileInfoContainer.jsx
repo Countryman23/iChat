@@ -5,7 +5,7 @@ import * as axios from 'axios'; //* импортируем всё что ест�
 import { connect } from 'react-redux';
 import {setProfileInfo} from '../../redux/profile-reducer';
 import Loading from "../../loading";
-import { withRouter } from "react-router";
+import { withRouter, Redirect } from "react-router";
 
 //это контейнерная классовая компонента она обязана всё перенаправить в дочернюю компоненту
 class ProfileInfoContainer extends React.Component {
@@ -23,9 +23,9 @@ class ProfileInfoContainer extends React.Component {
     
     render () {
         // (!this.props.profileInfo) если у нас нет profileInfo
-        //этим условием мы говорим, пока наш profileInfo равен null покажи Loading
+        //этим условием мы говорим, пока наш profileInfo равен null, верни нас к profile
         if (!this.props.profileInfo) {
-            return <Loading />
+            return <Redirect to = "/profile" />
         }
         // debugger
         return (

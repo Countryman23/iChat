@@ -32,7 +32,7 @@ let Profile = (props) => {
                 <span>9</span>
                 <span>10</span>
             </div> */} 
-            {/* //6 создаём массив*/}
+            {/* //9 создаём массив*/}
             {/* //10. деллаем логику onClick */}
             <div className={ModCSS.listNamberSelected}>
             {pages.map(p => {

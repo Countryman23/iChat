@@ -1,6 +1,6 @@
 import React from "react";
 import Navigation from "./components/Navigation/Navigation";
-import Authorization from "./components/Authorization/Authorization";
+import AuthContainer from "./components/Authorization/authContainer";
 // import Profile from "./components/Profile/Profile";
 //изменили на Container
 // import MyPosts from "./components/MyPosts/MyPosts";
@@ -41,7 +41,7 @@ const App = (props) => {
                     <Route path="/Messages" component={Messages} />
                     <Route path="/Settings" component={Settings} /> */}
                     {/* через render можем вызвать анонимную функцию */}
-                    <Route path="/Authorization" render={ () => <Authorization />} />
+                    <Route path="/Authorization" render={ () => <AuthContainer />} />
                     <Route path="/Profile" render={ () => <ProfileContainer />} />
                     {/* ? - означает что это параметр (:userId) не обязательный */}
                     <Route path="/ProfileInfoContainer/:userId?" render={ () => <ProfileInfoContainer />} />

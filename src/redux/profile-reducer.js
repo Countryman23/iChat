@@ -1,4 +1,4 @@
-//3
+///3
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
@@ -7,7 +7,7 @@ const SET_USER_COUNT = "SET_USER_COUNT";//15.
 const TOGGLE_IS_LOADING = "TOGGLE_IS_LOADING";
 const SET_PROFILE_INFO = "SET_PROFILE_INFO"; 
 
-//1
+///1
 // let initialState = {
 //     users: [    //         {
 //     //     //             id: 1, photoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW-Jw-ZMy8KVpsK728K3CAEogswHduRgqog&usqp=CAU",
@@ -38,7 +38,7 @@ let initialState = {
     profileInfo: null,
 };
 
-//4
+///4
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case FOLLOW:
@@ -94,7 +94,7 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-// //2
+// ///2
 // export const followAC = (userId) => ({type: FOLLOW, userId})
 // export const unFollowAC = (userId) => ({type: UNFOLLOW, userId})
 // export const setUsersAC = (users) => ({type: SET_USERS, users})
