@@ -37,7 +37,9 @@ class ProfileAPIComponent extends React.Component {
         // debugger
         this.props.toggleIsLoading(true)
         //axios.get("https://social-network.samuraijs.com/api/1.0/users")
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.carrentPage}&count=${this.props.pageSize}`) //6. добавили props чтобы данные для (page и count) подтягивались с сервера 
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.carrentPage}&count=${this.props.pageSize}`,
+        {withCredentials: true}
+        ) //6. добавили props чтобы данные для (page и count) подтягивались с сервера 
             .then(response => {
                 this.props.toggleIsLoading(false)
                 this.props.setUsers(response.data.items); //этим мы говорим, добавь в наш store юзеров из items
@@ -49,7 +51,9 @@ class ProfileAPIComponent extends React.Component {
     onUserListChanged = (pageNumber) => {
         this.props.toggleIsLoading(true)
         this.props.setCarrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`) //14. меняем page=$ 
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
+        {withCredentials: true}
+        ) //14. меняем page=$ 
             .then(response => {
                 this.props.toggleIsLoading(false)
                 this.props.setUsers(response.data.items); //этим мы говорим, добавь в наш store юзеров из items
