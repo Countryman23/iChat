@@ -7,6 +7,7 @@ import {apiFollowUser} from '../../api/api';
 import {apiUnfollowUser} from '../../api/api';
 
 
+
 let Profile = (props) => {
 
     let pagesCount = Math.ceil (props.totalUsersCount / props.pageSize); //3. количество страниц c пользователями
@@ -56,37 +57,46 @@ let Profile = (props) => {
                     <div className={ModCSS.subscribe}>
                         {u.followed
                             //вызываем dispatch и передпм id
-                            ? <button onClick={() => { 
+                            ? <button disabled={props.followingInProcess.some(id => id === u.id)} onClick={() => { //если в пропсах followingInProcess будет true, то кнопка будет disabled .some(id => id === u.id) этим мы говорим, если хоть одна id равна id пользователя то тогда disabled
+                                props.toggleFollowingInProcess(true, u.id);//мы фоловим true
                                 //добавляем запрос отписки
-                                // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, 
-                                // { withCredentials: true,
-                                //     headers: {
-                                //         "API-KEY": "b945a48b-e23b-46ca-a66f-5493b89d60ce"
-                                //     }
-                                // } ) //headers стандартный запрос к API. Тут говорится, буду обращаться к заголовкам. Цепляем ключ к headers
+                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, 
+                                { withCredentials: true,
+                                    headers: {
+                                        "API-KEY": "b945a48b-e23b-46ca-a66f-5493b89d60ce"
+                                    }
+                                } ) //headers стандартный запрос к API. Тут говорится, буду обращаться к заголовкам. Цепляем ключ к headers
                                 // withCredentials передаётся в delete вторым параметром
-                                apiUnfollowUser(u).then(response => {
+                                .then(response => {
+                                // apiUnfollowUser(u).then(response => {
                                     // debugger
                                         if (response.data.resultCode == 0) {
-                                            props.unFollow(u);
+                                            props.unFollow(u.id);
+                                            // props.unFollow(u);
                                         }
+                                        props.toggleFollowingInProcess(false, u.id);//когда мы закончим then
+
                                     });
 
                                 }} >Unfollow</button>
-                            : <button onClick={() => { 
+                            : <button disabled={props.followingInProcess.some(id => id === u.id)} onClick={() => { //если в пропсах followingInProcess будет false, то кнопка НЕ будет disabled. .some(id => id === u.id) этим мы говорим, если хоть одна id равна id пользователя то тогда disabled
+                                props.toggleFollowingInProcess(true, u.id);//мы фоловим true
                                 //добавляем запрос подписки
                                 //перекинули запрос в api.js apiFollowUser
-                                // axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, 
-                            //    { withCredentials: true,
-                            //     headers: {
-                            //         "API-KEY": "b945a48b-e23b-46ca-a66f-5493b89d60ce"
-                            //     }
-                            // } ) //подтвеождение авторизации по технологии CORS. withCredentials передаётся в get вторым параметром, а в post третьим
-                            apiFollowUser(u).then(response => {
-                                debugger
+                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, 
+                               { withCredentials: true,
+                                headers: {
+                                    "API-KEY": "b945a48b-e23b-46ca-a66f-5493b89d60ce"
+                                }
+                            } ) //подтвеождение авторизации по технологии CORS. withCredentials передаётся в get вторым параметром, а в post третьим
+                            .then(response => {
+                            // apiFollowUser(u).then(response => {
+                                // debugger
                                         if (response.data.resultCode == 0) {
-                                            props.follow(u);
+                                            props.follow(u.id);
+                                            // props.follow(u);
                                         }
+                                        props.toggleFollowingInProcess(false, u.id);//когда мы закончим then
                                     });
                             }} >Follow</button>}
                     </div>

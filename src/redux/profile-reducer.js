@@ -6,6 +6,7 @@ const SET_CARRENT_PAGE = "SET_CARRENT_PAGE";//7. создаём констант
 const SET_USER_COUNT = "SET_USER_COUNT";//15. 
 const TOGGLE_IS_LOADING = "TOGGLE_IS_LOADING";
 const SET_PROFILE_INFO = "SET_PROFILE_INFO"; 
+const TOGGLE_IS_FOLLOWING = "TOGGLE_IS_FOLLOWING";
 
 ///1
 // let initialState = {
@@ -36,6 +37,7 @@ let initialState = {
     carrentPage: 1,
     isLoading: false, //ожидание прогрузки данных с сервера
     profileInfo: null,
+    followingInProcess: [] //это для того чтобы небыло много запросов на сервер по нажатию на кнопку. Т.е. пока не прийдут изменения делаем кнопку неактивной
 };
 
 ///4
@@ -89,6 +91,12 @@ const profileReducer = (state = initialState, action) => {
         case SET_PROFILE_INFO: {
             return {...state, profileInfo: action.profileInfo}
         }
+        case TOGGLE_IS_FOLLOWING: {
+            return {...state, 
+                    followingInProcess: action.isLoading 
+                    ? [...state.followingInProcess, action.userId] //деструктуризируем массив который был и в конец дописываем id которая приходит к нам в action
+                    : state.followingInProcess.filter(id => id != action.userId)} //state.followingInProcess.filter() делаем копию и убираем id пользователя(пропускаем только ту id которая не равна той id которая пришла в action) 
+        }
         default:
             return state;
     }
@@ -110,5 +118,6 @@ export const setCarrentPage = (carrentPage) => ({type: SET_CARRENT_PAGE, carrent
 export const setTotalUsersCount = (totalUsersCount) => ({type: SET_USER_COUNT, count: totalUsersCount}) //17. расписали count чтобы понять что от куда берётся
 export const toggleIsLoading = (isLoading) => ({type: TOGGLE_IS_LOADING, isLoading}) 
 export const setProfileInfo = (profileInfo) => ({type: SET_PROFILE_INFO, profileInfo}) 
+export const toggleFollowingInProcess = (isLoading, userId) => ({type: TOGGLE_IS_FOLLOWING, isLoading, userId}) 
 
 export default profileReducer;

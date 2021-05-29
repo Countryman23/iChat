@@ -1,7 +1,7 @@
 import React from 'react';
 // import {toggleIsLoadingAC, followAC, unFollowAC, setUsersAC, setCarrentPageAC, setTotalUsersCountAC} from '../../redux/profile-reducer';
 //Убираем окончание АС чтобы исправить под новый синтаксис
-import {toggleIsLoading, follow, unFollow, setUsers, setCarrentPage, setTotalUsersCount} from '../../redux/profile-reducer';
+import {toggleFollowingInProcess, toggleIsLoading, follow, unFollow, setUsers, setCarrentPage, setTotalUsersCount} from '../../redux/profile-reducer';
 import { connect } from 'react-redux';
 import * as axios from 'axios'; //* импортируем всё что есть в библиотеке axios
 import Profile from './Profile';
@@ -78,7 +78,9 @@ class ProfileAPIComponent extends React.Component {
                         users={this.props.users}
                         follow={this.props.follow}
                         unFollow={this.props.unFollow}
-                        isLoading={this.props.isLoading} />
+                        isLoading={this.props.isLoading}
+                        toggleFollowingInProcess={this.props.toggleFollowingInProcess}
+                        followingInProcess={this.props.followingInProcess} />
     }
 }
 
@@ -89,6 +91,7 @@ const mapStateToProps = (state) => {
         totalUsersCount: state.profilePage.totalUsersCount,
         carrentPage: state.profilePage.carrentPage,//5
         isLoading: state.profilePage.isLoading,
+        followingInProcess: state.profilePage.followingInProcess
     }
 };
 
@@ -136,6 +139,7 @@ export default connect(mapStateToProps,
                             setUsers,
                             setCarrentPage,
                             setTotalUsersCount,
-                            toggleIsLoading})
+                            toggleIsLoading,
+                            toggleFollowingInProcess})
                             (ProfileAPIComponent);
                                         
