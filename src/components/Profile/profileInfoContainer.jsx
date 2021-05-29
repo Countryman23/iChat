@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import {setProfileInfo} from '../../redux/profile-reducer';
 import Loading from "../../loading";
 import { withRouter, Redirect } from "react-router";
+import {apiUsersRouter} from '../../api/api';
+
 
 //это контейнерная классовая компонента она обязана всё перенаправить в дочернюю компоненту
 class ProfileInfoContainer extends React.Component {
@@ -15,9 +17,13 @@ class ProfileInfoContainer extends React.Component {
         if (!userId) {
             userId = 2;
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId) 
-            .then(response => {
-                this.props.setProfileInfo(response.data); //этим мы говорим, добавь в наш store всё из data
+        //перекинули запрос в api.js apiUsersRouter
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId) 
+        // apiUsersRouter(userId).then(response => {
+        apiUsersRouter(userId).then(data => {
+            // debugger
+                // this.props.setProfileInfo(response.data); //этим мы говорим, добавь в наш store всё из data
+                this.props.setProfileInfo(data); //этим мы говорим, добавь в наш store всё из data
             });
     }
     

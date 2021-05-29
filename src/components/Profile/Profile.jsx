@@ -3,6 +3,9 @@ import ModCSS from "./Profile.module.css"; //Модифицируем наши �
 import Loading from "../../loading";
 import { NavLink } from "react-router-dom"; // импорт с фигурными скобками из-за экспорта не по дефолту
 import * as axios from 'axios'; //* импортируем всё что есть в библиотеке axios
+import {apiFollowUser} from '../../api/api';
+import {apiUnfollowUser} from '../../api/api';
+
 
 let Profile = (props) => {
 
@@ -55,31 +58,34 @@ let Profile = (props) => {
                             //вызываем dispatch и передпм id
                             ? <button onClick={() => { 
                                 //добавляем запрос отписки
-                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, 
-                                { withCredentials: true,
-                                    headers: {
-                                        "API-KEY": "b945a48b-e23b-46ca-a66f-5493b89d60ce"
-                                    }
-                                } ) //headers стандартный запрос к API. Тут говорится, буду обращаться к заголовкам. Цепляем ключ к headers
+                                // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, 
+                                // { withCredentials: true,
+                                //     headers: {
+                                //         "API-KEY": "b945a48b-e23b-46ca-a66f-5493b89d60ce"
+                                //     }
+                                // } ) //headers стандартный запрос к API. Тут говорится, буду обращаться к заголовкам. Цепляем ключ к headers
                                 // withCredentials передаётся в delete вторым параметром
-                                    .then(response => {
+                                apiUnfollowUser(u).then(response => {
+                                    // debugger
                                         if (response.data.resultCode == 0) {
-                                            props.unFollow(u.id);
+                                            props.unFollow(u);
                                         }
                                     });
 
                                 }} >Unfollow</button>
                             : <button onClick={() => { 
                                 //добавляем запрос подписки
-                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, 
-                               { withCredentials: true,
-                                headers: {
-                                    "API-KEY": "b945a48b-e23b-46ca-a66f-5493b89d60ce"
-                                }
-                            } ) //подтвеождение авторизации по технологии CORS. withCredentials передаётся в get вторым параметром, а в post третьим
-                                    .then(response => {
+                                //перекинули запрос в api.js apiFollowUser
+                                // axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, 
+                            //    { withCredentials: true,
+                            //     headers: {
+                            //         "API-KEY": "b945a48b-e23b-46ca-a66f-5493b89d60ce"
+                            //     }
+                            // } ) //подтвеождение авторизации по технологии CORS. withCredentials передаётся в get вторым параметром, а в post третьим
+                            apiFollowUser(u).then(response => {
+                                debugger
                                         if (response.data.resultCode == 0) {
-                                            props.follow(u.id);
+                                            props.follow(u);
                                         }
                                     });
                             }} >Follow</button>}

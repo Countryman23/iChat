@@ -5,6 +5,7 @@ import {toggleIsLoading, follow, unFollow, setUsers, setCarrentPage, setTotalUse
 import { connect } from 'react-redux';
 import * as axios from 'axios'; //* импортируем всё что есть в библиотеке axios
 import Profile from './Profile';
+import {apiGetUsers} from '../../api/api';
 
 class ProfileAPIComponent extends React.Component {
 
@@ -35,15 +36,19 @@ class ProfileAPIComponent extends React.Component {
     //создаём объект componentDidMount для отрисовки jsx полученного из render()
     componentDidMount() {
         // debugger
-        this.props.toggleIsLoading(true)
-        //axios.get("https://social-network.samuraijs.com/api/1.0/users")
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.carrentPage}&count=${this.props.pageSize}`,
-        {withCredentials: true}
-        ) //6. добавили props чтобы данные для (page и count) подтягивались с сервера 
-            .then(response => {
+        this.props.toggleIsLoading(true);
+        //перекинули запрос в api.js apiGetUsers
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.carrentPage}&count=${this.props.pageSize}`,
+        // {withCredentials: true}
+        // ) //6. добавили props чтобы данные для (page и count) подтягивались с сервера 
+        //apiGetUsers(this.props.carrentPage, this.props.pageSize).then(response => {
+        apiGetUsers(this.props.carrentPage, this.props.pageSize).then(data => {
+                // debugger
                 this.props.toggleIsLoading(false)
-                this.props.setUsers(response.data.items); //этим мы говорим, добавь в наш store юзеров из items
-                this.props.setTotalUsersCount(response.data.totalCount); //19.
+                // this.props.setUsers(response.data.items); //этим мы говорим, добавь в наш store юзеров из items
+                // this.props.setTotalUsersCount(response.data.totalCount); //19.
+                this.props.setUsers(data.items); //этим мы говорим, добавь в наш store юзеров из items
+                this.props.setTotalUsersCount(data.totalCount); //19.
             });
     }
     
@@ -51,12 +56,15 @@ class ProfileAPIComponent extends React.Component {
     onUserListChanged = (pageNumber) => {
         this.props.toggleIsLoading(true)
         this.props.setCarrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
-        {withCredentials: true}
-        ) //14. меняем page=$ 
-            .then(response => {
+        //перекинули запрос в api.js apiGetUsers
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
+        // {withCredentials: true}
+        // ) //14. меняем page=$ 
+        // apiGetUsers(pageNumber, this.props.pageSize).then(response => {
+        apiGetUsers(pageNumber, this.props.pageSize).then(data => {
                 this.props.toggleIsLoading(false)
-                this.props.setUsers(response.data.items); //этим мы говорим, добавь в наш store юзеров из items
+                // this.props.setUsers(response.data.items); //этим мы говорим, добавь в наш store юзеров из items
+                this.props.setUsers(data.items); //этим мы говорим, добавь в наш store юзеров из items
             });
     }
 

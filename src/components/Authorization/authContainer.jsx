@@ -4,6 +4,7 @@ import Login from "./Login"
 import * as axios from 'axios'; //* импортируем всё что есть в библиотеке axios
 import { connect } from 'react-redux';
 import {setAuthUserData} from "../../redux/auth-reducer"
+import {apiAuthProfile} from '../../api/api';
 
 //ниже JSX коде в котором находится HTML разметка
 // const AuthContainer = () => {
@@ -24,11 +25,16 @@ import {setAuthUserData} from "../../redux/auth-reducer"
 class AuthContainer extends React.Component {
     
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true}) //вторым параметром , {} передаём настройки запроса withCredentials что бы куки видели из другого сайта что мы авторизованны
-        .then(response => {
+        //перекинули запрос в api.js apiAuthProfile
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, 
+        // {withCredentials: true}) //вторым параметром , {} передаём настройки запроса withCredentials что бы куки видели из другого сайта что мы авторизованны
+        // apiAuthProfile().then(response => {
+        apiAuthProfile().then(data => {
             // debugger
-            if (response.data.resultCode === 0) {
-                let {id, login, email} = response.data.data; //две data потому-что 1я data сидит в инструкции API, 2ю выдаёт response
+            // if (response.data.resultCode === 0) {
+            if (data.resultCode === 0) {
+                // let {id, login, email} = response.data.data; //две data потому-что 1я data сидит в инструкции API, 2ю выдаёт response
+                let {id, login, email} = data.data; //две data потому-что 1я data сидит в инструкции API, 2ю выдаёт response
                 this.props.setAuthUserData (id, login, email);
             }
                 
