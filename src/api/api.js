@@ -33,7 +33,7 @@ export const apiAuthProfile = () => {
 }
 
 export const apiFollowUser = (userId) => {
-    return instance.post(`follow/${userId}`) //instance подставляется автомотически и headers тоже
+    return instance.post(`follow/${userId}`,{}) //instance подставляется автомотически и headers тоже
     .then(response => response.data);
 }
 
