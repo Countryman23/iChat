@@ -1,13 +1,11 @@
 import React from 'react';
 // import {toggleIsLoadingAC, followAC, unFollowAC, setUsersAC, setCarrentPageAC, setTotalUsersCountAC} from '../../redux/profile-reducer';
 //Убираем окончание АС чтобы исправить под новый синтаксис
-import {toggleFollowingInProcess, toggleIsLoading, follow, unFollow, setUsers, setCarrentPage, setTotalUsersCount} from '../../redux/profile-reducer';
+import {getUsersThunkCreator, toggleFollowingInProcess, follow, unFollow, setCarrentPage, } from '../../redux/profile-reducer';
 import { connect } from 'react-redux';
-import * as axios from 'axios'; //* импортируем всё что есть в библиотеке axios
 import Profile from './Profile';
-import {apiGetUsers} from '../../api/api';
 
-class ProfileAPIComponent extends React.Component {
+class ProfileComponent extends React.Component {
 
     //если конструктор работает только с супер, то его можно не записывать, это происходит по умолчанию
     // constructor(props) {
@@ -35,37 +33,42 @@ class ProfileAPIComponent extends React.Component {
 
     //создаём объект componentDidMount для отрисовки jsx полученного из render()
     componentDidMount() {
-        // debugger
-        this.props.toggleIsLoading(true);
+        // перенесли в санку
+        // this.props.toggleIsLoading(true);
         //перекинули запрос в api.js apiGetUsers
         // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.carrentPage}&count=${this.props.pageSize}`,
         // {withCredentials: true}
         // ) //6. добавили props чтобы данные для (page и count) подтягивались с сервера 
         //apiGetUsers(this.props.carrentPage, this.props.pageSize).then(response => {
-        apiGetUsers(this.props.carrentPage, this.props.pageSize).then(data => {
-                // debugger
-                this.props.toggleIsLoading(false)
-                // this.props.setUsers(response.data.items); //этим мы говорим, добавь в наш store юзеров из items
-                // this.props.setTotalUsersCount(response.data.totalCount); //19.
-                this.props.setUsers(data.items); //этим мы говорим, добавь в наш store юзеров из items
-                this.props.setTotalUsersCount(data.totalCount); //19.
-            });
+            // перенесли в санку
+        // apiGetUsers(this.props.carrentPage, this.props.pageSize).then(data => {
+        //         this.props.toggleIsLoading(false)
+        //         /// this.props.setUsers(response.data.items); //этим мы говорим, добавь в наш store юзеров из items
+        //         /// this.props.setTotalUsersCount(response.data.totalCount); //19.
+        //         this.props.setUsers(data.items); //этим мы говорим, добавь в наш store юзеров из items
+        //         this.props.setTotalUsersCount(data.totalCount); //19.
+        //     });
+        this.props.getUsersThunkCreator(this.props.carrentPage, this.props.pageSize);
+    // debugger
     }
     
     //13. делаем метод для onClick (pageNumber это просто логическое название)
     onUserListChanged = (pageNumber) => {
-        this.props.toggleIsLoading(true)
+        //заменили на санки
+        // this.props.toggleIsLoading(true)
         this.props.setCarrentPage(pageNumber);
         //перекинули запрос в api.js apiGetUsers
         // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
         // {withCredentials: true}
         // ) //14. меняем page=$ 
         // apiGetUsers(pageNumber, this.props.pageSize).then(response => {
-        apiGetUsers(pageNumber, this.props.pageSize).then(data => {
-                this.props.toggleIsLoading(false)
+        //заменили на санки
+        // apiGetUsers(pageNumber, this.props.pageSize).then(data => {
+        //         this.props.toggleIsLoading(false)
                 // this.props.setUsers(response.data.items); //этим мы говорим, добавь в наш store юзеров из items
-                this.props.setUsers(data.items); //этим мы говорим, добавь в наш store юзеров из items
-            });
+                // this.props.setUsers(data.items); //этим мы говорим, добавь в наш store юзеров из items
+            // });
+        this.props.getUsersThunkCreator(pageNumber, this.props.pageSize);
     }
 
     // render получает и отрисовывает данные, затем передаёт их для отрисовки в componentDidMount. и если они изменились они перерисовываются в componentDidUpdate
@@ -76,10 +79,12 @@ class ProfileAPIComponent extends React.Component {
                         //onUserListChanged компонента этого уровня, поэтому её пишем без props
                         onUserListChanged={this.onUserListChanged}
                         users={this.props.users}
-                        follow={this.props.follow}
-                        unFollow={this.props.unFollow}
+                        // follow={this.props.follow} //убрали после использования санок
+                        // unFollow={this.props.unFollow} //убрали после использования санок
+                        followThunk={this.props.follow}
+                        unFollowThunk={this.props.unFollow}
                         isLoading={this.props.isLoading}
-                        toggleFollowingInProcess={this.props.toggleFollowingInProcess}
+                        // toggleFollowingInProcess={this.props.toggleFollowingInProcess} //убрали после использования санок
                         followingInProcess={this.props.followingInProcess} />
     }
 }
@@ -133,13 +138,15 @@ const mapStateToProps = (state) => {
 //                         (ProfileAPIComponent);
 
 //снова редактируем так как современный ситаксис нам это позволяет. Убираем окончание АС, и когда {ключ: значениe} равны их можно записать одним словом
+//follow.....getUsersThunkCreator теперь они попадают в пропсы в компоненте ProfileComponent
 export default connect(mapStateToProps, 
                             {follow,  
                             unFollow,
-                            setUsers,
+                            // setUsers, // убрали так как используем напрямую через санки в reducere
                             setCarrentPage,
-                            setTotalUsersCount,
-                            toggleIsLoading,
-                            toggleFollowingInProcess})
-                            (ProfileAPIComponent);
+                            // setTotalUsersCount, // убрали так как используем напрямую через санки в reducere
+                            // toggleIsLoading, // убрали так как используем напрямую через санки в reducere
+                            toggleFollowingInProcess,
+                            getUsersThunkCreator})
+                            (ProfileComponent);
                                         

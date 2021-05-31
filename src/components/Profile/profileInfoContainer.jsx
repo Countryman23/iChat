@@ -1,10 +1,8 @@
 import React from 'react';
 import ProfileInfo from "./profileInfo"
 // import ModCSS from "./Profile.module.css"; //Модифицируем наши стили с помощью .module
-import * as axios from 'axios'; //* импортируем всё что есть в библиотеке axios
 import { connect } from 'react-redux';
 import {setProfileInfo} from '../../redux/profile-reducer';
-import Loading from "../../loading";
 import { withRouter, Redirect } from "react-router";
 import {apiUsersRouter} from '../../api/api';
 

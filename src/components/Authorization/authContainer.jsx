@@ -1,7 +1,6 @@
 import React from 'react';
 import ModCSS from "./Authorization.module.css"; //Модифицируем наши стили с помощью .module
 import Login from "./Login"
-import * as axios from 'axios'; //* импортируем всё что есть в библиотеке axios
 import { connect } from 'react-redux';
 import {setAuthUserData} from "../../redux/auth-reducer"
 import {apiAuthProfile} from '../../api/api';

@@ -19,6 +19,7 @@ export const apiGetUsers = (carrentPage, pageSize) => {
         //буквально мы написали return response.data
     }
 
+//просмотр профиля пользователя
 export const apiUsersRouter = (userId) => {
     // return axios.get(baseUrl + `profile/` + userId) 
     return instance.get(`profile/` + userId) //baseURL подставляется автомотически перед profile/
@@ -31,22 +32,12 @@ export const apiAuthProfile = () => {
     .then(response => response.data);
 }
 
-export const apiFollowUser = (u = u.id) => {
-    return axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, 
-       { withCredentials: true,
-        headers: {
-            "API-KEY": "b945a48b-e23b-46ca-a66f-5493b89d60ce"
-        }
-    } )
-    // .then(response => response.data);
+export const apiFollowUser = (userId) => {
+    return instance.post(`follow/${userId}`) //instance подставляется автомотически и headers тоже
+    .then(response => response.data);
 }
 
-export const apiUnfollowUser = (u = u.id) => {
-    return axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, 
-       { withCredentials: true,
-        headers: {
-            "API-KEY": "b945a48b-e23b-46ca-a66f-5493b89d60ce"
-        }
-    } )
-    // .then(response => response.data);
+export const apiUnfollowUser = (userId) => {
+    return instance.delete(`follow/${userId}`) //instance подставляется автомотически и headers тоже
+    .then(response => response.data);
 }
