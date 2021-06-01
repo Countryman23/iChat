@@ -180,4 +180,4 @@ export const getProfileInfoThunk = (userId) => (dispatch) => {
             dispatch(setProfileInfo(data)); //этим мы говорим, добавь в наш store всё из data
         });
     }
-export default profile;
+export default profileReducer;
