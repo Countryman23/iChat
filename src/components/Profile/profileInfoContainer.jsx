@@ -2,7 +2,7 @@ import React from 'react';
 import ProfileInfo from "./profileInfo"
 // import ModCSS from "./Profile.module.css"; //Модифицируем наши стили с помощью .module
 import { connect } from 'react-redux';
-import {setProfileInfo} from '../../redux/profile-reducer';
+import {getProfileInfoThunk} from '../../redux/profile-reducer';
 import { withRouter, Redirect } from "react-router";
 import {apiUsersRouter} from '../../api/api';
 
@@ -18,11 +18,13 @@ class ProfileInfoContainer extends React.Component {
         //перекинули запрос в api.js apiUsersRouter
         // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId) 
         // apiUsersRouter(userId).then(response => {
-        apiUsersRouter(userId).then(data => {
-            // debugger
-                // this.props.setProfileInfo(response.data); //этим мы говорим, добавь в наш store всё из data
-                this.props.setProfileInfo(data); //этим мы говорим, добавь в наш store всё из data
-            });
+        //перенесли в profileReducer, сделали через санки
+        // apiUsersRouter(userId).then(data => {
+        //     // debugger
+        //         // this.props.setProfileInfo(response.data); //этим мы говорим, добавь в наш store всё из data
+        //         this.props.setProfileInfo(data); //этим мы говорим, добавь в наш store всё из data
+        //     });
+        this.props.getProfileInfoThunk(userId);
     }
     
     render () {
@@ -52,4 +54,4 @@ let WithUrlDataContainerComponent = withRouter(ProfileInfoContainer);
 
 //рефакторинг
 // export default connect(mapStateToProps, {setProfileInfo})(ProfileInfoContainer);
-export default connect(mapStateToProps, {setProfileInfo})(WithUrlDataContainerComponent);
+export default connect(mapStateToProps, {getProfileInfoThunk})(WithUrlDataContainerComponent);

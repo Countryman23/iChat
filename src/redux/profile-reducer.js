@@ -1,4 +1,4 @@
-import { apiGetUsers, apiFollowUser, apiUnfollowUser, apiUsersPageNumber} from "../api/api"
+import { apiGetUsers, apiFollowUser, apiUnfollowUser, apiUsersRouter} from "../api/api"
 
 ///3
 const FOLLOW = "FOLLOW";
@@ -121,7 +121,7 @@ export const setUsers = (users) => ({ type: SET_USERS, users })
 export const setCarrentPage = (carrentPage) => ({ type: SET_CARRENT_PAGE, carrentPage }) //11. возвращаем action setCarrentPage
 export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_USER_COUNT, count: totalUsersCount }) //17. расписали count чтобы понять что от куда берётся
 export const toggleIsLoading = (isLoading) => ({ type: TOGGLE_IS_LOADING, isLoading })
-export const setProfileInfo = (profileInfo) => ({ type: SET_PROFILE_INFO, profileInfo })
+const setProfileInfo = (profileInfo) => ({ type: SET_PROFILE_INFO, profileInfo })
 export const toggleFollowingInProcess = (isLoading, userId) => ({ type: TOGGLE_IS_FOLLOWING, isLoading, userId })
 
 //создаём санку. а далее санк-криейтор
@@ -174,4 +174,11 @@ export const unFollowThunk = (userId) => {
     }
 }
 
+//так пишется санка в стрелочной функции
+export const getProfileInfoThunk = (userId) => (dispatch) => {
+    apiUsersRouter(userId).then(data => {
+            // this.props.setProfileInfo(response.data); //этим мы говорим, добавь в наш store всё из data
+            dispatch(setProfileInfo(data)); //этим мы говорим, добавь в наш store всё из data
+        });
+    }
 export default profileReducer;
