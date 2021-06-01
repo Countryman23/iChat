@@ -160,7 +160,7 @@ export const followThunk = (userId) => {
         });
     }
 }
-
+//test
 export const unFollowThunk = (userId) => {
     return (dispatch) => {
         dispatch(toggleFollowingInProcess(true, userId));
@@ -173,7 +173,7 @@ export const unFollowThunk = (userId) => {
     }
 }
 
-//так пишется санка в стрелочной функции
+//так пишется санка в стрелочной функцииb
 export const getProfileInfoThunk = (userId) => (dispatch) => {
     apiUsersRouter(userId).then(data => {
             // this.props.setProfileInfo(response.data); //этим мы говорим, добавь в наш store всё из data
