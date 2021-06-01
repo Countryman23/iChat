@@ -173,11 +173,11 @@ export const unFollowThunk = (userId) => {
     }
 }
 
-//так пишется санка в стрелочной функцииb
+//так пишется санка в стрелочной функции
 export const getProfileInfoThunk = (userId) => (dispatch) => {
     apiUsersRouter(userId).then(data => {
             // this.props.setProfileInfo(response.data); //этим мы говорим, добавь в наш store всё из data
             dispatch(setProfileInfo(data)); //этим мы говорим, добавь в наш store всё из data
         });
     }
-export default profileReducer;
+export default profile;
