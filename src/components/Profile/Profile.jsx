@@ -68,7 +68,8 @@ let Profile = (props) => {
                                 //         props.toggleFollowingInProcess(false, u.id);//когда мы закончим then
 
                                 //     });
-                               props.unFollowThunk(u.id) }} >Unfollow</button>
+                               props.unFollowThunk(u.id) 
+                            }} >Unfollow</button>
                             : <button disabled={props.followingInProcess.some(id => id === u.id)} onClick={() => { //если в пропсах followingInProcess будет false, то кнопка НЕ будет disabled. .some(id => id === u.id) этим мы говорим, если хоть одна id равна id пользователя то тогда disabled
                                 //перекинули логику в санки
                                 // props.toggleFollowingInProcess(true, u.id);//мы фоловим true
@@ -89,7 +90,8 @@ let Profile = (props) => {
                             //             }
                             //             props.toggleFollowingInProcess(false, u.id);//когда мы закончим then
                             //         });
-                           props.followThunk(u.id) }} >Follow</button>}
+                           props.followThunk(u.id) 
+                           }} >Follow</button>}
                     </div>
                 </div>
                 <div className={ModCSS.content}>
