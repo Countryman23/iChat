@@ -78,7 +78,6 @@ const profileReducer = (state = initialState, action) => {
                 })
             }
         case SET_USERS: {
-            // return {...state, users: [...state.users, ...action.users]} //таким способом происходит задваивание users
             return { ...state, users: [...action.users] } //взять старый state, взять пользователей которые там были и перезатиреть теми пользователями которые пришли из экшна
         }
         case SET_CARRENT_PAGE: {
