@@ -15,6 +15,7 @@ let initialState = {
         {id: 3, item: "item3"},
         {id: 4, item: "item4"}
     ],
+        // создали newPostData для принятия новых значений поля textarea
     newMessageData: "hard code message",
 };
 
@@ -69,14 +70,14 @@ export const messagesReducer = (state = initialState, action) => {
         case UPDATE_TEXT_MESSAGE_CHANGE:
                 return {
                     ...state,
-                    newMessageData: action.newMessage, //модифицируем копию
+                    newMessageData: action.newMessageText, //модифицируем копию
                 };
         case ADD_MESSAGE_BUTTON_BLL:
             let newMessage = state.newMessageData; //достаём текст
             return {
                 ...state,
                 newMessageData: "", //затираем
-                MesDataItem: [...state.MesDataItem, {id:5, item: newMessage}] //такой синтаксис push ...., {id:5, item: newMessage} 
+                MesDataItem: [...state.MesDataItem, {id: 5, item: newMessage}] //такой синтаксис push ...., {id:5, item: newMessage} 
             };
         //если ничего не изменилось то возвращаем старый state
         default:
@@ -85,7 +86,6 @@ export const messagesReducer = (state = initialState, action) => {
 }
 
 export const addMessageButtonUIAC = () => ({type: ADD_MESSAGE_BUTTON_BLL})
-export const textChangeAC = (text) => ({type: UPDATE_TEXT_MESSAGE_CHANGE, newMessage: text})
+export const textChangeAC = (text) => ({type: UPDATE_TEXT_MESSAGE_CHANGE, newMessageText: text})
 
 export default messagesReducer;
-

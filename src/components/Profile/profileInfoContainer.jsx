@@ -4,7 +4,6 @@ import ProfileInfo from "./profileInfo"
 import { connect } from 'react-redux';
 import {getProfileInfoThunk} from '../../redux/profile-reducer';
 import { withRouter, Redirect } from "react-router";
-import {apiUsersRouter} from '../../api/api';
 
 
 //это контейнерная классовая компонента она обязана всё перенаправить в дочернюю компоненту

@@ -28,20 +28,20 @@ export const authReducer = (state = initialState, action) => {
     }
 }
 
-// export const authProfileThunk = () => {
-//     return (dispatch) => {
-//         apiAuthProfile().then(data => {
-//             if (data.resultCode === 0) {
-//                 // let {id, login, email} = response.data.data; //две data потому-что 1я data сидит в инструкции API, 2ю выдаёт response
-//                 let {id, login, email} = data.data; //две data потому-что 1я data сидит в инструкции API, 2ю выдаёт response
-//                 dispatch(setAuthUserData (id, login, email));
-//             }
-                
-//         });
-//     }
-// }
-
 export const setAuthUserData = (userId, login, email) => ({type: SET_AUTH_USER_DATA, data: {userId, login, email}})
 
+export const authProfileThunk = () => {
+    return (dispatch) => {
+        apiAuthProfile().then(data => {
+            //resultCode проверка полученных данных
+            if (data.resultCode === 0) {
+                // let {id, login, email} = response.data.data; //две data потому-что 1я data сидит в инструкции API, 2ю выдаёт response
+                let {id, login, email} = data.data; //две data потому-что 1я data сидит в инструкции API, 2ю выдаёт response
+                dispatch(setAuthUserData(id, login, email));
+            }
+                
+        });
+    }
+}
 export default authReducer;
 

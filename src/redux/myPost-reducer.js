@@ -2,7 +2,7 @@
 const ADD_POST_BLL = "ADD_POST_BLL";
 const UPDATE_POST_CHANGE = "UPDATE_POST_CHANGE";
 
-//так как redux запускается до нашего state, мы не успеваем отобразить state и сы получаем ошибку
+//так как redux запускается до нашего state, мы не успеваем отобразить state и мы получаем ошибку
 let initialState = {
     postData: [
         { id: 1, text: "text1", like: 10 },
@@ -92,7 +92,7 @@ const myPostReducer = (state = initialState, action) => {
     //         return state;
     // }
     
-    //переписываем оптимизируя
+    ///переписываем оптимизируя
     switch (action.type) {
         case UPDATE_POST_CHANGE:
             return {

@@ -1,4 +1,3 @@
-import React from 'react';
 import {addMessageButtonUIAC, textChangeAC} from "../../redux/messages-reducer";
 import Messages from "./Messages";
 import { connect } from 'react-redux';
@@ -27,9 +26,9 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
     return {
+        MesDataName: state.messagesPage.MesDataName,
         MesDataItem: state.messagesPage.MesDataItem,
         newMessageData: state.messagesPage.newMessageData,
-        MesDataName: state.messagesPage.MesDataName,
     }
 };
 
