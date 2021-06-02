@@ -7,7 +7,7 @@ const Login = (props) => {
     return (
         <div>
             {props.isAuth ? props.login
-                : <NavLink to={"/Login"}>Login</NavLink>}
+                : <NavLink to={"/Login"}>тут логин</NavLink>}
         </div>
     );
 };

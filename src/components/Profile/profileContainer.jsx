@@ -6,6 +6,7 @@ import {getUsersThunkCreator, toggleFollowingInProcess, setCarrentPage, } from '
 import { followThunk, unFollowThunk } from '../../redux/profile-reducer';
 import { connect } from 'react-redux';
 import Profile from './Profile';
+import { Redirect } from "react-router";
 
 class ProfileComponent extends React.Component {
 
@@ -70,11 +71,16 @@ class ProfileComponent extends React.Component {
                 // this.props.setUsers(response.data.items); //этим мы говорим, добавь в наш store юзеров из items
                 // this.props.setUsers(data.items); //этим мы говорим, добавь в наш store юзеров из items
             // });
+            //когда компонента функциональная мы пропсы запрашиваем напрямую через props.
+            //когда компонента классовая мы пропсы запрашиваем через this.props.
         this.props.getUsersThunkCreator(pageNumber, this.props.pageSize);
     }
 
     // render получает и отрисовывает данные, затем передаёт их для отрисовки в componentDidMount. и если они изменились они перерисовываются в componentDidUpdate
     render() {
+    //перенаправление на страницу логина если не авторизован
+    if (!this.props.isAuth) {return <Redirect to={"/login"} />};
+        
         return <Profile totalUsersCount={this.props.totalUsersCount}
                         pageSize={this.props.pageSize} 
                         carrentPage={this.props.carrentPage}
@@ -98,7 +104,9 @@ const mapStateToProps = (state) => {
         totalUsersCount: state.profilePage.totalUsersCount,
         carrentPage: state.profilePage.carrentPage,//5
         isLoading: state.profilePage.isLoading,
-        followingInProcess: state.profilePage.followingInProcess
+        followingInProcess: state.profilePage.followingInProcess,
+        isAuth: state.auth.isAuth, // проверка авторизации. isAuth прийдёт в пропсах (в Messages.jsx) и мы сможем его прочитать
+
     }
 };
 

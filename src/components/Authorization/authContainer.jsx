@@ -35,8 +35,11 @@ class AuthContainer extends React.Component {
         //         let {id, login, email} = data.data; //две data потому-что 1я data сидит в инструкции API, 2ю выдаёт response
         //         this.props.setAuthUserData (id, login, email);
         //     }
-            this.props.authProfileThunk()
-        // });
+                    // });
+                
+        //когда компонента функциональная мы пропсы запрашиваем напрямую через props.
+        //когда компонента классовая мы пропсы запрашиваем через this.props.
+        this.props.authProfileThunk()
     }
     
     render () {

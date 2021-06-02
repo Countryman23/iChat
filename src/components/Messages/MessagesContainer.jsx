@@ -29,6 +29,8 @@ const mapStateToProps = (state) => {
         MesDataName: state.messagesPage.MesDataName,
         MesDataItem: state.messagesPage.MesDataItem,
         newMessageData: state.messagesPage.newMessageData,
+        isAuth: state.auth.isAuth, // проверка авторизации. isAuth прийдёт в пропсах (в Messages.jsx) и мы сможем его прочитать
+
     }
 };
 

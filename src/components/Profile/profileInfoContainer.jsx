@@ -23,15 +23,16 @@ class ProfileInfoContainer extends React.Component {
         //         // this.props.setProfileInfo(response.data); //этим мы говорим, добавь в наш store всё из data
         //         this.props.setProfileInfo(data); //этим мы говорим, добавь в наш store всё из data
         //     });
+                    
+        //когда компонента функциональная мы пропсы запрашиваем напрямую через props.
+        //когда компонента классовая мы пропсы запрашиваем через this.props.
         this.props.getProfileInfoThunk(userId);
     }
     
     render () {
         // (!this.props.profileInfo) если у нас нет profileInfo
         //этим условием мы говорим, пока наш profileInfo равен null, верни нас к profile
-        if (!this.props.profileInfo) {
-            return <Redirect to = "/profile" />
-        }
+        if (!this.props.profileInfo) { return <Redirect to = "/profile" /> };
         // debugger
         return (
             <div>
@@ -45,7 +46,9 @@ class ProfileInfoContainer extends React.Component {
 };
 
 const mapStateToProps = (state) => ({
-        profileInfo: state.profilePage.profileInfo
+        profileInfo: state.profilePage.profileInfo,
+        isAuth: state.auth.isAuth, // проверка авторизации. isAuth прийдёт в пропсах (в Messages.jsx) и мы сможем его прочитать
+
 });
 
 //возвращает новую компоненту ProfileInfoContainer и в неё ещё закинет данные из URL

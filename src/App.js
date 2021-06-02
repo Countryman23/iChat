@@ -1,6 +1,7 @@
 import React from "react";
 import Navigation from "./components/Navigation/Navigation";
 import AuthContainer from "./components/Authorization/authContainer";
+import Login from "./components/Authorization/Login";
 // import Profile from "./components/Profile/Profile";
 //изменили на Container
 // import MyPosts from "./components/MyPosts/MyPosts";
@@ -71,6 +72,7 @@ const App = (props) => {
                     <Route path="/MyPosts" render={ () => <MyPostsContainer newState = {props.store} />} />
                     <Route path="/Messages" render={ () => <MessagesContainer newState = {props.store}
                                                             dispatch={props.dispatch} />} />
+                    <Route path="/login" render={ () => <Login />} />
                     <Route path="/Settings" render={Settings} />
                 </div>
             </div>

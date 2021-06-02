@@ -2,6 +2,7 @@ import React from 'react';
 import ModCSS from "./Profile.module.css"; //Модифицируем наши стили с помощью .module
 import Loading from "../../loading";
 import { NavLink } from "react-router-dom"; // импорт с фигурными скобками из-за экспорта не по дефолту
+import { Redirect } from "react-router";
 
 
 let Profile = (props) => {
@@ -68,7 +69,9 @@ let Profile = (props) => {
                                 //         props.toggleFollowingInProcess(false, u.id);//когда мы закончим then
 
                                 //     });
-                               props.unFollowThunk(u.id) 
+                                 //когда компонента классовая мы пропсы запрашиваем через this.props.
+                                 //когда компонента функциональная мы пропсы запрашиваем напрямую через props.
+                               props.unFollowThunk(u.id)
                             }} >Unfollow</button>
                             : <button disabled={props.followingInProcess.some(id => id === u.id)} onClick={() => { //если в пропсах followingInProcess будет false, то кнопка НЕ будет disabled. .some(id => id === u.id) этим мы говорим, если хоть одна id равна id пользователя то тогда disabled
                                 //перекинули логику в санки
