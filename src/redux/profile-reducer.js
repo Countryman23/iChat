@@ -114,8 +114,11 @@ const profileReducer = (state = initialState, action) => {
 // export const toggleIsLoadingAC = (isLoading) => ({type: TOGGLE_IS_LOADING, isLoading})
 
 //Убираем окончание АС чтобы исправить под новый синтаксис
-export const follow = (userId) => ({ type: FOLLOW, userId })
-export const unFollow = (userId) => ({ type: UNFOLLOW, userId })
+//переписали follow unFollow после использования санок
+// export const follow = (userId) => ({ type: FOLLOW, userId })
+// export const unFollow = (userId) => ({ type: UNFOLLOW, userId })
+export const followSaccess = (userId) => ({ type: FOLLOW, userId })
+export const unFollowSaccess = (userId) => ({ type: UNFOLLOW, userId })
 export const setUsers = (users) => ({ type: SET_USERS, users })
 export const setCarrentPage = (carrentPage) => ({ type: SET_CARRENT_PAGE, carrentPage }) //11. возвращаем action setCarrentPage
 export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_USER_COUNT, count: totalUsersCount }) //17. расписали count чтобы понять что от куда берётся
@@ -137,36 +140,24 @@ export const getUsersThunkCreator = (carrentPage, pageSize) => {
     }
 }
 
-// export const usersRouterThunk = (userId) => {
-//     return (dispatch) => {
-//         //перекинули запрос в api.js apiUsersRouter
-//         // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId) 
-//         // apiUsersRouter(userId).then(response => {
-//         apiUsersRouter(userId).then(data => {
-//                 // this.props.setProfileInfo(response.data); //этим мы говорим, добавь в наш store всё из data
-//                 dispatch(setProfileInfo(data)); //этим мы говорим, добавь в наш store всё из data
-//             });
-//     }
-// }
-
 export const followThunk = (userId) => {
     return (dispatch) => {
         dispatch(toggleFollowingInProcess(true, userId));
         apiFollowUser(userId).then(data => {
             if (data.resultCode == 0) {
-                dispatch(follow(userId));
+                dispatch(followSaccess(userId));
             }
             dispatch(toggleFollowingInProcess(false, userId));
         });
     }
 }
-//test
+
 export const unFollowThunk = (userId) => {
     return (dispatch) => {
         dispatch(toggleFollowingInProcess(true, userId));
         apiUnfollowUser(userId).then(data => {
             if (data.resultCode == 0) {
-                dispatch(unFollow(userId));
+                dispatch(unFollowSaccess(userId));
             }
             dispatch(toggleFollowingInProcess(false, userId));
         });

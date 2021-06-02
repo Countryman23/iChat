@@ -1,7 +1,9 @@
 import React from 'react';
 // import {toggleIsLoadingAC, followAC, unFollowAC, setUsersAC, setCarrentPageAC, setTotalUsersCountAC} from '../../redux/profile-reducer';
 //Убираем окончание АС чтобы исправить под новый синтаксис
-import {getUsersThunkCreator, toggleFollowingInProcess, follow, unFollow, setCarrentPage, } from '../../redux/profile-reducer';
+import {getUsersThunkCreator, toggleFollowingInProcess, setCarrentPage, } from '../../redux/profile-reducer';
+//изменили после использования санок
+import { followThunk, unFollowThunk } from '../../redux/profile-reducer';
 import { connect } from 'react-redux';
 import Profile from './Profile';
 
@@ -81,8 +83,8 @@ class ProfileComponent extends React.Component {
                         users={this.props.users}
                         // follow={this.props.follow} //убрали после использования санок
                         // unFollow={this.props.unFollow} //убрали после использования санок
-                        followThunk={this.props.follow}
-                        unFollowThunk={this.props.unFollow}
+                        followThunk={this.props.followThunk}
+                        unFollowThunk={this.props.unFollowThunk}
                         isLoading={this.props.isLoading}
                         // toggleFollowingInProcess={this.props.toggleFollowingInProcess} //убрали после использования санок
                         followingInProcess={this.props.followingInProcess} />
@@ -139,9 +141,11 @@ const mapStateToProps = (state) => {
 
 //снова редактируем так как современный ситаксис нам это позволяет. Убираем окончание АС, и когда {ключ: значениe} равны их можно записать одним словом
 //follow.....getUsersThunkCreator теперь они попадают в пропсы в компоненте ProfileComponent
-export default connect(mapStateToProps, 
-                            {follow,  
-                            unFollow,
+export default connect(mapStateToProps, {
+                            // follow,  //изменили после использования санок
+                            // unFollow, //изменили после использования санок
+                            followThunk,  
+                            unFollowThunk,
                             // setUsers, // убрали так как используем напрямую через санки в reducere
                             setCarrentPage,
                             // setTotalUsersCount, // убрали так как используем напрямую через санки в reducere
