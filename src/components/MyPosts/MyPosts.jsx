@@ -1,6 +1,7 @@
 import React from 'react';
 import ModCSS from "./MyPosts.module.css"; //Модифицируем наши стили с помощью .module
 import Post from './Post/Post';
+import { withAuthRedirect } from "../../hoc/authRedirect";
 
 const MyPosts = (props) => {
 // debugger
@@ -78,4 +79,7 @@ const MyPosts = (props) => {
     );
 };
 
-export default MyPosts;
+//доступ только авторизованным
+let authAccessHOC  = withAuthRedirect(MyPosts);
+
+export default authAccessHOC;

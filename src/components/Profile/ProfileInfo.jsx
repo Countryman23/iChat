@@ -1,12 +1,9 @@
 import React from 'react';
 // import ModCSS from "./Profile.module.css"; //Модифицируем наши стили с помощью .module
-import { Redirect } from "react-router";
+import { withAuthRedirect } from "../../hoc/authRedirect";
 
 
 const ProfileInfo = (props) => {
-// debugger
-    //перенаправление на страницу логина если не авторизован
-    if (!props.isAuth) {return <Redirect to={"/login"} />};
 
     return (
 
@@ -24,4 +21,7 @@ const ProfileInfo = (props) => {
     );
 }
 
-export default ProfileInfo;
+//доступ только авторизованным
+let authAccessHOC  = withAuthRedirect(ProfileInfo);
+
+export default authAccessHOC;

@@ -6,7 +6,8 @@ import {getUsersThunkCreator, toggleFollowingInProcess, setCarrentPage, } from '
 import { followThunk, unFollowThunk } from '../../redux/profile-reducer';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { Redirect } from "react-router";
+import { withAuthRedirect } from "../../hoc/authRedirect";
+import { compose } from 'redux';
 
 class ProfileComponent extends React.Component {
 
@@ -78,8 +79,6 @@ class ProfileComponent extends React.Component {
 
     // render получает и отрисовывает данные, затем передаёт их для отрисовки в componentDidMount. и если они изменились они перерисовываются в componentDidUpdate
     render() {
-    //перенаправление на страницу логина если не авторизован
-    if (!this.props.isAuth) {return <Redirect to={"/login"} />};
         
         return <Profile totalUsersCount={this.props.totalUsersCount}
                         pageSize={this.props.pageSize} 
@@ -105,8 +104,6 @@ const mapStateToProps = (state) => {
         carrentPage: state.profilePage.carrentPage,//5
         isLoading: state.profilePage.isLoading,
         followingInProcess: state.profilePage.followingInProcess,
-        isAuth: state.auth.isAuth, // проверка авторизации. isAuth прийдёт в пропсах (в Messages.jsx) и мы сможем его прочитать
-
     }
 };
 
@@ -147,18 +144,47 @@ const mapStateToProps = (state) => {
 //                         toggleIsLoading: toggleIsLoadingAC})
 //                         (ProfileAPIComponent);
 
+//доступ только авторизованным
+//переделали логику через compose
+// let authAccessHOC = withAuthRedirect(ProfileComponent);
+
 //снова редактируем так как современный ситаксис нам это позволяет. Убираем окончание АС, и когда {ключ: значениe} равны их можно записать одним словом
 //follow.....getUsersThunkCreator теперь они попадают в пропсы в компоненте ProfileComponent
-export default connect(mapStateToProps, {
-                            // follow,  //изменили после использования санок
-                            // unFollow, //изменили после использования санок
-                            followThunk,  
-                            unFollowThunk,
-                            // setUsers, // убрали так как используем напрямую через санки в reducere
-                            setCarrentPage,
-                            // setTotalUsersCount, // убрали так как используем напрямую через санки в reducere
-                            // toggleIsLoading, // убрали так как используем напрямую через санки в reducere
-                            toggleFollowingInProcess,
-                            getUsersThunkCreator})
-                            (ProfileComponent);
-                                        
+
+// далее применяем compose
+// export default connect(mapStateToProps, {
+//                             // follow,  //изменили после использования санок
+//                             // unFollow, //изменили после использования санок
+//                             followThunk,  
+//                             unFollowThunk,
+//                             // setUsers, // убрали так как используем напрямую через санки в reducere
+//                             setCarrentPage,
+//                             // setTotalUsersCount, // убрали так как используем напрямую через санки в reducere
+//                             // toggleIsLoading, // убрали так как используем напрямую через санки в reducere
+//                             toggleFollowingInProcess,
+//                             getUsersThunkCreator})
+//                             (authAccessHOC); // подменили ProfileComponent ввили НОС
+
+//ниже собран готовый compose
+// compose (connect(mapStateToProps, {
+//                                 followThunk,  
+//                                 unFollowThunk,
+//                                 setCarrentPage,
+//                                 toggleFollowingInProcess,
+//                                 getUsersThunkCreator}),
+//                                 authAccessHOC)
+//                                 (ProfileComponent);
+// const profileContainerConnect = connect(mapStateToProps, {
+//                                 followThunk,  
+//                                 unFollowThunk,
+//                                 setCarrentPage,
+//                                 toggleFollowingInProcess,
+//                                 getUsersThunkCreator})
+//                                 (authAccessHOC); 
+// export default profileContainerConnect;
+
+export default compose (
+    withAuthRedirect,
+    connect(mapStateToProps, {followThunk, unFollowThunk, setCarrentPage,
+    toggleFollowingInProcess, getUsersThunkCreator})
+    )(ProfileComponent)

@@ -2,7 +2,7 @@ import React from 'react';
 import ModCSS from "./Messages.module.css"; //Модифицируем наши стили с помощью .module
 import MessageName from "./MessageName"
 import MessageItem from "./MessageItem"
-import { Redirect } from "react-router";
+import { withAuthRedirect } from "../../hoc/authRedirect";
 
 const Messages = (props) => {
     
@@ -47,9 +47,6 @@ const Messages = (props) => {
 
     let newTextDataRemove = props.newMessageData;
 
-    //перенаправление на страницу логина если не авторизован
-    if (!props.isAuth) { return <Redirect to={"/login"} /> };
-
     return (
         <div className={ModCSS.messages}>
             <div className={ModCSS.name}>
@@ -82,4 +79,7 @@ const Messages = (props) => {
     );
 };
 
-export default Messages;
+//доступ только авторизованным
+let authAccessHOC  = withAuthRedirect(Messages);
+
+export default authAccessHOC;

@@ -47,8 +47,6 @@ class ProfileInfoContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
         profileInfo: state.profilePage.profileInfo,
-        isAuth: state.auth.isAuth, // проверка авторизации. isAuth прийдёт в пропсах (в Messages.jsx) и мы сможем его прочитать
-
 });
 
 //возвращает новую компоненту ProfileInfoContainer и в неё ещё закинет данные из URL
