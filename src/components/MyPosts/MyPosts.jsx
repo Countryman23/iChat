@@ -2,6 +2,7 @@ import React from 'react';
 import ModCSS from "./MyPosts.module.css"; //Модифицируем наши стили с помощью .module
 import Post from './Post/Post';
 import { withAuthRedirect } from "../../hoc/authRedirect";
+import Status from "./status"
 
 const MyPosts = (props) => {
 // debugger
@@ -63,6 +64,7 @@ const MyPosts = (props) => {
         <div>
             <div className={ModCSS.item}>
                 <div className={ModCSS.header}><h3>My posts</h3></div>
+                <Status status = {"hi"}/>
                 <div>
                     <textarea onChange={addPostChange} 
                                 ref={newPostEl} 
@@ -80,6 +82,7 @@ const MyPosts = (props) => {
 };
 
 //доступ только авторизованным
-let authAccessHOC  = withAuthRedirect(MyPosts);
+// let authAccessHOC  = withAuthRedirect(MyPosts); закоментировали на время тестов статуса
 
-export default authAccessHOC;
+// export default authAccessHOC;
+export default MyPosts;
