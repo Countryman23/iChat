@@ -11,7 +11,18 @@ export const withAuthRedirect = (Component) => {
     class RedirectComponent extends React.Component {
         render () {
             //перенаправление на страницу логина если не авторизован
-            if (!this.props.isAuth) {return <Redirect to={"/login"} />};
+
+
+
+
+
+            // if (!this.props.isAuth) {return <Redirect to={"/login"} />}; убрал на время теста
+
+
+
+
+
+
             return <Component {...this.props} /> // все пропсы которые приходят в withAuthRedirect, передаются в {...props}
         }
     }

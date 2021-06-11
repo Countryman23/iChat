@@ -2,7 +2,6 @@ import React from 'react';
 import ModCSS from "./Profile.module.css"; //Модифицируем наши стили с помощью .module
 import Loading from "../../loading";
 import { NavLink } from "react-router-dom"; // импорт с фигурными скобками из-за экспорта не по дефолту
-import { Redirect } from "react-router";
 
 
 let Profile = (props) => {

@@ -51,6 +51,7 @@ const mapDispatchToProps = (dispatch) => {
         }
     }
 };
+
 //получаем store через Provider без лишних функций
 const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 

@@ -1,4 +1,4 @@
-import { apiGetUsers, apiFollowUser, apiUnfollowUser, apiUsersRouter} from "../api/api"
+import { apiStatusInfo, apiUpdateStatusInfo, apiGetUsers, apiFollowUser, apiUnfollowUser, apiUsersRouter} from "../api/api"
 
 ///3
 const FOLLOW = "FOLLOW";
@@ -9,6 +9,7 @@ const SET_USER_COUNT = "SET_USER_COUNT";//15.
 const TOGGLE_IS_LOADING = "TOGGLE_IS_LOADING";
 const SET_PROFILE_INFO = "SET_PROFILE_INFO";
 const TOGGLE_IS_FOLLOWING = "TOGGLE_IS_FOLLOWING";
+const SET_STATUS = "SET_STATUS";
 
 ///1
 // let initialState = {
@@ -39,7 +40,8 @@ let initialState = {
     carrentPage: 1,
     isLoading: false, //ожидание прогрузки данных с сервера
     profileInfo: null,
-    followingInProcess: [] //это для того чтобы небыло много запросов на сервер по нажатию на кнопку. Т.е. пока не прийдут изменения делаем кнопку неактивной
+    followingInProcess: [], //это для того чтобы небыло много запросов на сервер по нажатию на кнопку. Т.е. пока не прийдут изменения делаем кнопку неактивной
+    status: ""
 };
 
 ///4
@@ -100,6 +102,11 @@ const profileReducer = (state = initialState, action) => {
                     : state.followingInProcess.filter(id => id != action.userId)
             } //state.followingInProcess.filter() делаем копию и убираем id пользователя(пропускаем только ту id которая не равна той id которая пришла в action) 
         }
+        case SET_STATUS: {
+            return { 
+                ...state, 
+                status: action.status }
+        }
         default:
             return state;
     }
@@ -125,6 +132,7 @@ export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_USER_COUNT, 
 export const toggleIsLoading = (isLoading) => ({ type: TOGGLE_IS_LOADING, isLoading })
 const setProfileInfo = (profileInfo) => ({ type: SET_PROFILE_INFO, profileInfo })
 export const toggleFollowingInProcess = (isLoading, userId) => ({ type: TOGGLE_IS_FOLLOWING, isLoading, userId })
+const setStatus = (status) => ({ type:SET_STATUS, status })
 
 //создаём санку. а далее санк-криейтор
 //создаём санк-криейтор. это функция, котороя может что то принимать и возвращать санку
@@ -171,4 +179,21 @@ export const getProfileInfoThunk = (userId) => (dispatch) => {
             dispatch(setProfileInfo(data)); //этим мы говорим, добавь в наш store всё из data
         });
     }
+
+export const getStatusInfoThunk = (userId) => (dispatch) => {
+    apiStatusInfo(userId)
+    .then(data => {
+            dispatch(setStatus(data));
+        });
+    }
+
+export const getUpdateStatusInfoThunk = (status) => (dispatch) => {
+    apiUpdateStatusInfo(status)
+    .then(data => {
+        if (data.resultCode === 0) {
+            dispatch(setStatus(status));
+        }
+        });
+    }
+
 export default profileReducer;

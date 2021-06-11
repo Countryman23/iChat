@@ -41,3 +41,13 @@ export const apiUnfollowUser = (userId) => {
     return instance.delete(`follow/${userId}`) //instance подставляется автомотически и headers тоже
     .then(response => response.data);
 }
+
+export const apiStatusInfo = (userId) => {
+    return instance.get(`profile/status/` + userId)
+    .then(response => response.data);
+}
+
+export const apiUpdateStatusInfo = (status) => {
+    return instance.put(`profile/status/`, {status: status}) // put означает обновление. {status: status} смотрим в АПИшке какие данные нужно изменять
+    .then(response => response.data);
+}

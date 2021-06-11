@@ -2,7 +2,7 @@ import React from 'react';
 import ProfileInfo from "./profileInfo"
 // import ModCSS from "./Profile.module.css"; //Модифицируем наши стили с помощью .module
 import { connect } from 'react-redux';
-import {getProfileInfoThunk} from '../../redux/profile-reducer';
+import {getProfileInfoThunk, getStatusInfoThunk, getUpdateStatusInfoThunk} from '../../redux/profile-reducer';
 import { withRouter, Redirect } from "react-router";
 
 
@@ -12,7 +12,7 @@ class ProfileInfoContainer extends React.Component {
     componentDidMount () {
         let userId = this.props.match.params.userId; // получаем id пользователя
         if (!userId) {
-            userId = 2;
+            userId = 17232;
         }
         //перекинули запрос в api.js apiUsersRouter
         // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId) 
@@ -27,6 +27,7 @@ class ProfileInfoContainer extends React.Component {
         //когда компонента функциональная мы пропсы запрашиваем напрямую через props.
         //когда компонента классовая мы пропсы запрашиваем через this.props.
         this.props.getProfileInfoThunk(userId);
+        this.props.getStatusInfoThunk(userId); // добавили для отображения статуса
     }
     
     render () {
@@ -38,7 +39,9 @@ class ProfileInfoContainer extends React.Component {
             <div>
                 {/* //{...this.props} Пропсы которые пришли в нас, мы их раскрываем {...}, и как атрибуты props= передаём нашеё компоненте */}
                 {/* <ProfileInfo {...this.props} props={this.props} /> это показано для примера, что внутри */}
-                <ProfileInfo {...this.props} profileInfo={this.props.profileInfo} />
+                <ProfileInfo {...this.props} profileInfo={this.props.profileInfo}
+                                            status={this.props.status}
+                                            getUpdateStatusInfoThunk={this.props.getUpdateStatusInfoThunk} />
                 
             </div>
         );
@@ -47,6 +50,7 @@ class ProfileInfoContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
         profileInfo: state.profilePage.profileInfo,
+        status: state.profilePage.status, // добавили для отображения статуса
 });
 
 //возвращает новую компоненту ProfileInfoContainer и в неё ещё закинет данные из URL
@@ -54,4 +58,8 @@ let WithUrlDataContainerComponent = withRouter(ProfileInfoContainer);
 
 //рефакторинг
 // export default connect(mapStateToProps, {setProfileInfo})(ProfileInfoContainer);
-export default connect(mapStateToProps, {getProfileInfoThunk})(WithUrlDataContainerComponent);
+export default connect(mapStateToProps, 
+                        {getProfileInfoThunk, 
+                        getStatusInfoThunk,
+                        getUpdateStatusInfoThunk})
+                        (WithUrlDataContainerComponent);

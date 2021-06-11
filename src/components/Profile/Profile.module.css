@@ -36,3 +36,7 @@
 .listNamberSelected {
     cursor: pointer
 }
+
+.status {
+    padding-bottom: 30px;
+}

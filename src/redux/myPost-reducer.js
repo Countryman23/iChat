@@ -2,6 +2,7 @@
 const ADD_POST_BLL = "ADD_POST_BLL";
 const UPDATE_POST_CHANGE = "UPDATE_POST_CHANGE";
 
+
 //так как redux запускается до нашего state, мы не успеваем отобразить state и мы получаем ошибку
 let initialState = {
     postData: [
@@ -117,6 +118,7 @@ const myPostReducer = (state = initialState, action) => {
             return state;
     }
 }
+
 
 export const addPostUIActionCreator = () => ({type: ADD_POST_BLL})
 export const postChangeActionCreator = (text) => ({type: UPDATE_POST_CHANGE, newText: text})
