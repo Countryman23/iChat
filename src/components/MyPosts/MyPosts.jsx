@@ -2,6 +2,7 @@ import React from 'react';
 import ModCSS from "./MyPosts.module.css"; //Модифицируем наши стили с помощью .module
 import Post from './Post/Post';
 import { withAuthRedirect } from "../../hoc/authRedirect";
+// import Status from "../Profile/status";
 
 const MyPosts = (props) => {
 // debugger
@@ -61,6 +62,17 @@ const MyPosts = (props) => {
 // debugger
     return (
         <div>
+
+
+
+            {/* <div> СЂРµР°Р»РёР·РѕРІР°С‚СЊ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ СЃРІРѕРµРіРѕ РїСЂРѕС„РёР»СЏ
+                <img src={props.profileInfo.photos.large}/>
+                <Status status = {props.status} getUpdateStatusInfoThunk={props.getUpdateStatusInfoThunk}/> 
+               {props.profileInfo.fullName}
+            </div> */}
+
+
+
             <div className={ModCSS.item}>
                 <div className={ModCSS.header}><h3>My posts</h3></div>
                 <div>

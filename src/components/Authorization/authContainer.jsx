@@ -1,8 +1,9 @@
 import React from 'react';
 import ModCSS from "./Authorization.module.css"; //Модифицируем наши стили с помощью .module
-import Login from "./Login"
 import { connect } from 'react-redux';
 import {authProfileThunk} from "../../redux/auth-reducer"
+import Login from "./Login"
+
 //ниже JSX коде в котором находится HTML разметка
 // const AuthContainer = () => {
 //     return (
