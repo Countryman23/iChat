@@ -1,8 +1,8 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 
-//
-// 
+//ниже JSX коде в котором находится HTML разметка
+// Field это специальные компоненты для form
 const LoginForm = (props) => {
     return (
         <div>             
@@ -27,7 +27,7 @@ const LoginForm = (props) => {
 
 //HOC
 const ReduxLoginForm = reduxForm ({
-    form: "login", //
+    form: "login", //уникальное имя для формы
 }) (LoginForm)
 
 export default ReduxLoginForm;

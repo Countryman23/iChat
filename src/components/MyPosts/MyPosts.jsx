@@ -65,10 +65,10 @@ const MyPosts = (props) => {
 
 
 
-            {/* <div> СЂРµР°Р»РёР·РѕРІР°С‚СЊ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ СЃРІРѕРµРіРѕ РїСЂРѕС„РёР»СЏ
+            {/* <div> реализовать отображения своего профиля
                 <img src={props.profileInfo.photos.large}/>
                 <Status status = {props.status} getUpdateStatusInfoThunk={props.getUpdateStatusInfoThunk}/> 
-               {props.profileInfo.fullName}
+                {props.profileInfo.fullName}
             </div> */}
 
 
