@@ -1,13 +1,17 @@
 import React from 'react';
 import ModCSS from "./Authorization.module.css"; //Модифицируем наши стили с помощью .module
-import { NavLink } from "react-router-dom"; 
+import ReduxLoginForm from "../../form/loginForm"
 
 //ниже JSX коде в котором находится HTML разметка
 const Login = (props) => {
+
+        const onSubmitHandl = (formData) => {
+                console(formData);
+            }
+
     return (
         <div>
-            {props.isAuth ? props.login
-                : <NavLink to={"/Login"}>тут логин</NavLink>}
+            <ReduxLoginForm onSubmit={onSubmitHandl} />
         </div>
     );
 };

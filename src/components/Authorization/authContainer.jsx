@@ -2,7 +2,7 @@ import React from 'react';
 import ModCSS from "./Authorization.module.css"; //Модифицируем наши стили с помощью .module
 import { connect } from 'react-redux';
 import {authProfileThunk} from "../../redux/auth-reducer"
-import Login from "./Login"
+import Auth from "./auth"
 
 //ниже JSX коде в котором находится HTML разметка
 // const AuthContainer = () => {
@@ -46,7 +46,7 @@ class AuthContainer extends React.Component {
     render () {
         return (
             <div className={`${ModCSS.item} ${ModCSS.active}`}>
-                <Login {...this.props} />
+               <Auth {...this.props} />
             </div>
         );
     };

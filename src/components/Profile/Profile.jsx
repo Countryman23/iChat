@@ -10,7 +10,7 @@ let Profile = (props) => {
         
         let pages = [];
         //4 заполняем в pages // дописал / 100 что бы уменьшить количество отображаемых страниц
-        for (let i=1; i <= pagesCount / 20; i++) {
+        for (let i=1; i <= pagesCount / 100; i++) {
             pages.push(i);
         }
 
