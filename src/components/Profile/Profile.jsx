@@ -3,7 +3,6 @@ import ModCSS from "./Profile.module.css"; //Модифицируем наши �
 import Loading from "../../loading";
 import { NavLink } from "react-router-dom"; // импорт с фигурными скобками из-за экспорта не по дефолту
 
-
 let Profile = (props) => {
 
     let pagesCount = Math.ceil (props.totalUsersCount / props.pageSize); //3. количество страниц c пользователями
@@ -14,7 +13,8 @@ let Profile = (props) => {
             pages.push(i);
         }
 
-    return (<>
+    return (
+        <>
         {props.isLoading ? <Loading /> : null }
         <div>
             {/* Убираем кнопку */}
