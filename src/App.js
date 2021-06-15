@@ -1,7 +1,7 @@
 import React from "react";
 import Navigation from "./components/Navigation/Navigation";
 import AuthContainer from "./components/Authorization/authContainer";
-import Login from "./components/Authorization/Login";
+import Login from "./components/Authorization/login";
 // import Profile from "./components/Profile/Profile";
 //изменили на Container
 // import MyPosts from "./components/MyPosts/MyPosts";

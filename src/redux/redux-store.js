@@ -4,7 +4,8 @@ import messagesReducer from "./messages-reducer"
 import profileReducer from "./profile-reducer"
 import authReducer from "./auth-reducer"
 import thunkMiddleware from "redux-thunk"
-import { reducer as formReducer } from 'redux-form';
+import { reducer as formReducer } from 'redux-form'
+
 
 //собираем все рэдюсеры. соответственно это разделы state
 let reducers = combineReducers({
