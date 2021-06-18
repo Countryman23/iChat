@@ -1,4 +1,6 @@
-import {addPostUIActionCreator, postChangeActionCreator} from '../../redux/myPost-reducer';
+// изменили после того как добавили форму
+// import {addPostUIActionCreator, postChangeActionCreator} from '../../redux/myPost-reducer';
+import {addPostUIActionCreator} from '../../redux/myPost-reducer';
 import MyPosts from './MyPosts';
 import { connect } from 'react-redux';
 
@@ -43,11 +45,17 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updatePostChange: (text) => {
-            dispatch(postChangeActionCreator(text));
-        },
-        addPostBLL: () => {
-            dispatch(addPostUIActionCreator());
+        // убрали после того как добавили форму
+        // updatePostChange: (text) => {
+        //     dispatch(postChangeActionCreator(text));
+        // },
+
+        // заменили после того как добавили форму
+        // addPostBLL: () => {
+        //     dispatch(addPostUIActionCreator());
+        // }
+        addPostBLL: (newTextPost) => {
+            dispatch(addPostUIActionCreator(newTextPost));
         }
     }
 };

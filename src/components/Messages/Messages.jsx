@@ -89,7 +89,8 @@ const Messages = (props) => {
                     <button onClick={addMessageButtonUI}>
                             Add message</button>
                 </div> */}
-
+                
+                {/* добавляем форму */}
                 <div>
                     <ReduxMessageForm onSubmit={onSubmitHandl} /> 
                 </div>

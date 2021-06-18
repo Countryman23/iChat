@@ -1,6 +1,7 @@
 //добавляем так же как в state.js
 const ADD_POST_BLL = "ADD_POST_BLL";
-const UPDATE_POST_CHANGE = "UPDATE_POST_CHANGE";
+// убрали после того как добавили форму
+// const UPDATE_POST_CHANGE = "UPDATE_POST_CHANGE";
 
 
 //так как redux запускается до нашего state, мы не успеваем отобразить state и мы получаем ошибку
@@ -12,9 +13,9 @@ let initialState = {
         { id: 4, text: "Mi", like: 40 }
     ],
     // создали newPostData для принятия новых значений поля textarea
-    newPostData: "hard code textarea",
+    // newPostData: "hard code textarea", // убрали после того как добавили форму
 };
-// debugger
+
 const myPostReducer = (state = initialState, action) => {
 //     if (action.type === ADD_POST_BLL) {
 //         {let newPost = {
@@ -95,21 +96,25 @@ const myPostReducer = (state = initialState, action) => {
     
     ///переписываем оптимизируя
     switch (action.type) {
-        case UPDATE_POST_CHANGE:
-            return {
-                ...state,
-                newPostData: action.newText
-            };
+        // убрали после того как добавили форму
+        // case UPDATE_POST_CHANGE:
+        //     return {
+        //         ...state,
+        //         newPostData: action.newText
+        //     };
         case ADD_POST_BLL:
             let newPost = {
                 id: 5, 
-                text: state.newPostData, 
+                // заменили после того как добавили форму
+                // text: state.newPostData, 
+                text: action.newTextPost, 
                 like: 50,
             };
             // if (newPost === ""){state.myPostsPage.postData.slice(newPost)};
             return {
                 ...state,
-                newPostData: "",
+                // убрали после того как добавили форму
+                // newPostData: "",
                 postData: [...state.postData, newPost]
                 // реализовать не добавлять пустой textarea
                 //if (state.myPostsPage.newPostData === ""){state.myPostsPage.postData.pop(newPost)};
@@ -119,8 +124,10 @@ const myPostReducer = (state = initialState, action) => {
     }
 }
 
-
-export const addPostUIActionCreator = () => ({type: ADD_POST_BLL})
-export const postChangeActionCreator = (text) => ({type: UPDATE_POST_CHANGE, newText: text})
+// заменили после того как добавили форму
+// export const addPostUIActionCreator = () => ({type: ADD_POST_BLL})
+export const addPostUIActionCreator = (newTextPost) => ({type: ADD_POST_BLL, newTextPost})
+// убрали после того как добавили форму
+// export const postChangeActionCreator = (text) => ({type: UPDATE_POST_CHANGE, newText: text})
 
 export default myPostReducer;
