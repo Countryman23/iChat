@@ -3,6 +3,8 @@ import ModCSS from "./Messages.module.css"; //Модифицируем наши 
 import MessageName from "./MessageName"
 import MessageItem from "./MessageItem"
 import { withAuthRedirect } from "../../hoc/authRedirect";
+import ReduxMessageForm from "../../form/messageForm"
+
 
 const Messages = (props) => {
     
@@ -32,20 +34,31 @@ const Messages = (props) => {
                                 id={item.id}
                                 key={item.id} />))
     
-    let newTextEl = React.createRef();
+    // убрали после того как добавили форму
+    // let newTextEl = React.createRef();
+    
     //3
-    let addTextChange = () => {
-        let text = newTextEl.current.value;
-        // props.dispatch(textChangeAC(text))
-        props.updateTextChange(text);
-    }
-    //4
-    let addMessageButtonUI = () => {
-        // props.dispatch(addMessageButtonUIAC());
-        props.addMessageButtonBLL();
-    }
+    // убрали после того как добавили форму
+    // let addTextChange = () => {
+    //     let text = newTextEl.current.value;
+    //     // props.dispatch(textChangeAC(text))
+    //     props.updateTextChange(text);
+    // }
 
-    let newTextDataRemove = props.newMessageData;
+    //4
+    // убрали после того как добавили форму
+    // let addMessageButtonUI = () => {
+    //     // props.dispatch(addMessageButtonUIAC());
+    //     props.addMessageButtonBLL();
+    // }
+
+    // убрали после того как добавили форму
+    // let newTextDataRemove = props.newMessageData;
+    
+    //добавили для формы
+    const onSubmitHandl = (values) => {// values, значения из формы
+        props.addMessageButtonBLL(values.newTextMessage)
+    }
 
     return (
         <div className={ModCSS.messages}>
@@ -67,12 +80,18 @@ const Messages = (props) => {
                 {/* передаём атрибуты компоненте, через пропсы */}
                 {/* <MessageItem item="item3" />
                <MessageItem item="item4" /> */}
-                <textarea onChange={addTextChange} 
+
+               {/* перенесли в MessageForm */}
+                {/* <textarea onChange={addTextChange} 
                             ref={newTextEl} 
                             value={newTextDataRemove} />
                 <div>
                     <button onClick={addMessageButtonUI}>
                             Add message</button>
+                </div> */}
+
+                <div>
+                    <ReduxMessageForm onSubmit={onSubmitHandl} /> 
                 </div>
             </div>
         </div>

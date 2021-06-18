@@ -1,4 +1,6 @@
-import {addMessageButtonUIAC, textChangeAC} from "../../redux/messages-reducer";
+// изменили после того как добавили форму
+// import {addMessageButtonUIAC, textChangeAC} from "../../redux/messages-reducer";
+import {addMessageButtonUIAC} from "../../redux/messages-reducer";
 import Messages from "./Messages";
 import { connect } from 'react-redux';
 
@@ -34,11 +36,17 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateTextChange: (text) => {
-            dispatch(textChangeAC(text));
-        },
-        addMessageButtonBLL: () => {
-            dispatch(addMessageButtonUIAC());
+        // убрали после того как добавили форму
+        // updateTextChange: (text) => {
+        //     dispatch(textChangeAC(text));
+        // },
+
+        // заменили после того как добавили форму
+        // addMessageButtonBLL: () => {
+        //     dispatch(addMessageButtonUIAC());
+        // }
+        addMessageButtonBLL: (newTextMessage) => {
+            dispatch(addMessageButtonUIAC(newTextMessage));
         }
     }
 };

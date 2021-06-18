@@ -1,6 +1,7 @@
 //добавляем так же как в state.js
 const ADD_MESSAGE_BUTTON_BLL = "ADD_MESSAGE_BUTTON_BLL";
-const UPDATE_TEXT_MESSAGE_CHANGE = "UPDATE_TEXT_MESSAGE_CHANGE";
+// убрали после того как добавили форму
+// const UPDATE_TEXT_MESSAGE_CHANGE = "UPDATE_TEXT_MESSAGE_CHANGE";
 
 let initialState = {
     MesDataName: [
@@ -16,7 +17,7 @@ let initialState = {
         {id: 4, item: "item4"}
     ],
         // создали newPostData для принятия новых значений поля textarea
-    newMessageData: "hard code message",
+    // newMessageData: "hard code message", // убрали после того как добавили форму
 };
 
 export const messagesReducer = (state = initialState, action) => {
@@ -67,16 +68,20 @@ export const messagesReducer = (state = initialState, action) => {
 
     //переписываем оптимизируя
     switch (action.type) {
-        case UPDATE_TEXT_MESSAGE_CHANGE:
-                return {
-                    ...state,
-                    newMessageData: action.newMessageText, //модифицируем копию
-                };
+        // убрали после того как добавили форму
+        // case UPDATE_TEXT_MESSAGE_CHANGE:
+        //         return {
+        //             ...state,
+        //             newMessageData: action.newMessageText, //модифицируем копию
+        //         };
         case ADD_MESSAGE_BUTTON_BLL:
-            let newMessage = state.newMessageData; //достаём текст
+            // заменили после того как добавили форму
+            // let newMessage = state.newMessageData; //достаём текст
+            let newMessage = action.newTextMessage; //достаём текст
             return {
                 ...state,
-                newMessageData: "", //затираем
+                // убрали после того как добавили форму
+                // newMessageData: "", //затираем
                 MesDataItem: [...state.MesDataItem, {id: 5, item: newMessage}] //такой синтаксис push ...., {id:5, item: newMessage} 
             };
         //если ничего не изменилось то возвращаем старый state
@@ -85,7 +90,10 @@ export const messagesReducer = (state = initialState, action) => {
     }
 }
 
-export const addMessageButtonUIAC = () => ({type: ADD_MESSAGE_BUTTON_BLL})
-export const textChangeAC = (text) => ({type: UPDATE_TEXT_MESSAGE_CHANGE, newMessageText: text})
+// заменили после того как добавили форму
+// export const addMessageButtonUIAC = () => ({type: ADD_MESSAGE_BUTTON_BLL})
+export const addMessageButtonUIAC = (newTextMessage) => ({type: ADD_MESSAGE_BUTTON_BLL, newTextMessage})
+// убрали после того как добавили форму
+// export const textChangeAC = (text) => ({type: UPDATE_TEXT_MESSAGE_CHANGE, newMessageText: text})
 
 export default messagesReducer;
