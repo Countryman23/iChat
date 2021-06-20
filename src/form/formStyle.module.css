@@ -1,0 +1,7 @@
+.form.error input, .form.error textarea {
+    border: 2px solid red;
+}
+
+.form.error span {
+    color: white;
+}
