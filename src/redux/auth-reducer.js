@@ -1,4 +1,4 @@
-import { apiAuthProfile } from "../api/api"
+import { apiAuthProfile, apiLogin, apiLogout } from "../api/api"
 
 const SET_AUTH_USER_DATA = "SET_AUTH_USER_DATA";
 
@@ -9,7 +9,9 @@ let initialState = {
     isAuth: false, //состояние пока не авторизован
 };
 
-export const setAuthUserData = (userId, login, email) => ({type: SET_AUTH_USER_DATA, data: {userId, login, email}})
+// добавили isAuth для логинизации
+// export const setAuthUserData = (userId, login, email) => ({ type: SET_AUTH_USER_DATA, data: { userId, login, email } })
+export const setAuthUserData = (userId, login, email, isAuth) => ({ type: SET_AUTH_USER_DATA, data: { userId, login, email, isAuth } })
 
 export const authProfileThunk = () => {
     return (dispatch) => {
@@ -17,10 +19,11 @@ export const authProfileThunk = () => {
             //resultCode проверка полученных данных(проверка залогининости)
             if (data.resultCode === 0) {
                 // let {id, login, email} = response.data.data; //две data потому-что 1я data сидит в инструкции API, 2ю выдаёт response
-                let {id, login, email} = data.data; //две data потому-что 1я data сидит в инструкции API, 2ю выдаёт response
-                dispatch(setAuthUserData(id, login, email));
+                let { id, login, email } = data.data; //две data потому-что 1я data сидит в инструкции API, 2ю выдаёт response
+                // dispatch(setAuthUserData(id, login, email));
+                dispatch(setAuthUserData(id, login, email, true)); // добавили true для логинизации
             }
-                
+
         });
     }
 }
@@ -29,15 +32,36 @@ export const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_AUTH_USER_DATA:
             // debugger
-                return {
-                    ...state,
-                    ...action.data,
-                    isAuth: true
+            return {
+                ...state,
+                ...action.data,
+                // isAuth: true // убрали после реализации логинизации
 
-                };
+            };
         default:
             return state;
     }
+}
+
+// всё что после dispatch это САНКА
+export const LoginThunkCreator = (email, password, rememberMe) => (dispatch) => {
+    apiLogin(email, password, rememberMe)
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(authProfileThunk());
+            }
+
+        });
+}
+
+export const LogoutThunkCreator = () => (dispatch) => {
+    apiLogout()
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setAuthUserData(null, null, null, false));
+            }
+
+        });
 }
 
 export default authReducer;

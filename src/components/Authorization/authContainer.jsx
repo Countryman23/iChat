@@ -1,7 +1,7 @@
 import React from 'react';
 import ModCSS from "./Authorization.module.css"; //Модифицируем наши стили с помощью .module
 import { connect } from 'react-redux';
-import {authProfileThunk} from "../../redux/auth-reducer"
+import {authProfileThunk, LogoutThunkCreator} from "../../redux/auth-reducer"
 import Auth from "./auth"
 
 //ниже JSX коде в котором находится HTML разметка
@@ -57,4 +57,6 @@ const mapStateToProps = (state) => ({
     login: state.auth.login
 });
 
-export default connect (mapStateToProps, {authProfileThunk}) (AuthContainer);
+// изменили после логинизации
+// export default connect (mapStateToProps, {authProfileThunk}) (AuthContainer);
+export default connect (mapStateToProps, {authProfileThunk, LogoutThunkCreator}) (AuthContainer);

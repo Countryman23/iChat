@@ -7,10 +7,16 @@ import Login from "./login"
 const Auth = (props) => {
     return (
         <div>
-            {props.isAuth ? props.login
+            {/* изменили после логинизации */}
+            {/* {props.isAuth ? props.login
                 : <NavLink to={"/Login"}>
                     <Login />
-                    </NavLink>}
+                    </NavLink>} */}
+
+            {props.isAuth
+                ? <div>{props.login} <button onClick={props.LogoutThunkCreator}>
+                                            Log out</button> </div>
+                : <NavLink to={"/login"}> <Login /> </NavLink>}
             
         </div>
     );

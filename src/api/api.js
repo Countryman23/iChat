@@ -51,3 +51,13 @@ export const apiUpdateStatusInfo = (status) => {
     return instance.put(`profile/status/`, {status: status}) // put означает обновление. {status: status} смотрим в АПИшке какие данные нужно изменять
     .then(response => response.data);
 }
+
+export const apiLogin = (email, password, rememberMe = false ) => {
+    return instance.post(`auth/login/`, {email, password, rememberMe})
+    .then(response => response.data);
+}
+
+export const apiLogout = () => {
+    return instance.delete(`auth/login/`)
+    .then(response => response.data);
+}

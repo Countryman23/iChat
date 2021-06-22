@@ -4,7 +4,7 @@ import {requiredField, maxLengthCreator} from "../form/validators";
 import {Input} from "../form/formsControls"
 
 // вынесли в переменную. так как если сразу добавить в validate, то это вызывает зависание
-const maxLength10 = maxLengthCreator(10);
+const maxLength20 = maxLengthCreator(20);
 
 //ниже JSX коде в котором находится HTML разметка
 // Field это специальные компоненты для form
@@ -13,19 +13,19 @@ const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name="login" 
-                    placeholder={"Login"} 
+                <Field name="email" 
+                    placeholder={"Email"} 
                     component={Input}
-                    validate={[requiredField, maxLength10]} /> 
+                    validate={[requiredField, maxLength20]} /> 
             </div>
             <div>
                 <Field name="password" 
                     placeholder={"Password"} 
                     component={Input}
-                    validate={[requiredField, maxLength10]} />
+                    validate={[requiredField, maxLength20]} />
             </div>
             <div>
-                <Field name="remember" 
+                <Field name="rememberMe" 
                     type={"checkbox"} 
                     component={"input"} /> Remember
             </div>
