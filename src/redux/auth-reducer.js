@@ -1,4 +1,5 @@
-import { apiAuthProfile, apiLogin, apiLogout } from "../api/api"
+import { apiAuthProfile, apiLogin, apiLogout } from "../api/api";
+import {stopSubmit} from "redux-form"
 
 const SET_AUTH_USER_DATA = "SET_AUTH_USER_DATA";
 
@@ -50,7 +51,12 @@ export const LoginThunkCreator = (email, password, rememberMe) => (dispatch) => 
             if (data.resultCode === 0) {
                 dispatch(authProfileThunk());
             }
-
+            // проверка авторизвции
+            else {
+                // берём ошибку из ответа сервера. Если messages > 0 то мы выведем первое сообщение messages[0]. Иаче покажем Some error
+                let errorMessage = data.messages.length > 0 ? data.messages[0] : "Some error";
+                dispatch(stopSubmit ("login", {_error: errorMessage}));
+            }
         });
 }
 

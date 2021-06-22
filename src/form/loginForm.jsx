@@ -2,6 +2,7 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import {requiredField, maxLengthCreator} from "../form/validators";
 import {Input} from "../form/formsControls"
+import ModCSS from "./formStyle.module.css"; //Модифицируем наши стили с помощью .module
 
 // вынесли в переменную. так как если сразу добавить в validate, то это вызывает зависание
 const maxLength20 = maxLengthCreator(20);
@@ -29,6 +30,11 @@ const LoginForm = (props) => {
                     type={"checkbox"} 
                     component={"input"} /> Remember
             </div>
+                {/* тут мы говорим, если у нас есть props.error тогда покажи {props.error} */}
+                {props.error && <div className={ModCSS.loginFormError}>
+                    {props.error}
+                </div>
+                }
             <div>
                 <button> OK </button>
             </div>

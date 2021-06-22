@@ -12,7 +12,8 @@ class ProfileInfoContainer extends React.Component {
     componentDidMount () {
         let userId = this.props.match.params.userId; // получаем id пользователя
         if (!userId) {
-            userId = 17232;
+            // userId = 17232; // убираем жёсткую привязку
+            userId = this.props.authorizeUserId;
         }
         //перекинули запрос в api.js apiUsersRouter
         // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId) 
@@ -51,6 +52,8 @@ class ProfileInfoContainer extends React.Component {
 const mapStateToProps = (state) => ({
         profileInfo: state.profilePage.profileInfo,
         status: state.profilePage.status, // добавили для отображения статуса
+        authorizeUserId: state.auth.userId, // если мы авторизованны показывать наш профиль. В итоге в компоненту приходят эти данные
+        isAuth: state.auth.isAuth
 });
 
 //возвращает новую компоненту ProfileInfoContainer и в неё ещё закинет данные из URL

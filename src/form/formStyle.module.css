@@ -5,3 +5,9 @@
 .form.error span {
     color: white;
 }
+
+.loginFormError {
+    width: 100px;
+    border: 2px solid red;
+    color: white;
+}
