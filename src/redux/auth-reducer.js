@@ -16,7 +16,8 @@ export const setAuthUserData = (userId, login, email, isAuth) => ({ type: SET_AU
 
 export const authProfileThunk = () => {
     return (dispatch) => {
-        apiAuthProfile().then(data => {
+        // apiAuthProfile().then(data => { изменили, так как диспатчим этот промисв app
+            return apiAuthProfile().then(data => {
             //resultCode проверка полученных данных(проверка залогининости)
             if (data.resultCode === 0) {
                 // let {id, login, email} = response.data.data; //две data потому-что 1я data сидит в инструкции API, 2ю выдаёт response

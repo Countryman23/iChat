@@ -1,7 +1,8 @@
 import React from 'react';
 import ModCSS from "./Authorization.module.css"; //Модифицируем наши стили с помощью .module
 import { connect } from 'react-redux';
-import {authProfileThunk, LogoutThunkCreator} from "../../redux/auth-reducer"
+// import {authProfileThunk, LogoutThunkCreator} from "../../redux/auth-reducer" // authProfileThunk перенесли в app.js
+import {LogoutThunkCreator} from "../../redux/auth-reducer"
 import Auth from "./auth"
 
 //ниже JSX коде в котором находится HTML разметка
@@ -40,7 +41,7 @@ class AuthContainer extends React.Component {
                 
         //когда компонента функциональная мы пропсы запрашиваем напрямую через props.
         //когда компонента классовая мы пропсы запрашиваем через this.props.
-        this.props.authProfileThunk()
+        // this.props.authProfileThunk() // перенесли в app.js
     }
     
     render () {
@@ -59,4 +60,5 @@ const mapStateToProps = (state) => ({
 
 // изменили после логинизации
 // export default connect (mapStateToProps, {authProfileThunk}) (AuthContainer);
-export default connect (mapStateToProps, {authProfileThunk, LogoutThunkCreator}) (AuthContainer);
+// export default connect (mapStateToProps, {authProfileThunk, LogoutThunkCreator}) (AuthContainer); // authProfileThunk перенесли в app.js
+export default connect (mapStateToProps, {LogoutThunkCreator}) (AuthContainer);

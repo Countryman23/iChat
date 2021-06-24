@@ -13,7 +13,21 @@ class ProfileInfoContainer extends React.Component {
         let userId = this.props.match.params.userId; // получаем id пользователя
         if (!userId) {
             // userId = 17232; // убираем жёсткую привязку
-            userId = this.props.authorizeUserId;
+
+
+
+
+            // реализовать отображение своего профиля
+
+            // userId = this.props.authorizeUserId;
+            // if (!userId) {
+            //     this.props.history.push("/ProfileInfoContainer/17232")
+            // }
+
+
+
+
+
         }
         //перекинули запрос в api.js apiUsersRouter
         // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId) 

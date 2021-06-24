@@ -5,6 +5,7 @@ import profileReducer from "./profile-reducer"
 import authReducer from "./auth-reducer"
 import thunkMiddleware from "redux-thunk"
 import { reducer as formReducer } from 'redux-form'
+import appReducer from "./app-reducer";
 
 
 //собираем все рэдюсеры. соответственно это разделы state
@@ -13,7 +14,8 @@ let reducers = combineReducers({
     messagesPage: messagesReducer,
     profilePage: profileReducer,
     auth: authReducer,
-    form: formReducer // тут form обязательный ключ
+    form: formReducer, // тут form обязательный ключ
+    app: appReducer
 });
 //createStore создаёт внутри себя  state внутр которого есть reducers (создаём store с помощью redux)
 //applyMiddleware этим мы говорим, прими промежуточный слой. чтобы запустить санки из санк-киейтора
