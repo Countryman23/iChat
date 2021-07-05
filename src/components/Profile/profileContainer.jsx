@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import Profile from './Profile';
 import { withAuthRedirect } from "../../hoc/authRedirect";
 import { compose } from 'redux';
+import { getUsers, getPageSize, getTotalUsersCount, getCarrentPaget, getIsLoading, getFollowingInProcess} from "../../selectors/profileSelector"
 
 class ProfileComponent extends React.Component {
 
@@ -96,14 +97,26 @@ class ProfileComponent extends React.Component {
     }
 }
 
+//ниже переписали через селекторы
+// const mapStateToProps = (state) => {
+//     return {
+//         users: state.profilePage.users, //это прийдёт в пропс
+//         pageSize: state.profilePage.pageSize, //2
+//         totalUsersCount: state.profilePage.totalUsersCount,
+//         carrentPage: state.profilePage.carrentPage,//5
+//         isLoading: state.profilePage.isLoading,
+//         followingInProcess: state.profilePage.followingInProcess,
+//     }
+// };
+
 const mapStateToProps = (state) => {
     return {
-        users: state.profilePage.users, //это прийдёт в пропс
-        pageSize: state.profilePage.pageSize, //2
-        totalUsersCount: state.profilePage.totalUsersCount,
-        carrentPage: state.profilePage.carrentPage,//5
-        isLoading: state.profilePage.isLoading,
-        followingInProcess: state.profilePage.followingInProcess,
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        carrentPage: getCarrentPaget(state),
+        isLoading: getIsLoading(state),
+        followingInProcess: getFollowingInProcess(state),
     }
 };
 
