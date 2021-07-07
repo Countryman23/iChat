@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ModCSS from "./Profile.module.css"; //Модифицируем наши стили с помощью .module
 
 const StatusWithHook = (props) => {
@@ -12,6 +12,12 @@ const StatusWithHook = (props) => {
 
     let [editMode, setEditMode] = useState(false); // меняем вызов статуса
     let [status, setStatus] = useState(props.status);
+
+    // мы говорим реакту запускать нашь useEffect не всегда,
+    // а только в момент когда компонента монтировалась в первый раз
+    useEffect( () => {
+        setStatus(props.status)
+    }, [props.status] ) // [props.status] этим мы говорим, useEffect запускайся каждый раз когда будет изменён props.status
 
     const activatedEditMode = () => {
         setEditMode(true);
