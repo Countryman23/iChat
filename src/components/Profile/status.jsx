@@ -18,7 +18,7 @@ class Status extends React.Component {
         this.setState ({
                 editMode: false
         });
-        this.props.getUpdateStatusInfoThunk(this.state.status);
+        this.props.getUpdateStatusInfoThunk(this.state.status); // обновляем локальный стате
     }
 
     onStatusChenge = (e) => {

@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import Profile from './Profile';
 import { withAuthRedirect } from "../../hoc/authRedirect";
 import { compose } from 'redux';
-import { getUsers, getPageSize, getTotalUsersCount, getCarrentPaget, getIsLoading, getFollowingInProcess} from "../../selectors/profileSelector"
+import { getUsersRESelector, getPageSize, getTotalUsersCount, getCarrentPaget, getIsLoading, getFollowingInProcess} from "../../selectors/profileSelector"
 
 class ProfileComponent extends React.Component {
 
@@ -111,7 +111,7 @@ class ProfileComponent extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: getUsers(state),
+        users: getUsersRESelector(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         carrentPage: getCarrentPaget(state),

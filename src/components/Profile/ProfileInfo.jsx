@@ -1,7 +1,7 @@
 import React from 'react';
 // import ModCSS from "./Profile.module.css"; //Модифицируем наши стили с помощью .module
 import { withAuthRedirect } from "../../hoc/authRedirect";
-import Status from "./status"
+import StatusWithHook from "./statusWithHook"
 
 
 const ProfileInfo = (props) => {
@@ -15,7 +15,9 @@ const ProfileInfo = (props) => {
         <div>
             <div>
                 <img src={props.profileInfo.photos.large}/>
-                <Status status = {props.status} getUpdateStatusInfoThunk={props.getUpdateStatusInfoThunk}/>
+                {/* дальше применяем Хуки */}
+                {/* <Status status = {props.status} getUpdateStatusInfoThunk={props.getUpdateStatusInfoThunk}/> */}
+                <StatusWithHook status = {props.status} getUpdateStatusInfoThunk={props.getUpdateStatusInfoThunk}/>
                 <div>{props.profileInfo.fullName}</div>
                 {/* убрали так как добавили статусы из сервера */}
                 {/* <div>{props.profileInfo.aboutMe}</div> */}
