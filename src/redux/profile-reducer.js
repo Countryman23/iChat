@@ -1,15 +1,15 @@
-import { apiStatusInfo, apiUpdateStatusInfo, apiGetUsers, apiFollowUser, apiUnfollowUser, apiUsersRouter} from "../api/api"
+import { apiStatusInfo, apiUpdateStatusInfo, apiGetUsers, apiFollowUser, apiUnfollowUser, apiUsersRouter } from "../api/api"
 
 ///3
-const FOLLOW = "FOLLOW";
-const UNFOLLOW = "UNFOLLOW";
-const SET_USERS = "SET_USERS";
-const SET_CARRENT_PAGE = "SET_CARRENT_PAGE";//7. создаём константу для работы с сервером. Далее берём её и обрабатываем в state (const profileReducer)
-const SET_USER_COUNT = "SET_USER_COUNT";//15. 
-const TOGGLE_IS_LOADING = "TOGGLE_IS_LOADING";
-const SET_PROFILE_INFO = "SET_PROFILE_INFO";
-const TOGGLE_IS_FOLLOWING = "TOGGLE_IS_FOLLOWING";
-const SET_STATUS = "SET_STATUS";
+const FOLLOW = "profile/FOLLOW";
+const UNFOLLOW = "profile/UNFOLLOW";
+const SET_USERS = "profile/SET_USERS";
+const SET_CARRENT_PAGE = "profile/SET_CARRENT_PAGE";//7. создаём константу для работы с сервером. Далее берём её и обрабатываем в state (const profileReducer)
+const SET_USER_COUNT = "profile/SET_USER_COUNT";//15. 
+const TOGGLE_IS_LOADING = "profile/TOGGLE_IS_LOADING";
+const SET_PROFILE_INFO = "profile/SET_PROFILE_INFO";
+const TOGGLE_IS_FOLLOWING = "profile/TOGGLE_IS_FOLLOWING";
+const SET_STATUS = "profile/SET_STATUS";
 
 ///1
 // let initialState = {
@@ -44,6 +44,16 @@ let initialState = {
     status: ""
 };
 
+// рефакторим для сокращения кода
+const updatefollowUnfollow = (items, itemId, propName, newProps) => {
+    return items.map(u => {
+        if (u[propName] === itemId) {
+            return {...u, ...newProps}
+        }
+        return u;
+    })
+}
+
 ///4
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -51,33 +61,39 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 //копируем users из state
-                users: state.users.map(u => {
-                    //когда, пришёл очередной users пришёл в колбэк u благодаря .map, 
-                    //и если его id равен айдишнику который нужно зафоловить,
-                    //то тогда его нужно зафоловить сделать true, а для этого
-                    //нужно вернуть изменённую копию
-                    if (u.id === action.userId) {
-                        return { ...u, followed: true }
-                    }
-                    //если не совпадает, возвращаем тот же самый объект
-                    return u;
-                })
+
+                // ниже рефакторим
+                // users: state.users.map(u => {
+                //     //когда, пришёл очередной users пришёл в колбэк u благодаря .map, 
+                //     //и если его id равен айдишнику который нужно зафоловить,
+                //     //то тогда его нужно зафоловить сделать true, а для этого
+                //     //нужно вернуть изменённую копию
+                //     if (u.id === action.userId) {
+                //         return { ...u, followed: true }
+                //     }
+                //     //если не совпадает, возвращаем тот же самый объект
+                //     return u;
+                // })
+
+                users: updatefollowUnfollow(state.users, action.userId, "id", {followed: true})
             }
         case UNFOLLOW:
             return {
                 ...state,
                 //копируем users из state
-                users: state.users.map(u => {
-                    //когда, пришёл очередной users пришёл в колбэк u благодаря .map, 
-                    //и если его id равен айдишнику который нужно зафоловить,
-                    //то тогда его нужно зафоловить сделать true, а для этого
-                    //нужно вернуть изменённую копию
-                    if (u.id === action.userId) {
-                        return { ...u, followed: false }
-                    }
-                    //если не совпадает, возвращаем тот же самый объект
-                    return u;
-                })
+                // users: state.users.map(u => {
+                //     //когда, пришёл очередной users пришёл в колбэк u благодаря .map, 
+                //     //и если его id равен айдишнику который нужно зафоловить,
+                //     //то тогда его нужно зафоловить сделать true, а для этого
+                //     //нужно вернуть изменённую копию
+                //     if (u.id === action.userId) {
+                //         return { ...u, followed: false }
+                //     }
+                //     //если не совпадает, возвращаем тот же самый объект
+                //     return u;
+                // })
+
+                users: updatefollowUnfollow(state.users, action.userId, "id", {followed: false})
             }
         case SET_USERS: {
             return { ...state, users: [...action.users] } //взять старый state, взять пользователей которые там были и перезатиреть теми пользователями которые пришли из экшна
@@ -103,9 +119,10 @@ const profileReducer = (state = initialState, action) => {
             } //state.followingInProcess.filter() делаем копию и убираем id пользователя(пропускаем только ту id которая не равна той id которая пришла в action) 
         }
         case SET_STATUS: {
-            return { 
-                ...state, 
-                status: action.status }
+            return {
+                ...state,
+                status: action.status
+            }
         }
         default:
             return state;
@@ -132,68 +149,118 @@ export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_USER_COUNT, 
 export const toggleIsLoading = (isLoading) => ({ type: TOGGLE_IS_LOADING, isLoading })
 const setProfileInfo = (profileInfo) => ({ type: SET_PROFILE_INFO, profileInfo })
 export const toggleFollowingInProcess = (isLoading, userId) => ({ type: TOGGLE_IS_FOLLOWING, isLoading, userId })
-const setStatus = (status) => ({ type:SET_STATUS, status })
+const setStatus = (status) => ({ type: SET_STATUS, status })
 
 //создаём санку. а далее санк-криейтор
 //создаём санк-криейтор. это функция, котороя может что то принимать и возвращать санку
+// ниже сделали рефакторинг через async await. измегить везде где есть then
+// export const getUsersThunkCreator = (carrentPage, pageSize) => {
+//     return (dispatch) => {
+//         dispatch(toggleIsLoading(true));
+//         apiGetUsers(carrentPage, pageSize).then(data => {
+//             dispatch(toggleIsLoading(false));
+//             // this.props.setUsers(response.data.items); //этим мы говорим, добавь в наш store юзеров из items
+//             dispatch(setUsers(data.items)); //этим мы говорим, добавь в наш store юзеров из items
+//             dispatch(setTotalUsersCount(data.totalCount))
+//         });
+//     }
+// }
+
 export const getUsersThunkCreator = (carrentPage, pageSize) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleIsLoading(true));
-        apiGetUsers(carrentPage, pageSize).then(data => {
-            dispatch(toggleIsLoading(false));
-            // this.props.setUsers(response.data.items); //этим мы говорим, добавь в наш store юзеров из items
-            dispatch(setUsers(data.items)); //этим мы говорим, добавь в наш store юзеров из items
-            dispatch(setTotalUsersCount(data.totalCount))
-        });
+        // нечватает строчки
+        // dispatch(setCurrentPage(carrentPage))
+
+        let data = await apiGetUsers(carrentPage, pageSize)
+        dispatch(toggleIsLoading(false));
+        dispatch(setUsers(data.items));
+        dispatch(setTotalUsersCount(data.totalCount))
     }
 }
 
+// ниже делаем рефакторинг
+// export const followThunk = (userId) => {
+//     return async (dispatch) => {
+//         dispatch(toggleFollowingInProcess(true, userId));
+//         let data = await apiFollowUser(userId)
+//         if (data.resultCode == 0) {
+//             dispatch(followSaccess(userId));
+//         }
+//         dispatch(toggleFollowingInProcess(false, userId));
+//     }
+// }
+
+// export const unFollowThunk = (userId) => {
+//     return async (dispatch) => {
+//         dispatch(toggleFollowingInProcess(true, userId));
+//         let data = await apiUnfollowUser(userId)
+//         if (data.resultCode == 0) {
+//             dispatch(unFollowSaccess(userId));
+//         }
+//         dispatch(toggleFollowingInProcess(false, userId));
+//     }
+// }
+
+const followUnfollow = async (dispatch, userId, apiMethod, actionCreator) => {
+    dispatch(toggleFollowingInProcess(true, userId));
+
+    let data = await apiMethod(userId);
+
+    if (data.resultCode == 0) {
+        dispatch(actionCreator(userId));
+    }
+    dispatch(toggleFollowingInProcess(false, userId));
+}
+
 export const followThunk = (userId) => {
-    return (dispatch) => {
-        dispatch(toggleFollowingInProcess(true, userId));
-        apiFollowUser(userId).then(data => {
-            if (data.resultCode == 0) {
-                dispatch(followSaccess(userId));
-            }
-            dispatch(toggleFollowingInProcess(false, userId));
-        });
+    return async (dispatch) => {
+        // закинули логику в переменную apiMethod и actionCreator. каждый берёт значения которые ему нужны
+        let apiMethod = apiFollowUser.bind(apiFollowUser);
+        let actionCreator = followSaccess;
+
+        // этот кусок кода одинаковый для каждой санки
+        followUnfollow(dispatch, userId, apiMethod, actionCreator);
     }
 }
 
 export const unFollowThunk = (userId) => {
-    return (dispatch) => {
-        dispatch(toggleFollowingInProcess(true, userId));
-        apiUnfollowUser(userId).then(data => {
-            if (data.resultCode == 0) {
-                dispatch(unFollowSaccess(userId));
-            }
-            dispatch(toggleFollowingInProcess(false, userId));
-        });
+    return async (dispatch) => {
+        // // закинули логику в переменную apiMethod и actionCreator. каждый берёт значения которые ему нужны
+        // let apiMethod = apiUnfollowUser.bind(apiUnfollowUser);
+        // let actionCreator = unFollowSaccess;
+        // // этот кусок кода одинаковый для каждой санки
+        // followUnfollow(dispatch, userId, apiMethod, actionCreator);
+
+        // сокращаем до одной строчки
+        followUnfollow(dispatch, userId, apiUnfollowUser.bind(apiUnfollowUser), unFollowSaccess);
     }
 }
 
 //так пишется санка в стрелочной функции
-export const getProfileInfoThunk = (userId) => (dispatch) => {
-    apiUsersRouter(userId).then(data => {
-            // this.props.setProfileInfo(response.data); //этим мы говорим, добавь в наш store всё из data
-            dispatch(setProfileInfo(data)); //этим мы говорим, добавь в наш store всё из data
-        });
-    }
+export const getProfileInfoThunk = (userId) => async (dispatch) => {
 
-export const getStatusInfoThunk = (userId) => (dispatch) => {
-    apiStatusInfo(userId)
-    .then(data => {
-            dispatch(setStatus(data));
-        });
-    }
+    let data = await apiUsersRouter(userId)
 
-export const getUpdateStatusInfoThunk = (status) => (dispatch) => {
-    apiUpdateStatusInfo(status)
-    .then(data => {
-        if (data.resultCode === 0) {
-            dispatch(setStatus(status));
-        }
-        });
+    // this.props.setProfileInfo(response.data); //этим мы говорим, добавь в наш store всё из data
+    dispatch(setProfileInfo(data)); //этим мы говорим, добавь в наш store всё из data
+
+}
+
+export const getStatusInfoThunk = (userId) => async (dispatch) => {
+
+    let data = await apiStatusInfo(userId)
+
+    dispatch(setStatus(data));
+}
+
+export const getUpdateStatusInfoThunk = (status) => async (dispatch) => {
+
+    let data = await apiUpdateStatusInfo(status)
+
+    if (data.resultCode === 0) {
+        dispatch(setStatus(status));
     }
+}
 
 export default profileReducer;

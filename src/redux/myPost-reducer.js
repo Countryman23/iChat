@@ -1,5 +1,5 @@
 //добавляем так же как в state.js
-const ADD_POST_BLL = "ADD_POST_BLL";
+const ADD_POST_BLL = "post/ADD_POST_BLL";
 // убрали после того как добавили форму
 // const UPDATE_POST_CHANGE = "UPDATE_POST_CHANGE";
 

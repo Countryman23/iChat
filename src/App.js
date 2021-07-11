@@ -102,7 +102,6 @@ class App extends React.Component {
         }
 
         return (
-            <BrowserRouter>
                 <div className={ModCSS.appWrapper}>
                     <div className={ModCSS.nav}>
                         <Navigation />
@@ -118,7 +117,6 @@ class App extends React.Component {
                         <Route path="/Settings" render={Settings} />
                     </div>
                 </div>
-            </BrowserRouter>
         );
     }
 };

@@ -1,5 +1,5 @@
 //добавляем так же как в state.js
-const ADD_MESSAGE_BUTTON_BLL = "ADD_MESSAGE_BUTTON_BLL";
+const ADD_MESSAGE_BUTTON_BLL = "mess/ADD_MESSAGE_BUTTON_BLL";
 // убрали после того как добавили форму
 // const UPDATE_TEXT_MESSAGE_CHANGE = "UPDATE_TEXT_MESSAGE_CHANGE";
 

@@ -2,7 +2,7 @@ import { apiAuthProfile, apiLogin, apiLogout } from "../api/api";
 import {stopSubmit} from "redux-form"
 import {authProfileThunk} from "./auth-reducer"
 
-const SET_INITIALIZED = "SET_INITIALIZED";
+const SET_INITIALIZED = "app/SET_INITIALIZED";
 
 let initialState = {
     initialized: false,

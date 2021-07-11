@@ -53,15 +53,21 @@ class ProfileComponent extends React.Component {
         //         this.props.setUsers(data.items); //этим мы говорим, добавь в наш store юзеров из items
         //         this.props.setTotalUsersCount(data.totalCount); //19.
         //     });
-        this.props.getUsersThunkCreator(this.props.carrentPage, this.props.pageSize);
-    // debugger
+        // this.props.getUsersThunkCreator(this.props.carrentPage, this.props.pageSize);
+        // рефакторинг
+        const {carrentPage, pageSize} = this.props;
+        this.props.getUsersThunkCreator(carrentPage, pageSize);
     }
     
     //13. делаем метод для onClick (pageNumber это просто логическое название)
     onUserListChanged = (pageNumber) => {
         //заменили на санки
         // this.props.toggleIsLoading(true)
-        this.props.setCarrentPage(pageNumber);
+        // this.props.setCarrentPage(pageNumber);
+        
+        // рефакторинг
+        const {pageSize} = this.props;
+        this.props.setCarrentPage(pageNumber, pageSize);
         //перекинули запрос в api.js apiGetUsers
         // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
         // {withCredentials: true}

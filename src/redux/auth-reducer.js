@@ -1,7 +1,7 @@
 import { apiAuthProfile, apiLogin, apiLogout } from "../api/api";
 import {stopSubmit} from "redux-form"
 
-const SET_AUTH_USER_DATA = "SET_AUTH_USER_DATA";
+const SET_AUTH_USER_DATA = "auth/SET_AUTH_USER_DATA";
 
 let initialState = {
     userId: null,
@@ -14,19 +14,30 @@ let initialState = {
 // export const setAuthUserData = (userId, login, email) => ({ type: SET_AUTH_USER_DATA, data: { userId, login, email } })
 export const setAuthUserData = (userId, login, email, isAuth) => ({ type: SET_AUTH_USER_DATA, data: { userId, login, email, isAuth } })
 
-export const authProfileThunk = () => {
-    return (dispatch) => {
-        // apiAuthProfile().then(data => { изменили, так как диспатчим этот промисв app
-            return apiAuthProfile().then(data => {
-            //resultCode проверка полученных данных(проверка залогининости)
-            if (data.resultCode === 0) {
-                // let {id, login, email} = response.data.data; //две data потому-что 1я data сидит в инструкции API, 2ю выдаёт response
-                let { id, login, email } = data.data; //две data потому-что 1я data сидит в инструкции API, 2ю выдаёт response
-                // dispatch(setAuthUserData(id, login, email));
-                dispatch(setAuthUserData(id, login, email, true)); // добавили true для логинизации
-            }
+// ниже сделали рефакторинг через async await. измегить везде где есть then
+// export const authProfileThunk = () => {
+//     return (dispatch) => {
+//         // apiAuthProfile().then(data => { изменили, так как диспатчим этот промисв app
+//             return apiAuthProfile().then(data => {
+//             //resultCode проверка полученных данных(проверка залогининости)
+//             if (data.resultCode === 0) {
+//                 // let {id, login, email} = response.data.data; //две data потому-что 1я data сидит в инструкции API, 2ю выдаёт response
+//                 let { id, login, email } = data.data; //две data потому-что 1я data сидит в инструкции API, 2ю выдаёт response
+//                 // dispatch(setAuthUserData(id, login, email));
+//                 dispatch(setAuthUserData(id, login, email, true)); // добавили true для логинизации
+//             }
 
-        });
+//         });
+//     }
+// }
+
+export const authProfileThunk = () => async (dispatch) => {
+
+    let data = await apiAuthProfile();
+
+    if (data.resultCode === 0) {
+        let { id, login, email } = data.data; 
+        dispatch(setAuthUserData(id, login, email, true)); 
     }
 }
 
@@ -46,10 +57,10 @@ export const authReducer = (state = initialState, action) => {
 }
 
 // всё что после dispatch это САНКА
-export const LoginThunkCreator = (email, password, rememberMe) => (dispatch) => {
-    apiLogin(email, password, rememberMe)
-        .then(data => {
-            if (data.resultCode === 0) {
+export const LoginThunkCreator = (email, password, rememberMe) => async (dispatch) => {
+    let data = await apiLogin(email, password, rememberMe)
+
+    if (data.resultCode === 0) {
                 dispatch(authProfileThunk());
             }
             // проверка авторизвции
@@ -58,17 +69,14 @@ export const LoginThunkCreator = (email, password, rememberMe) => (dispatch) => 
                 let errorMessage = data.messages.length > 0 ? data.messages[0] : "Some error";
                 dispatch(stopSubmit ("login", {_error: errorMessage}));
             }
-        });
 }
 
-export const LogoutThunkCreator = () => (dispatch) => {
-    apiLogout()
-        .then(data => {
-            if (data.resultCode === 0) {
+export const LogoutThunkCreator = () => async (dispatch) => {
+    let data = await apiLogout()
+
+    if (data.resultCode === 0) {
                 dispatch(setAuthUserData(null, null, null, false));
             }
-
-        });
 }
 
 export default authReducer;

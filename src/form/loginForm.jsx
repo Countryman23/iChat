@@ -10,9 +10,9 @@ const maxLength20 = maxLengthCreator(20);
 //ниже JSX коде в котором находится HTML разметка
 // Field это специальные компоненты для form
 // handleSubmit получаем из стандартных свойств формы, из reduxForm. Этим мы говорим, что хотим доверить обработку onSubmit
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field name="email" 
                     placeholder={"Email"} 
@@ -31,8 +31,8 @@ const LoginForm = (props) => {
                     component={"input"} /> Remember
             </div>
                 {/* тут мы говорим, если у нас есть props.error тогда покажи {props.error} */}
-                {props.error && <div className={ModCSS.loginFormError}>
-                    {props.error}
+                {error && <div className={ModCSS.loginFormError}>
+                    {error}
                 </div>
                 }
             <div>
