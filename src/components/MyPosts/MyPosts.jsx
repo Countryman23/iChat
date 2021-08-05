@@ -2,7 +2,8 @@ import React from 'react';
 import ModCSS from "./MyPosts.module.css"; //Модифицируем наши стили с помощью .module
 import Post from './Post/Post';
 import { withAuthRedirect } from "../../hoc/authRedirect";
-import ReduxPostForm from "../../form/postForm"
+import ReduxPostForm from "../../form/postForm";
+
 
 
 const MyPosts = (props) => {
@@ -80,8 +81,6 @@ const MyPosts = (props) => {
                 <Status status = {props.status} getUpdateStatusInfoThunk={props.getUpdateStatusInfoThunk}/> 
                 {props.profileInfo.fullName}
             </div> */}
-
-
 
             <div className={ModCSS.item}>
                 <div className={ModCSS.header}><h3>My posts</h3></div>

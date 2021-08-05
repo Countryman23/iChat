@@ -8,7 +8,7 @@ import Login from "./components/Authorization/login";
 // import Messages from "./components/Messages/Messages";
 import MyPostsContainer from "./components/MyPosts/MyPostsContainer";
 import MessagesContainer from "./components/Messages/MessagesContainer";
-import ProfileContainer from "./components/Profile/profileContainer";
+import UserContainer from "./components/Users/userContainer";
 import ProfileInfoContainer from "./components/Profile/profileInfoContainer";
 import Settings from "./components/Settings/Settings";
 import ModCSS from "./App.module.css"; //Модифицируем наши стили с помощью .module
@@ -108,9 +108,9 @@ class App extends React.Component {
                     </div>
                     <div className={ModCSS.content}>
                         <Route path="/Authorization" render={ () => <AuthContainer />} />
-                        <Route path="/Profile" render={ () => <ProfileContainer />} />
+                        <Route path="/Profile" render={ () => <MyPostsContainer newState = {this.props.store} />} />
+                        <Route path="/Users" render={ () => <UserContainer />} />
                         <Route path="/ProfileInfoContainer/:userId?" render={ () => <ProfileInfoContainer />} />
-                        <Route path="/MyPosts" render={ () => <MyPostsContainer newState = {this.props.store} />} />
                         <Route path="/Messages" render={ () => <MessagesContainer newState = {this.props.store}
                                                                                 dispatch={this.props.dispatch} />} />
                         <Route path="/login" render={ () => <Login />} />

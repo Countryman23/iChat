@@ -2,6 +2,7 @@ import React from 'react';
 // import ModCSS from "./Profile.module.css"; //Модифицируем наши стили с помощью .module
 import { withAuthRedirect } from "../../hoc/authRedirect";
 import StatusWithHook from "./statusWithHook"
+import MyPostsContainer from "../MyPosts/MyPostsContainer"
 
 
 const ProfileInfo = (props) => {
@@ -21,6 +22,7 @@ const ProfileInfo = (props) => {
                 <div>{props.profileInfo.fullName}</div>
                 {/* убрали так как добавили статусы из сервера */}
                 {/* <div>{props.profileInfo.aboutMe}</div> */}
+                <MyPostsContainer />
             </div>
         </div>
     );

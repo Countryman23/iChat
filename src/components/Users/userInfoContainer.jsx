@@ -1,10 +1,10 @@
 import React from 'react';
-import ModCSS from "./Profile.module.css"; //Модифицируем наши стили с помощью .module
+import ModCSS from "../Profile/Profile.module.css"; //Модифицируем наши стили с помощью .module
 import Loading from "../../loading";
-import ProfilePagination from "./ProfilePagination"
+import ProfilePagination from "../Profile/ProfilePagination"
 import User from "./User"
 
-let Profile = ({carrentPage, onUserListChanged, totalUsersCount, pageSize, ...props}) => {
+let UserInfoContainer = ({carrentPage, onUserListChanged, totalUsersCount, pageSize, ...props}) => {
     return <div>
             
             {props.isLoading ? <Loading /> : null }
@@ -37,4 +37,4 @@ let Profile = ({carrentPage, onUserListChanged, totalUsersCount, pageSize, ...pr
     </div>
 }
 
-export default Profile;
+export default UserInfoContainer;

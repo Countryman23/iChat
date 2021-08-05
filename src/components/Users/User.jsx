@@ -1,5 +1,5 @@
 import React from 'react';
-import ModCSS from "./Profile.module.css"; //Модифицируем наши стили с помощью .module
+import ModCSS from "../Profile/Profile.module.css"; //Модифицируем наши стили с помощью .module
 import { NavLink } from "react-router-dom"; // импорт с фигурными скобками из-за экспорта не по дефолту
 
 let User = ({ user, ...props }) => {

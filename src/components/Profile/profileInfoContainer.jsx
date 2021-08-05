@@ -10,25 +10,16 @@ import { withRouter, Redirect } from "react-router";
 class ProfileInfoContainer extends React.Component {
     
     componentDidMount () {
-        let userId = this.props.match.params.userId; // получаем id пользователя
-        if (!userId) {
-            // userId = 17232; // убираем жёсткую привязку
-
-
-
-
-            // реализовать отображение своего профиля
-
-            // userId = this.props.authorizeUserId;
+            
+            // let userId = this.props.authorizeUserId;
             // if (!userId) {
             //     this.props.history.push("/ProfileInfoContainer/17232")
             // }
 
+        let userId = this.props.match.params.userId; // получаем id пользователя
+        if (!userId) {
+            userId = 17232;} // -----------------------убирать жёсткую привязку
 
-
-
-
-        }
         //перекинули запрос в api.js apiUsersRouter
         // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId) 
         // apiUsersRouter(userId).then(response => {

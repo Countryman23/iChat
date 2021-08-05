@@ -18,14 +18,15 @@ const Navigation = () => {
                     <NavLink to="/Authorization" activeClassName={ModCSS.activeLink}>Authorization</NavLink>
                 </div>
                 <div className={ModCSS.item}>
-                    <NavLink to="/Profile" activeClassName={ModCSS.activeLink}>Profile</NavLink>
+                    <NavLink to="/ProfileInfoContainer" activeClassName={ModCSS.activeLink}>Profile</NavLink>
+                </div>
+                <div className={ModCSS.item}>
+                    <NavLink to="/Users" activeClassName={ModCSS.activeLink}>Users</NavLink>
                 </div>
                 <div className={ModCSS.item}>
                     <NavLink to="/Messages" activeClassName={ModCSS.activeLink}>Messages</NavLink>
                 </div>
-                <div className={ModCSS.item}>
-                    <NavLink to="/MyPosts" activeClassName={ModCSS.activeLink}>MyPosts</NavLink>
-                </div>
+                
                 <div className={ModCSS.item}>
                     <NavLink to="/Settings" activeClassName={ModCSS.activeLink}>Settings</NavLink>
                 </div>

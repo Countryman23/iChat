@@ -16,7 +16,7 @@ const Login = (props) => {
         // Но connect вызывает не LoginThunkCreator, а его диспатч authProfileThunk
 
     if (props.isAuth) {
-        return <Redirect to = "/profile" />
+        return <Redirect to = "/ProfileInfoContainer" />
     }
             
             // вызываем другой onSubmit и получаем из формы LoginForm параметры handleSubmit

@@ -5,12 +5,12 @@ import {getUsersThunkCreator, toggleFollowingInProcess, setCarrentPage, } from '
 //изменили после использования санок
 import { followThunk, unFollowThunk } from '../../redux/profile-reducer';
 import { connect } from 'react-redux';
-import Profile from './Profile';
+import UserInfoContainer from './userInfoContainer';
 import { withAuthRedirect } from "../../hoc/authRedirect";
 import { compose } from 'redux';
 import { getUsersRESelector, getPageSize, getTotalUsersCount, getCarrentPaget, getIsLoading, getFollowingInProcess} from "../../selectors/profileSelector"
 
-class ProfileComponent extends React.Component {
+class UserContainer extends React.Component {
 
     //если конструктор работает только с супер, то его можно не записывать, это происходит по умолчанию
     // constructor(props) {
@@ -87,7 +87,7 @@ class ProfileComponent extends React.Component {
     // render получает и отрисовывает данные, затем передаёт их для отрисовки в componentDidMount. и если они изменились они перерисовываются в componentDidUpdate
     render() {
         
-        return <Profile totalUsersCount={this.props.totalUsersCount}
+        return <UserInfoContainer totalUsersCount={this.props.totalUsersCount}
                         pageSize={this.props.pageSize} 
                         carrentPage={this.props.carrentPage}
                         //onUserListChanged компонента этого уровня, поэтому её пишем без props
@@ -206,4 +206,4 @@ export default compose (
     withAuthRedirect,
     connect(mapStateToProps, {followThunk, unFollowThunk, setCarrentPage,
     toggleFollowingInProcess, getUsersThunkCreator})
-    )(ProfileComponent)
+    )(UserContainer)
