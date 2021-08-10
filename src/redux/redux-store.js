@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import myPostReducer from "./myPost-reducer"
 import messagesReducer from "./messages-reducer"
 import profileReducer from "./profile-reducer"
@@ -17,10 +17,18 @@ let reducers = combineReducers({
     form: formReducer, // тут form обязательный ключ
     app: appReducer
 });
+
+
+//добавили для расширения браузера Redux DevTools
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
+
 //createStore создаёт внутри себя  state внутр которого есть reducers (создаём store с помощью redux)
 //applyMiddleware этим мы говорим, прими промежуточный слой. чтобы запустить санки из санк-киейтора
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+// let store = createStore(reducers, applyMiddleware(thunkMiddleware)); //убрали после добавления Redux DevTools
 
-window.store = store;
+// Изменили после внедрения Redux DevTools, во избежании конфликтов
+// window.store = store;
+window.__store__ = store;
 
 export default store;

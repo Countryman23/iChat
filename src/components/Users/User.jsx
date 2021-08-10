@@ -3,8 +3,7 @@ import ModCSS from "../Profile/Profile.module.css"; //Модифицируем �
 import { NavLink } from "react-router-dom"; // импорт с фигурными скобками из-за экспорта не по дефолту
 
 let User = ({ user, ...props }) => {
-    return (<>
-        <div className={ModCSS.profile}>
+    return (<div className={ModCSS.profile}>
             <div className={ModCSS.subscribeWrapper}>
                 <div className={ModCSS.subscribeImg}>
                     {/* <img src={u.photoUrl} /> // временно скрыли потомучто этих данных нет в api  */}
@@ -74,7 +73,6 @@ let User = ({ user, ...props }) => {
                 {/* <div>{u.location.city}</div>// временно скрыли потомучто этих данных нет в api */}
             </div>
         </div>
-    </>
     )
 }
 

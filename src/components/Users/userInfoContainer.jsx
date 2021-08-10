@@ -1,7 +1,7 @@
 import React from 'react';
 import ModCSS from "../Profile/Profile.module.css"; //Модифицируем наши стили с помощью .module
 import Loading from "../../loading";
-import ProfilePagination from "../Profile/ProfilePagination"
+import Pagination from "../Users/Pagination"
 import User from "./User"
 
 let UserInfoContainer = ({carrentPage, onUserListChanged, totalUsersCount, pageSize, ...props}) => {
@@ -22,10 +22,10 @@ let UserInfoContainer = ({carrentPage, onUserListChanged, totalUsersCount, pageS
             {/* //10. деллаем логику onClick */}
 
             <div className={ModCSS.listNamberSelected}>
-                <ProfilePagination carrentPage={carrentPage}
-                                    onUserListChanged={onUserListChanged}
-                                    totalUsersCount={totalUsersCount}
-                                    pageSize={pageSize} />
+                <Pagination carrentPage={carrentPage}
+                            onUserListChanged={onUserListChanged}
+                            totalUsersCount={totalUsersCount}
+                            pageSize={pageSize} />
             </div>
             <div >
                 {props.users.map(u => <User key={u.id}

@@ -35,7 +35,7 @@ const SET_STATUS = "profile/SET_STATUS";
 //создаём для store
 let initialState = {
     users: [],
-    pageSize: 6, //1 
+    pageSize: 10, //1 
     totalUsersCount: 0,//общее количество пользобателей
     carrentPage: 1,
     isLoading: false, //ожидание прогрузки данных с сервера
