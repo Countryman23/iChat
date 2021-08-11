@@ -7,8 +7,8 @@ import Login from "./components/Authorization/login";
 // import MyPosts from "./components/MyPosts/MyPosts";
 // import Messages from "./components/Messages/Messages";
 import MyPostsContainer from "./components/MyPosts/MyPostsContainer";
-import MessagesContainer from "./components/Messages/MessagesContainer";
-import UserContainer from "./components/Users/userContainer";
+// import MessagesContainer from "./components/Messages/MessagesContainer"; //перенесли ниже для React lazy
+// import UserContainer from "./components/Users/userContainer"; //перенесли ниже для React lazy
 import ProfileInfoContainer from "./components/Profile/profileInfoContainer";
 import Settings from "./components/Settings/Settings";
 import ModCSS from "./App.module.css"; //Модифицируем наши стили с помощью .module
@@ -16,9 +16,9 @@ import { BrowserRouter, Route } from "react-router-dom"; // импорт с фи
 import { connect } from 'react-redux';
 // import { withRouter } from "react-router";
 // import { compose } from "redux";
-import {initializApp} from "./redux/app-reducer"
+import {initializApp} from "./redux/app-reducer";
 import Loading from "../src/loading";
-
+import {withSuspense} from "./hoc/withSuspense" // нужен для React Lazy
 
 // переносим массив из MyPosts, и далее в index.js
 // let postData = [
@@ -86,6 +86,10 @@ import Loading from "../src/loading";
 //     );
 // };
 
+// React lazy. Тут мы говорим, загрузи данную компоненту когда её вызовут
+const MessagesContainer = React.lazy(() => import('./components/Messages/MessagesContainer'));
+const UserContainer = React.lazy(() => import('./components/Users/userContainer'));
+
 // изменили компоненту на классовую
 class App extends React.Component {
 
@@ -109,10 +113,14 @@ class App extends React.Component {
                     <div className={ModCSS.content}>
                         <Route path="/Authorization" render={ () => <AuthContainer />} />
                         <Route path="/Profile" render={ () => <MyPostsContainer newState = {this.props.store} />} />
-                        <Route path="/Users" render={ () => <UserContainer />} />
+                        {/* убрали, так как применили React.Lazy */}
+                        {/* <Route path="/Users" render={ () => <UserContainer />} /> */}
+                        <Route path="/Users" render={withSuspense(UserContainer)} />
                         <Route path="/ProfileInfoContainer/:userId?" render={ () => <ProfileInfoContainer />} />
-                        <Route path="/Messages" render={ () => <MessagesContainer newState = {this.props.store}
-                                                                                dispatch={this.props.dispatch} />} />
+                        {/* убрали, так как применили React.Lazy */}
+                        {/* <Route path="/Messages" render={ () => <MessagesContainer newState = {this.props.store}
+                                                                                dispatch={this.props.dispatch} />} /> */}
+                        <Route path="/Messages" render={withSuspense(MessagesContainer)} />
                         <Route path="/login" render={ () => <Login />} />
                         <Route path="/Settings" render={Settings} />
                     </div>
