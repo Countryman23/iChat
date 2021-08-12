@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/iChat/static/css/main.232b2967.chunk.css",
-    "main.js": "/iChat/static/js/main.59c9daec.chunk.js",
-    "main.js.map": "/iChat/static/js/main.59c9daec.chunk.js.map",
-    "runtime-main.js": "/iChat/static/js/runtime-main.5044d985.js",
-    "runtime-main.js.map": "/iChat/static/js/runtime-main.5044d985.js.map",
-    "static/js/2.ef1978ae.chunk.js": "/iChat/static/js/2.ef1978ae.chunk.js",
-    "static/js/2.ef1978ae.chunk.js.map": "/iChat/static/js/2.ef1978ae.chunk.js.map",
+    "main.js": "/iChat/static/js/main.16c159a2.chunk.js",
+    "main.js.map": "/iChat/static/js/main.16c159a2.chunk.js.map",
+    "runtime-main.js": "/iChat/static/js/runtime-main.d5a217dc.js",
+    "runtime-main.js.map": "/iChat/static/js/runtime-main.d5a217dc.js.map",
+    "static/js/2.51661e67.chunk.js": "/iChat/static/js/2.51661e67.chunk.js",
+    "static/js/2.51661e67.chunk.js.map": "/iChat/static/js/2.51661e67.chunk.js.map",
     "static/css/3.68023383.chunk.css": "/iChat/static/css/3.68023383.chunk.css",
-    "static/js/3.1c91caa6.chunk.js": "/iChat/static/js/3.1c91caa6.chunk.js",
-    "static/js/3.1c91caa6.chunk.js.map": "/iChat/static/js/3.1c91caa6.chunk.js.map",
+    "static/js/3.892b58f0.chunk.js": "/iChat/static/js/3.892b58f0.chunk.js",
+    "static/js/3.892b58f0.chunk.js.map": "/iChat/static/js/3.892b58f0.chunk.js.map",
     "static/css/4.de7bc9ef.chunk.css": "/iChat/static/css/4.de7bc9ef.chunk.css",
     "static/js/4.06a4989c.chunk.js": "/iChat/static/js/4.06a4989c.chunk.js",
     "static/js/4.06a4989c.chunk.js.map": "/iChat/static/js/4.06a4989c.chunk.js.map",
@@ -19,15 +19,15 @@
     "static/css/3.68023383.chunk.css.map": "/iChat/static/css/3.68023383.chunk.css.map",
     "static/css/4.de7bc9ef.chunk.css.map": "/iChat/static/css/4.de7bc9ef.chunk.css.map",
     "static/css/main.232b2967.chunk.css.map": "/iChat/static/css/main.232b2967.chunk.css.map",
-    "static/js/2.ef1978ae.chunk.js.LICENSE.txt": "/iChat/static/js/2.ef1978ae.chunk.js.LICENSE.txt",
-    "static/js/3.1c91caa6.chunk.js.LICENSE.txt": "/iChat/static/js/3.1c91caa6.chunk.js.LICENSE.txt",
+    "static/js/2.51661e67.chunk.js.LICENSE.txt": "/iChat/static/js/2.51661e67.chunk.js.LICENSE.txt",
+    "static/js/3.892b58f0.chunk.js.LICENSE.txt": "/iChat/static/js/3.892b58f0.chunk.js.LICENSE.txt",
     "static/media/isLoading.73cfc5f4.gif": "/iChat/static/media/isLoading.73cfc5f4.gif",
     "static/media/logo.38dd95ae.png": "/iChat/static/media/logo.38dd95ae.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.5044d985.js",
-    "static/js/2.ef1978ae.chunk.js",
+    "static/js/runtime-main.d5a217dc.js",
+    "static/js/2.51661e67.chunk.js",
     "static/css/main.232b2967.chunk.css",
-    "static/js/main.59c9daec.chunk.js"
+    "static/js/main.16c159a2.chunk.js"
   ]
 }
