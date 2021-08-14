@@ -53,3 +53,8 @@
     font-weight: bold;
     border-color: black;
 }
+
+.userPhoto img {
+    width: 200px;
+    border-radius: 20px
+}

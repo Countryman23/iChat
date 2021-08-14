@@ -1,4 +1,4 @@
-import { apiStatusInfo, apiUpdateStatusInfo, apiGetUsers, apiFollowUser, apiUnfollowUser, apiUsersRouter } from "../api/api"
+import { apiStatusInfo, apiUpdateStatusInfo, apiGetUsers, apiFollowUser, apiUnfollowUser, apiUsersRouter, apiSavePhoto } from "../api/api"
 
 ///3
 const FOLLOW = "profile/FOLLOW";
@@ -10,6 +10,7 @@ const TOGGLE_IS_LOADING = "profile/TOGGLE_IS_LOADING";
 const SET_PROFILE_INFO = "profile/SET_PROFILE_INFO";
 const TOGGLE_IS_FOLLOWING = "profile/TOGGLE_IS_FOLLOWING";
 const SET_STATUS = "profile/SET_STATUS";
+const SAVE_PHOTO = "profile/SAVE_PHOTO";
 
 ///1
 // let initialState = {
@@ -124,6 +125,12 @@ const profileReducer = (state = initialState, action) => {
                 status: action.status
             }
         }
+        case SAVE_PHOTO: {
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photos}
+            }
+        }
         default:
             return state;
     }
@@ -150,6 +157,8 @@ export const toggleIsLoading = (isLoading) => ({ type: TOGGLE_IS_LOADING, isLoad
 const setProfileInfo = (profileInfo) => ({ type: SET_PROFILE_INFO, profileInfo })
 export const toggleFollowingInProcess = (isLoading, userId) => ({ type: TOGGLE_IS_FOLLOWING, isLoading, userId })
 const setStatus = (status) => ({ type: SET_STATUS, status })
+export const savePhotoSaccess = (photos) => ({ type: SAVE_PHOTO, photos })
+
 
 //создаём санку. а далее санк-криейтор
 //создаём санк-криейтор. это функция, котороя может что то принимать и возвращать санку
@@ -260,6 +269,15 @@ export const getUpdateStatusInfoThunk = (status) => async (dispatch) => {
 
     if (data.resultCode === 0) {
         dispatch(setStatus(status));
+    }
+}
+
+export const savePhoto = (file) => async (dispatch) => {
+
+    let data = await apiSavePhoto(file)
+
+    if (data.resultCode === 0) {
+        dispatch(savePhotoSaccess(data.data.photos));
     }
 }
 

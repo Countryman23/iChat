@@ -100,10 +100,19 @@ class App extends React.Component {
     
     render () {
         
+
+
+
+
         // делаем проверку. тут говорим, пока не получена инициализация покажи загрузчик
-        if (!this.props.initialized) {
-            return <Loading />
-        }
+        //закоментировал для gh-pages
+        // if (!this.props.initialized) {
+        //     return <Loading />
+        // }
+
+
+
+
 
         return (
                 <div className={ModCSS.appWrapper}>

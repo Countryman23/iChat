@@ -61,3 +61,15 @@ export const apiLogout = () => {
     return instance.delete(`auth/login/`)
     .then(response => response.data);
 }
+
+export const apiSavePhoto = (photoFile) => {
+    const formData = new FormData();
+    formData.append("image", photoFile);
+    
+    return instance.put(`auth/photo`, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    })
+    .then(response => response.data);
+}
