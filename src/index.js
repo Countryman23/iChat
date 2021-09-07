@@ -9,7 +9,7 @@ import store from './redux/redux-store';
 import { Provider } from 'react-redux';
 // import {addPostBLL, updatePostChange, subscribe} from './redux/state'; //импортируем не по дефолту, нужны {} // это уже не нужно, та как теперь экспортируем store
 // import {reRenderEntireTree} from "./redux/render" // render.js уже не нужен
-import { BrowserRouter } from "react-router-dom"; // импорт с фигурными скобками из-за экспорта не по дефолту
+import { HashRouter } from "react-router-dom"; // импорт с фигурными скобками из-за экспорта не по дефолту
 
 // переносим массив из app.js
 // переносим все массивы state.js
@@ -123,11 +123,11 @@ import { BrowserRouter } from "react-router-dom"; // импорт с фигур�
 // });//убрали, так как добавили react-redux
 
 ReactDOM.render(<React.StrictMode>
-                    <BrowserRouter>
+                    <HashRouter>
                         <Provider store={store}>
                             <App />
                         </Provider>
-                    </BrowserRouter>
+                    </HashRouter>
                 </React.StrictMode>,
                     document.getElementById('root')
 );

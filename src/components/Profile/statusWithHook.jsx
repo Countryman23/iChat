@@ -37,8 +37,9 @@ const StatusWithHook = (props) => {
         <div>
             {!editMode &&
                 <div>
-                    <span onDoubleClick={activatedEditMode}>
+                    <b>Status</b>: <span onDoubleClick={activatedEditMode}>
                         {props.status || "---"} </span>
+                    
                 </div>
             }
             {editMode &&
